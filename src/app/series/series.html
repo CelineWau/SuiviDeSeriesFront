@@ -1,1 +1,10 @@
-<p>series works!</p>
+<p>Nombre de séries : {{ series.length }}</p>
+
+@for (serie of series; track serie.idSerie) {
+    <p>{{ serie.nom }}</p>
+    @for (carre of getCarreaux(serie.nombreLivreTotal, getNombreLivresLus(serie.livres)); track $index) {
+        <span>{{ carre }}</span>
+    }
+}
+
+<a routerLink="/series/creer">Créer une série</a>
