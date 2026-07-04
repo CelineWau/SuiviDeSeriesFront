@@ -1,10 +1,16 @@
-<p>Nombre de séries : {{ series.length }}</p>
+<div class="liste-series">
+    @for (serie of series; track serie.idSerie) {
+        <div class="serie-ligne">
+            <span>{{ serie.nom }}</span>
+            <div class="carrés">
+                @for (carre of getCarreaux(serie.nombreLivreTotal, getNombreLivresLus(serie.livres)); track $index) {
+                <span>{{ carre }}</span>
+                }
+            </div>
 
-@for (serie of series; track serie.idSerie) {
-    <p>{{ serie.nom }}</p>
-    @for (carre of getCarreaux(serie.nombreLivreTotal, getNombreLivresLus(serie.livres)); track $index) {
-        <span>{{ carre }}</span>
+        </div>
     }
-}
+</div>
 
-<a routerLink="/series/creer">Créer une série</a>
+
+<a routerLink="/series/creer" class="btn-dragon">Créer une série à suivre</a>

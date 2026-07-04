@@ -1,0 +1,15 @@
+nav {
+    background-color: #0d0d0d;
+    border-bottom: 1px solid var(--couleur-or);
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.titre-app {
+    font-family: 'Cinzel', serif;
+    color: var(--couleur-or);
+    font-size: 1.4rem;
+    margin-right: auto;
+}
