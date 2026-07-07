@@ -1,7 +1,10 @@
 <div class="liste-series">
     @for (serie of series; track serie.idSerie) {
         <div class="serie-ligne">
-            <span>{{ serie.nom }}</span>
+            <div class="serie-info">
+                <span>{{ serie.nom }}</span>
+                <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
+            </div>
             <div class="carrés">
                 @for (carre of getCarreaux(serie.nombreLivreTotal, serie.livres); track $index) {
                 <span>{{ carre }}</span>

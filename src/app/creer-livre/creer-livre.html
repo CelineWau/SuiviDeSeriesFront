@@ -32,11 +32,9 @@
 
     <div class="champ">
         <label for="serie">Série</label>
-        <select id="serie" formControlName="serieId">
-            @for (serie of series; track serie.idSerie) {
-                <option [value]="serie.idSerie">{{ serie.nom }}</option>
-            }
-        </select>
+        @if (serieCourante) {
+            <p>{{ serieCourante.nom }}</p>
+        }
     </div>
 
     <button type="submit" class="btn-dragon">Enregistrer</button>

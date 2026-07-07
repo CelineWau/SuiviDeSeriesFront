@@ -14,5 +14,5 @@ export const routes: Routes = [
     { path: 'profil', component: Profil},
     { path: '', component: Login},
     { path: 'series/creer', component: CreerSerie},
-    { path: 'livres/creer', component: CreerLivre}
+    { path: 'livres/creer/:serieId', component: CreerLivre}
 ];
