@@ -3,7 +3,7 @@
         <div class="serie-ligne">
             <span>{{ serie.nom }}</span>
             <div class="carrés">
-                @for (carre of getCarreaux(serie.nombreLivreTotal, getNombreLivresLus(serie.livres)); track $index) {
+                @for (carre of getCarreaux(serie.nombreLivreTotal, serie.livres); track $index) {
                 <span>{{ carre }}</span>
                 }
             </div>

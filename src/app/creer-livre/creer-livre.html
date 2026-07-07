@@ -1,0 +1,44 @@
+<form [formGroup]="livreForm" (ngSubmit)="onSubmit()" class="formulaire">
+    <h1>Enregistrer un livre</h1>
+
+    <div class="champ">
+        <label for="titre">Titre du livre</label>
+        <input type="text" id="titre" formControlName="titre" placeholder="Titre du livre">
+    </div>
+
+    <div class="champ">
+        <label for="auteur">Auteur du livre</label>
+        <input type="text" id="auteur" formControlName="auteur" placeholder="Auteur du livre">
+    </div>
+
+    <div class="champ">
+        <label for="isbn">ISBN du livre</label>
+        <input type="text" id="isbn" formControlName="isbn" placeholder="ISBN du livre">
+    </div>
+
+    <div class="champ">
+        <label for="numeroDansLaSerie">Place dans la série</label>
+        <input type="number" id="numeroDansLaSerie" formControlName="numeroDansLaSerie" placeholder="Place dans la série">
+    </div>
+
+    <div class="champ">
+        <label for="statutLivre">Statut du livre</label>
+        <select id="statutLivre" formControlName="statutLivre">
+            <option value="LU">Lu</option>
+            <option value="DANS_PAL">Dans ma PAL</option>
+            <option value="A_ACHETER">A acheter</option>
+        </select>
+    </div>
+
+    <div class="champ">
+        <label for="serie">Série</label>
+        <select id="serie" formControlName="serieId">
+            @for (serie of series; track serie.idSerie) {
+                <option [value]="serie.idSerie">{{ serie.nom }}</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn-dragon">Enregistrer</button>
+    
+</form>

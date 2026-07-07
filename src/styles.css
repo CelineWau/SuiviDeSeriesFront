@@ -44,3 +44,30 @@ h1, h2, h3 {
     border-color: var(--couleur-bordeaux);
     color: var(--couleur-texte);
 }
+
+/* FORMULAIRES */
+.formulaire {
+    padding: 2rem 4rem;
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.champ {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+
+.champ label {
+    color: var(--couleur-or);
+    font-family: 'Cinzel', serif;
+    margin-bottom: 0.5rem;
+}
+
+.champ input, .champ select {
+    background-color: #0d0d0d;
+    border: 1px solid var(--couleur-or);
+    color: var(--couleur-texte);
+    padding: 0.5rem;
+    font-family: 'Raleway', sans-serif;
+}

@@ -26,7 +26,10 @@ export class Series implements OnInit {
     return livres.filter(livre => livre.statutLivre === 'LU').length;
   }
 
-  getCarreaux(total: number, lus: number): string[] {
-    return Array(total).fill('').map((_, i) => i < lus ? '■' : '□');
+  getCarreaux(total: number, livres: any[]): string[] {
+    return Array.from({length: total}, (_, i) => {
+      const livre = livres.find(l => l.numeroDansLaSerie === i + 1);
+      return livre && livre.statutLivre === 'LU' ? '■' : '□';
+    });
   }
 }
