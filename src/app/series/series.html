@@ -4,6 +4,7 @@
             <div class="serie-info">
                 <span>{{ serie.nom }}</span>
                 <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
+                <button (click)="supprimer(serie.idSerie)" class="btn-supprimer">X</button>
             </div>
             <div class="carrés">
                 @for (carre of getCarreaux(serie.nombreLivreTotal, serie.livres); track $index) {

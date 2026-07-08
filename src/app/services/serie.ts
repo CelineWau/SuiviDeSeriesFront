@@ -18,4 +18,8 @@ export class Serie {
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }
+
+  supprimerSerie(id: number): Observable<any> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

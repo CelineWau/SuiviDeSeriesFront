@@ -25,7 +25,9 @@ export class CreerSerie {
   onSubmit(){
     if (this.serieForm.valid) {
       this.serieService.creerSerie(this.serieForm.value).subscribe(() => {
-        this.router.navigate(['/series']);
+        this.router.navigateByUrl('/accueil', {skipLocationChange: true}).then(() => {
+          this.router.navigate(['/series']);
+        });
       });
     }
   }

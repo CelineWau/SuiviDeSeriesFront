@@ -47,3 +47,17 @@
     color: var(--couleur-texte);
 }
 
+/* BOUTON SUPPRIMER SERIE */
+.btn-supprimer {
+    background-color: transparent;
+    border: 1px solid var(--couleur-bordeaux);
+    color: var(--couleur-bordeaux);
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-supprimer:hover {
+    background-color: var(--couleur-bordeaux);
+    color: var(--couleur-texte);
+}
