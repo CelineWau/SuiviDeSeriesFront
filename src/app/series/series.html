@@ -3,11 +3,13 @@
         <div class="serie-ligne">
             <div class="serie-info">
                 <span>{{ serie.nom }}</span>
-                <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
+                @if (serie.statutSerie !== 'TERMINEE') {
+                    <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
+                }
                 <button (click)="supprimer(serie.idSerie)" class="btn-supprimer">X</button>
             </div>
             <div class="carrés">
-                @for (carre of getCarreaux(serie.nombreLivreTotal, serie.livres); track $index) {
+                @for (carre of getCarreaux(serie.nombreLivreTotal, serie.livres, serie.statutSerie); track $index) {
                 <span>{{ carre }}</span>
                 }
             </div>

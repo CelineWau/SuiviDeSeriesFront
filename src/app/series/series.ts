@@ -35,7 +35,10 @@ export class Series implements OnInit {
     return livres.filter(livre => livre.statutLivre === 'LU').length;
   }
 
-  getCarreaux(total: number, livres: any[]): string[] {
+  getCarreaux(total: number, livres: any[], statutSerie: string): string[] {
+    if (statutSerie === 'TERMINEE') {
+      return Array(total).fill('■');
+    }
     return Array.from({length: total}, (_, i) => {
       const livre = livres.find(l => l.numeroDansLaSerie === i + 1);
       return livre && livre.statutLivre === 'LU' ? '■' : '□';
