@@ -14,4 +14,8 @@ export class Livre {
   creerLivre(livreData: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, livreData);
   }
+
+  modifierStatutLivre(id: number, statut: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/${id}/statut`, {statut: statut});
+  }
 }

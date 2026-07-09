@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Serie } from '../services/serie';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { Livre } from '../services/livre';
 
 @Component({
   selector: 'app-series',
@@ -12,8 +13,9 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 export class Series implements OnInit {
 
   series: any[] = [];
+  carreSelectionne: any = null;
 
-  constructor(private serieService: Serie, private router: Router, private cdr: ChangeDetectorRef){}
+  constructor(private serieService: Serie, private livreService: Livre, private router: Router, private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
     this.chargerSeries();
@@ -35,13 +37,20 @@ export class Series implements OnInit {
     return livres.filter(livre => livre.statutLivre === 'LU').length;
   }
 
-  getCarreaux(total: number, livres: any[], statutSerie: string): string[] {
+  getCarreaux(total: number, livres: any[], statutSerie: string): any[] {
     if (statutSerie === 'TERMINEE') {
-      return Array(total).fill('■');
+      return Array(total).fill({ symbole: '■', livreId: null, statut: 'LU'});
     }
     return Array.from({length: total}, (_, i) => {
       const livre = livres.find(l => l.numeroDansLaSerie === i + 1);
-      return livre && livre.statutLivre === 'LU' ? '■' : '□';
+      return {
+        symbole: livre?.statutLivre === 'LU' ? '■' : '□',
+        livreId: livre?.idLivre,
+        statut: livre?.statutLivre,
+        classe: livre?.statutLivre === 'LU' ? 'carre-lu' :
+                livre?.statutLivre === 'DANS_PAL' ? 'carre-pal' :
+                livre?.statutLivre === 'A_ACHETER' ? 'carre-acheter' : 'carre-vide'
+      };
     });
   }
 
@@ -52,5 +61,20 @@ export class Series implements OnInit {
         this.cdr.detectChanges();
       });
     });
+  }
+
+  ouvrirMenuStatut(carre: any): void {
+    console.log('carre cliqué:', carre);
+    if(carre.livreId) {
+      this.carreSelectionne = carre;
+      console.log('carreSelectionne:', this.carreSelectionne);
+    }
+  }
+
+  changerStatut(nouveauStatut: string): void {
+    this.livreService.modifierStatutLivre(this.carreSelectionne.livreId, nouveauStatut).subscribe(() => {
+      this.carreSelectionne = null;
+      this.chargerSeries();
+    })
   }
 }

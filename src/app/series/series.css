@@ -22,12 +22,14 @@
     display: flex;
     flex-direction: row-reverse;
     gap: 0.2rem;
+    position: relative;
 }
 
 .carrés span {
     font-size: 2.5rem;
     width: 1.5rem;
     text-align: center;
+    cursor: pointer;
 }
 
 /* BOUTON AJOUT LIVRE */
@@ -48,6 +50,7 @@
 }
 
 /* BOUTON SUPPRIMER SERIE */
+
 .btn-supprimer {
     background-color: transparent;
     border: 1px solid var(--couleur-bordeaux);
@@ -60,4 +63,51 @@
 .btn-supprimer:hover {
     background-color: var(--couleur-bordeaux);
     color: var(--couleur-texte);
+}
+
+/* POP UP CHANGEMENT STATUT LIVRE*/
+
+.menu-statut {
+    position: absolute;
+    bottom: 100%;
+    right: 0%;
+    background-color: #1a1a1a;
+    border: 1px solid var(--couleur-or);
+    padding: 1rem;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.menu-statut button {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--couleur-or);
+    font-family: 'Cinzel', serif;
+    padding: 0.3rem;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-statut button:hover {
+    color: var(--couleur-bordeaux);
+}
+
+/* COULEUR CARRE */
+
+.carre-lu {
+  color: var(--couleur-texte);
+}
+
+.carre-pal {
+  color: var(--couleur-or);
+}
+
+.carre-acheter {
+  color: var(--couleur-bordeaux);
+}
+
+.carre-vide {
+  color: #444;
 }

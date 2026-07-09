@@ -10,10 +10,18 @@
             </div>
             <div class="carrés">
                 @for (carre of getCarreaux(serie.nombreLivreTotal, serie.livres, serie.statutSerie); track $index) {
-                <span>{{ carre }}</span>
+                    <span [class]="carre.classe" (click)="ouvrirMenuStatut(carre)">{{ carre.symbole }}</span>
+                    @if (carreSelectionne?.livreId && carreSelectionne?.livreId === carre.livreId) {
+                        <div class="menu-statut">
+                            <p>Changer le statut :</p>
+                            <button (click)="changerStatut('LU')">Lu</button>
+                            <button (click)="changerStatut('DANS_PAL')">Dans ma PAL</button>
+                            <button (click)="changerStatut('A_ACHETER')">À acheter</button>
+                            <button (click)="carreSelectionne = null">Annuler</button>
+                        </div>
+                    }
                 }
             </div>
-
         </div>
     }
 </div>
