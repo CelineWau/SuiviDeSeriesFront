@@ -111,3 +111,9 @@
 .carre-vide {
   color: #444;
 }
+
+/* STATUT PUBLICATION*/
+.statut-publication {
+    font-size: 0.75rem;
+    color: #888;
+}
