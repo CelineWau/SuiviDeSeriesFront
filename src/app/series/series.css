@@ -23,9 +23,11 @@
     flex-direction: row-reverse;
     gap: 0.2rem;
     position: relative;
+    margin-left: auto;
+    align-items: center;
 }
 
-.carrés span {
+.carrés span:not(.btn-edit) {
     font-size: 2.5rem;
     width: 1.5rem;
     text-align: center;
@@ -116,4 +118,15 @@
 .statut-publication {
     font-size: 0.75rem;
     color: #888;
+}
+
+/* BOUTON MODIFICATION SERIE */
+.btn-edit {
+    cursor: pointer;
+    font-size: 0.8rem;
+    opacity: 0.4;
+}
+
+.btn-edit:hover {
+    opacity: 1;
 }

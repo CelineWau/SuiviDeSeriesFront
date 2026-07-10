@@ -3,10 +3,11 @@ import { Serie } from '../services/serie';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Livre } from '../services/livre';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-series',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './series.html',
   styleUrl: './series.css',
 })
@@ -14,6 +15,8 @@ export class Series implements OnInit {
 
   series: any[] = [];
   carreSelectionne: any = null;
+  serieEnEdition: any = null;
+  nouveauTotal: number = 0;
 
   constructor(private serieService: Serie, private livreService: Livre, private router: Router, private cdr: ChangeDetectorRef){}
 
@@ -76,5 +79,17 @@ export class Series implements OnInit {
       this.carreSelectionne = null;
       this.chargerSeries();
     })
+  }
+
+  ouvrirEditionTotal(serie: any): void {
+    this.serieEnEdition = serie;
+    this.nouveauTotal = serie.nombreLivreTotal;
+  }
+
+  sauvegarderTotal(): void {
+    this.serieService.modifierNombreLivreTotal(this.serieEnEdition.idSerie, this.nouveauTotal).subscribe(() => {
+      this.serieEnEdition = null;
+      this.chargerSeries();
+    });
   }
 }
