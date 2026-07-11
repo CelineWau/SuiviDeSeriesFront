@@ -17,6 +17,7 @@ export class Series implements OnInit {
   carreSelectionne: any = null;
   serieEnEdition: any = null;
   nouveauTotal: number = 0;
+  seriePublicationEnEdition: any = null;
 
   constructor(private serieService: Serie, private livreService: Livre, private router: Router, private cdr: ChangeDetectorRef){}
 
@@ -90,6 +91,19 @@ export class Series implements OnInit {
     this.serieService.modifierNombreLivreTotal(this.serieEnEdition.idSerie, this.nouveauTotal).subscribe(() => {
       this.serieEnEdition = null;
       this.chargerSeries();
+    });
+  }
+
+  ouvrirEditionPublication(serie: any): void {
+    this.seriePublicationEnEdition = serie;
+  }
+
+  sauvegarderPublication(event: Event): void {
+    const nouveauStatut = (event.target as HTMLSelectElement).value;
+    this.serieService.modifierStatutPublication(this.seriePublicationEnEdition.idSerie, nouveauStatut).subscribe(() => {
+      this.seriePublicationEnEdition = null;
+      this.chargerSeries();
+      this.cdr.detectChanges();
     });
   }
 }

@@ -120,6 +120,16 @@
     color: #888;
 }
 
+.statut-publication select {
+    background-color: #0d0d0d;
+    border: 1px solid var(--couleur-or);
+    color: var(--couleur-texte);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.75rem;
+    padding: 0.2rem;
+    cursor: pointer;
+}
+
 /* BOUTON MODIFICATION SERIE */
 .btn-edit {
     cursor: pointer;

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ObservedValueOf } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +25,9 @@ export class Serie {
 
   modifierNombreLivreTotal(id: number, nouveauTotal: number): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${id}/nombreLivreTotal`, {nombreLivreTotal: nouveauTotal});
+  }
+
+  modifierStatutPublication(id: number, nouveauStatut: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/${id}/statutPublication`, {statutPublication: nouveauStatut});
   }
 }

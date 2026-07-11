@@ -4,12 +4,20 @@
             <div class="serie-info">
                 <span>{{ serie.nom }}</span>
                 <button (click)="supprimer(serie.idSerie)" class="btn-supprimer">X</button>
-                @if (serie.statutPublication === 'TERMINEE') {
-                    <span class="statut-publication">Publication terminée</span>
-                } @else if (serie.statutPublication === 'EN_COURS') {
-                    <span class="statut-publication">En cours de publication</span>
+                @if (seriePublicationEnEdition?.idSerie === serie.idSerie) {
+                    <select (change)="sauvegarderPublication($event)" class="statut-publication">
+                        <option value="" disabled selected>Choisir...</option>
+                        <option value="EN_COURS">En cours de publication</option>
+                        <option value="TERMINEE">Publication terminée</option>
+                        <option value="INCONNU">Inconnu</option>
+                    </select>
+                    <button (click)="seriePublicationEnEdition = null" class="btn-supprimer">✕</button>
                 } @else {
-                    <span class="statut-publication">Inconnu</span>
+                    <span (click) = "ouvrirEditionPublication(serie)" class="statut-publication" style="cursor: pointer;">
+                        @if (serie.statutPublication === 'TERMINEE') { Publication terminée }
+                        @else if (serie.statutPublication === 'EN_COURS') { En cours de publication }
+                        @else { Inconnu }
+                    </span>
                 }
                 @if (serie.statutSerie !== 'TERMINEE') {
                     <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
