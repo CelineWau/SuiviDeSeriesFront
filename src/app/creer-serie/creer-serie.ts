@@ -18,6 +18,7 @@ export class CreerSerie {
       nom: ['', Validators.required],
       statutSerie: ['', Validators.required],
       nombreLivreTotal: ['', Validators.required],
+      statutPublication: ['', Validators.required],
       utilisateurId: [1]
     });
   }
