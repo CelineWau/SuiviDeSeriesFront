@@ -48,6 +48,11 @@
   color: #444;
 }
 
+.carre-abandonne {
+    color: var(--couleur-violet);
+    opacity: 0.5;
+}
+
 /* BOUTON SUPPRIMER SERIE */
 
 .btn-supprimer {

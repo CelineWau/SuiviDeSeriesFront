@@ -33,7 +33,7 @@
                         @else { Série terminée }
                     </span>
                 }-->
-                @if (serie.statutSerie !== 'TERMINEE') {
+                @if (serie.statutSerie === 'EN_COURS') {
                     <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
                 }
             </div>

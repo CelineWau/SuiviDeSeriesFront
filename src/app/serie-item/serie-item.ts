@@ -35,6 +35,17 @@ export class SerieItem {
   }
 
   getCarreaux(total: number, livres: any[], statutSerie: string): any[] {
+    if (statutSerie === 'ABANDONNEE') {
+      return Array.from({length: total}, (_, i) => {
+        const livre = livres.find(l => l.numeroDansLaSerie === i + 1);
+        return {
+          symbole: livre?.statutLivre === 'LU' ? '■' : '□',
+          livreId: livre?.idLivre,
+          statut: livre?.statutLivre,
+          classe: 'carre-abandonne'
+        }
+      })
+    }
     if (statutSerie === 'TERMINEE') {
       return Array(total).fill({ symbole: '■', livreId: null, statut: 'LU'});
     }
