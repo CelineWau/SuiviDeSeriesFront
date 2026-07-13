@@ -29,7 +29,9 @@
                     <button (click)="sauvegarderTotal()" class="btn-livre">✓</button>
                     <button (click)="serieEnEdition = null" class="btn-supprimer">✕</button>
                 }
-                <span (click)="ouvrirEditionTotal(serie)" class="btn-edit">✏️</span>
+                @if (serie.statutPublication !== 'TERMINEE') {
+                    <span (click)="ouvrirEditionTotal(serie)" class="btn-edit">✏️</span>
+                }
                 @for (carre of getCarreaux(serie.nombreLivreTotal, serie.livres, serie.statutSerie); track $index) {
                     <span [class]="carre.classe" (click)="ouvrirMenuStatut(carre)">{{ carre.symbole }}</span>
                     @if (carreSelectionne?.livreId && carreSelectionne?.livreId === carre.livreId) {
