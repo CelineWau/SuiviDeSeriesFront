@@ -4,24 +4,21 @@ import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Livre } from '../services/livre';
 import { FormsModule } from '@angular/forms';
+import { SerieItem } from '../serie-item/serie-item';
 
 @Component({
   selector: 'app-series',
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, SerieItem],
   templateUrl: './series.html',
   styleUrl: './series.css',
 })
 export class Series implements OnInit {
 
   series: any[] = [];
-  carreSelectionne: any = null;
-  serieEnEdition: any = null;
-  nouveauTotal: number = 0;
-  seriePublicationEnEdition: any = null;
 
   constructor(private serieService: Serie, private livreService: Livre, private router: Router, private cdr: ChangeDetectorRef){}
 
-  ngOnInit(): void {
+    ngOnInit(): void {
     this.chargerSeries();
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
@@ -37,27 +34,6 @@ export class Series implements OnInit {
     });
   }
 
-  getNombreLivresLus(livres: any[]): number {
-    return livres.filter(livre => livre.statutLivre === 'LU').length;
-  }
-
-  getCarreaux(total: number, livres: any[], statutSerie: string): any[] {
-    if (statutSerie === 'TERMINEE') {
-      return Array(total).fill({ symbole: '■', livreId: null, statut: 'LU'});
-    }
-    return Array.from({length: total}, (_, i) => {
-      const livre = livres.find(l => l.numeroDansLaSerie === i + 1);
-      return {
-        symbole: livre?.statutLivre === 'LU' ? '■' : '□',
-        livreId: livre?.idLivre,
-        statut: livre?.statutLivre,
-        classe: livre?.statutLivre === 'LU' ? 'carre-lu' :
-                livre?.statutLivre === 'DANS_PAL' ? 'carre-pal' :
-                livre?.statutLivre === 'A_ACHETER' ? 'carre-acheter' : 'carre-vide'
-      };
-    });
-  }
-
   supprimer(id: number): void {
     this.serieService.supprimerSerie(id).subscribe(() => {
       this.serieService.getSeries().subscribe(data => {
@@ -67,43 +43,15 @@ export class Series implements OnInit {
     });
   }
 
-  ouvrirMenuStatut(carre: any): void {
-    console.log('carre cliqué:', carre);
-    if(carre.livreId) {
-      this.carreSelectionne = carre;
-      console.log('carreSelectionne:', this.carreSelectionne);
-    }
+  get seriesEnCours(): any[] {
+    return this.series.filter( s => s.statutSerie === 'EN_COURS');
   }
 
-  changerStatut(nouveauStatut: string): void {
-    this.livreService.modifierStatutLivre(this.carreSelectionne.livreId, nouveauStatut).subscribe(() => {
-      this.carreSelectionne = null;
-      this.chargerSeries();
-    })
+  get seriesAbandonnee(): any[] {
+    return this.series.filter( s => s.statutSerie === 'ABANDONNEE');
   }
 
-  ouvrirEditionTotal(serie: any): void {
-    this.serieEnEdition = serie;
-    this.nouveauTotal = serie.nombreLivreTotal;
-  }
-
-  sauvegarderTotal(): void {
-    this.serieService.modifierNombreLivreTotal(this.serieEnEdition.idSerie, this.nouveauTotal).subscribe(() => {
-      this.serieEnEdition = null;
-      this.chargerSeries();
-    });
-  }
-
-  ouvrirEditionPublication(serie: any): void {
-    this.seriePublicationEnEdition = serie;
-  }
-
-  sauvegarderPublication(event: Event): void {
-    const nouveauStatut = (event.target as HTMLSelectElement).value;
-    this.serieService.modifierStatutPublication(this.seriePublicationEnEdition.idSerie, nouveauStatut).subscribe(() => {
-      this.seriePublicationEnEdition = null;
-      this.chargerSeries();
-      this.cdr.detectChanges();
-    });
+  get seriesTerminee(): any[] {
+    return this.series.filter( s => s.statutSerie === 'TERMINEE');
   }
 }

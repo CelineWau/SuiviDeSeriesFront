@@ -30,4 +30,8 @@ export class Serie {
   modifierStatutPublication(id: number, nouveauStatut: string): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${id}/statutPublication`, {statutPublication: nouveauStatut});
   }
+
+  modifierStatutSerie(id: number, nouveauStatutSerie: string): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/${id}/statutSerie`, {statutSerie: nouveauStatutSerie});
+  }
 }

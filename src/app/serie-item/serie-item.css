@@ -1,0 +1,138 @@
+/* LISTE SERIES */
+
+.serie-ligne {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.3rem 1rem;
+}
+
+.serie-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.carrés {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 0.2rem;
+    position: relative;
+    margin-left: auto;
+    align-items: center;
+}
+
+.carrés span:not(.btn-edit) {
+    font-size: 2.5rem;
+    width: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* COULEUR CARRE */
+
+.carre-lu {
+  color: var(--couleur-texte);
+}
+
+.carre-pal {
+  color: var(--couleur-or);
+}
+
+.carre-acheter {
+  color: var(--couleur-bordeaux);
+}
+
+.carre-vide {
+  color: #444;
+}
+
+/* BOUTON SUPPRIMER SERIE */
+
+.btn-supprimer {
+    background-color: transparent;
+    border: 1px solid var(--couleur-bordeaux);
+    color: var(--couleur-bordeaux);
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-supprimer:hover {
+    background-color: var(--couleur-bordeaux);
+    color: var(--couleur-texte);
+}
+
+/* STATUT PUBLICATION*/
+.statut-publication {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.statut-publication select {
+    background-color: #0d0d0d;
+    border: 1px solid var(--couleur-or);
+    color: var(--couleur-texte);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.75rem;
+    padding: 0.2rem;
+    cursor: pointer;
+}
+
+/* BOUTON AJOUT LIVRE */
+
+.btn-livre {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--couleur-or);
+    color: var(--couleur-or);
+    font-family: 'Cinzel', serif;
+    text-decoration: none;
+}
+
+.btn-livre:hover {
+    background-color: var(--couleur-bordeaux);
+    border-color: var(--couleur-bordeaux);
+    color: var(--couleur-texte);
+}
+
+/* POP UP CHANGEMENT STATUT LIVRE*/
+
+.menu-statut {
+    position: absolute;
+    bottom: 100%;
+    right: 0%;
+    background-color: #1a1a1a;
+    border: 1px solid var(--couleur-or);
+    padding: 1rem;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.menu-statut button {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--couleur-or);
+    font-family: 'Cinzel', serif;
+    padding: 0.3rem;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-statut button:hover {
+    color: var(--couleur-bordeaux);
+}
+
+/* BOUTON MODIFICATION SERIE */
+.btn-edit {
+    cursor: pointer;
+    font-size: 0.8rem;
+    opacity: 0.4;
+}
+
+.btn-edit:hover {
+    opacity: 1;
+}
