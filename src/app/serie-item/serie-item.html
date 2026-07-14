@@ -12,40 +12,40 @@
                     </select>
                     <button (click)="seriePublicationEnEdition = null" class="btn-supprimer">✕</button>
                 } @else {
-                    <span (click) = "ouvrirEditionPublication(serie)" class="statut-publication" style="cursor: pointer;">
+                    <span (click) = "ouvrirEditionPublication(serie)" class="statut-publication" [class.statut-en-cours]="serie.statutPublication === 'EN_COURS'" style="cursor: pointer;">
                         @if (serie.statutPublication === 'TERMINEE') { Publication terminée }
                         @else if (serie.statutPublication === 'EN_COURS') { En cours de publication }
                         @else { Inconnu }
                     </span>
                 }
-                <!--@if (serieStatutEnEdition?.idSerie === serie.idSerie) {
-                    <select (change)="sauvegarderStatutSerie($event)" class="statut-publication">
-                        <option value="" disabled selected>Choisir...</option>
-                        <option value="EN_COURS">Série en cours</option>
-                        <option value="TERMINEE">Série terminée</option>
-                        <option value="ABANDONNEE">Série abondonnée</option>
-                    </select>
-                    <button (click)="serieStatutEnEdition = null" class="btn-supprimer">✕</button>
-                } @else {
-                    <span (click)="ouvrirEditionStatutSerie(serie)" class="statut-publication">
-                        @if (serie.statutSerie === 'EN_COURS') { Série en cours }
-                        @else if (serie.statutSerie === 'ABANDONNEE') { Série abandonnée }
-                        @else { Série terminée }
-                    </span>
-                }-->
-                @if (serie.statutSerie === 'EN_COURS') {
+                <span class="statut-serie-wrapper">
+                    <button (click)="ouvrirEditionStatutSerie(serie)" class="btn-livre">Changer le statut ▾</button>
+                    @if (serieStatutEnEdition?.idSerie === serie.idSerie) {
+                        <div class="menu-statut">
+                            <p>Changer le statut :</p>
+                            <button (click)="changerStatutSerie('EN_COURS')">En cours</button>
+                            <button (click)="changerStatutSerie('TERMINEE')">Terminée</button>
+                            <button (click)="changerStatutSerie('ABANDONNEE')">Abandonnée</button>
+                            <button (click)="serieStatutEnEdition = null">Annuler</button>
+                        </div>
+                    }
+                </span>
+                @if (serie.statutSerie === 'EN_COURS' && !tousLesLivresEnregistres(serie)) {
                     <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
                 }
             </div>
-            <div class="carrés">
+            <div class="carres">
                 @if (serieEnEdition?.idSerie === serie.idSerie) {
                     <input type="number" [(ngModel)]="nouveauTotal" style="width: 3rem;">
                     <button (click)="sauvegarderTotal()" class="btn-livre">✓</button>
                     <button (click)="serieEnEdition = null" class="btn-supprimer">✕</button>
                 }
-                @if (serie.statutPublication !== 'TERMINEE') {
-                    <span (click)="ouvrirEditionTotal(serie)" class="btn-edit">✏️</span>
-                }
+                <span
+                    (click)="serie.statutPublication !== 'TERMINEE' && ouvrirEditionTotal(serie)"
+                    class="btn-edit"
+                    [class.btn-edit-cache]="serie.statutPublication === 'TERMINEE'">
+                    ✏️
+                    </span>
                 @for (carre of getCarreaux(serie.nombreLivreTotal, serie.livres, serie.statutSerie); track $index) {
                     <span [class]="carre.classe" (click)="ouvrirMenuStatut(carre)">{{ carre.symbole }}</span>
                     @if (carreSelectionne?.livreId && carreSelectionne?.livreId === carre.livreId) {

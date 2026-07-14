@@ -14,7 +14,7 @@
     gap: 1rem;
 }
 
-.carrés {
+.carres {
     display: flex;
     flex-direction: row-reverse;
     gap: 0.2rem;
@@ -23,11 +23,15 @@
     align-items: center;
 }
 
-.carrés span:not(.btn-edit) {
+.carres span:not(.btn-edit) {
     font-size: 2.5rem;
     width: 1.5rem;
     text-align: center;
     cursor: pointer;
+}
+
+.carres span.carre-lu {
+    cursor: default;
 }
 
 /* COULEUR CARRE */
@@ -75,6 +79,11 @@
     color: #888;
 }
 
+.statut-en-cours {
+    color: var(--couleur-emeraude);
+    font-weight: 600;
+}
+
 .statut-publication select {
     background-color: #0d0d0d;
     border: 1px solid var(--couleur-or);
@@ -94,6 +103,7 @@
     color: var(--couleur-or);
     font-family: 'Cinzel', serif;
     text-decoration: none;
+    background-color: transparent;
 }
 
 .btn-livre:hover {
@@ -136,6 +146,20 @@
     cursor: pointer;
     font-size: 0.8rem;
     opacity: 0.4;
+    width: 1.5rem;
+    text-align: center;
+    display: inline-block;
+}
+
+.statut-serie-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.btn-edit-cache {
+    visibility: hidden;
+    cursor: default;
+    pointer-events: none;
 }
 
 .btn-edit:hover {

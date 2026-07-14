@@ -63,10 +63,8 @@ export class SerieItem {
   }
   
   ouvrirMenuStatut(carre: any): void {
-    console.log('carre cliqué:', carre);
-    if(carre.livreId) {
+    if(carre.livreId && carre.statut !== 'LU') {
       this.carreSelectionne = carre;
-      console.log('carreSelectionne:', this.carreSelectionne);
     }
   }
 
@@ -106,12 +104,16 @@ export class SerieItem {
     this.serieStatutEnEdition = serie;
   }
 
-  sauvegarderStatutSerie(event: Event): void {
-    const nouveauStatut = (event.target as HTMLSelectElement).value;
+  changerStatutSerie(nouveauStatut: string): void {
     this.serieService.modifierStatutSerie(this.serieStatutEnEdition.idSerie, nouveauStatut).subscribe(() => {
       this.serieStatutEnEdition = null;
       this.serieModifiee.emit();
       this.cdr.detectChanges();
     })
+  }
+
+  tousLesLivresEnregistres(serie: any): boolean {
+    console.log('livres:', serie.livres, 'total:', serie.nombreLivreTotal);
+    return (serie.livres?.length ?? 0) >= serie.nombreLivreTotal;
   }
 }
