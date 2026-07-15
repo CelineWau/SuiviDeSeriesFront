@@ -6,9 +6,17 @@
         <input type="text" id="titre" formControlName="titre" placeholder="Titre du livre">
     </div>
 
-    <div class="champ">
+    <div class="champ champ-autocomplete">
         <label for="auteur">Auteur du livre</label>
-        <input type="text" id="auteur" formControlName="auteur" placeholder="Auteur du livre">
+        <input type="text" id="auteur" formControlName="auteur" placeholder="Auteur du livre" (input)="filtrerAuteurs()" (focus)="filtrerAuteurs()" (blur)="fermerSuggestionsAvecDelai()"
+        autocomplete="off">
+        @if (suggestionsVisibles) {
+            <ul class="liste-suggestion">
+                @for (auteur of auteursFiltres; track auteur) {
+                    <li (mousedown)="choisirAuteur(auteur)">{{auteur}}</li>
+                }
+            </ul>
+        }
     </div>
 
     <div class="champ">

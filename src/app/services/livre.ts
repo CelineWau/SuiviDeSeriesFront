@@ -18,4 +18,8 @@ export class Livre {
   modifierStatutLivre(id: number, statut: string): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${id}/statut`, {statut: statut});
   }
+
+  recupererAuteurs(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/auteurs`);
+  }
 }

@@ -16,6 +16,9 @@ export class CreerLivre implements OnInit {
   livreForm: FormGroup;
   series: any[] = [];
   serieCourante: any;
+  auteurs: string[] = [];
+  auteursFiltres: string[] = [];
+  suggestionsVisibles = false;
 
   constructor(private fb: FormBuilder, private livreService: Livre, private serieService: Serie, private router: Router, private route: ActivatedRoute) {
     const serieId = this.route.snapshot.paramMap.get('serieId');
@@ -41,8 +44,32 @@ export class CreerLivre implements OnInit {
     this.serieService.getSeries().subscribe(data => {
       this.series = data;
       this.serieCourante = data.find((s: any) => s.idSerie == this.route.snapshot.paramMap.get('serieId'));
-      console.log('serieId URL:', this.route.snapshot.paramMap.get('serieId'));
-      console.log('serieCourante:', this.serieCourante);
     });
+
+    this.livreService.recupererAuteurs().subscribe(data => {
+      this.auteurs = data;
+    });
+  }
+
+  filtrerAuteurs(): void {
+    const saisie = this.livreForm.get('auteur')?.value?.toLowerCase() ?? '';
+    if(saisie.length === 0) {
+      this.auteursFiltres = [];
+      this.suggestionsVisibles = false;
+      return;
+    }
+    this.auteursFiltres = this.auteurs.filter(a => a.toLowerCase().includes(saisie));
+    this.suggestionsVisibles = this.auteursFiltres.length > 0;
+  }
+
+  choisirAuteur(auteur: string): void {
+    this.livreForm.get('auteur')?.setValue(auteur);
+    this.suggestionsVisibles = false;
+  }
+
+  fermerSuggestionsAvecDelai(): void {
+    setTimeout(() => {
+      this.suggestionsVisibles = false;
+    }, 150);
   }
 }
