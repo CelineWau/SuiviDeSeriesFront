@@ -18,18 +18,19 @@
                         @else { Inconnu }
                     </span>
                 }
-                <span class="statut-serie-wrapper">
+                @if (serie.statutSerie !== 'TERMINEE') {
+                    <span class="statut-serie-wrapper">
                     <button (click)="ouvrirEditionStatutSerie(serie)" class="btn-livre">Changer le statut ▾</button>
                     @if (serieStatutEnEdition?.idSerie === serie.idSerie) {
                         <div class="menu-statut">
                             <p>Changer le statut :</p>
                             <button (click)="changerStatutSerie('EN_COURS')">En cours</button>
-                            <button (click)="changerStatutSerie('TERMINEE')">Terminée</button>
                             <button (click)="changerStatutSerie('ABANDONNEE')">Abandonnée</button>
                             <button (click)="serieStatutEnEdition = null">Annuler</button>
                         </div>
                     }
                 </span>
+                }
                 @if (serie.statutSerie === 'EN_COURS' && !tousLesLivresEnregistres(serie)) {
                     <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
                 }
