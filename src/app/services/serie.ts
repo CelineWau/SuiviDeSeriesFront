@@ -15,6 +15,10 @@ export class Serie {
     return this.http.get<any[]>(this.apiUrl);
   }
 
+  getSeriesPresqueFiniesPal(seuil: number): Observable<any []> {
+    return this.http.get<any[]>(`${this.apiUrl}/presqueFiniesPal?seuil=${seuil}`);  
+  }
+
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }

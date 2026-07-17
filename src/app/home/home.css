@@ -1,0 +1,36 @@
+.page-accueil {
+    padding: 2rem 4rem;
+}
+
+.section-pal {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border: 1px solid var(--couleur-or);
+    background-color: var(--couleur-fond);
+    width: fit-content;
+    min-width: 300px;
+}
+
+.section-pal h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding: 0;
+    color: var(--couleur-or);
+    font-size: 1.2rem;
+}
+
+.liste-pal {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.liste-pal li {
+    padding: 0.4rem 0;
+    color: var(--couleur-texte);
+    border-bottom: 1px solid var(--couleur-bronze);
+}
+
+.liste-pal li:last-child {
+    border-bottom: none;
+}

@@ -1,3 +1,16 @@
-<h1>Bonjour Céline</h1>
-<p>Tu as {{ series.filter(s => s.statutSerie === 'EN_COURS').length }} séries en cours</p>
-<a routerLink="/series">Voir mes séries</a>
+<div class="page-accueil">
+  <h1>Bonjour Céline</h1>
+  <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} séries en cours</p>
+  <a routerLink="/series">Voir mes séries</a>
+
+  @if (seriesPresqueFinies.length > 0) {
+    <div class="section-pal">
+      <h2>Objectif PAL : ces séries n'attendent que toi</h2>
+      <ul class="liste-pal">
+        @for (serie of seriesPresqueFinies; track serie.idSerie) {
+          <li>{{ serie.nom }}</li>
+        }
+      </ul>
+    </div>
+  }
+</div>
