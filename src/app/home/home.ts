@@ -11,13 +11,15 @@ import { Serie } from '../services/serie';
 export class Home implements OnInit{
 
   series: any[] = [];
-  seriesPresqueFinies : any [] = [];
+  seriesPresqueFinies: any[] = [];
+  seriesAvecLivresAAcheter: any[] = [];
 
   constructor(private serieService: Serie, private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
     this.chargerSerie();
     this.chargerSeriesPresqueFinies();
+    this.chargerSeriesAvecLivresAAcheter()
   }
   
   chargerSerie():void {
@@ -32,5 +34,12 @@ export class Home implements OnInit{
       this.seriesPresqueFinies = data;
       this.cdr.detectChanges();
     });
+  }
+
+  chargerSeriesAvecLivresAAcheter(): void {
+    this.serieService.getSeriesAvecLivresAAcheter().subscribe(data => {
+      this.seriesAvecLivresAAcheter = data;
+      this.cdr.detectChanges();
+    })
   }
 }

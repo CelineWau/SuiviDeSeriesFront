@@ -19,6 +19,10 @@ export class Serie {
     return this.http.get<any[]>(`${this.apiUrl}/presqueFiniesPal?seuil=${seuil}`);  
   }
 
+  getSeriesAvecLivresAAcheter(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/seriesAvecLivresAAcheter`);
+  }
+
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }

@@ -34,3 +34,15 @@
 .liste-pal li:last-child {
     border-bottom: none;
 }
+
+.conteneur-stat {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.nombre-a-acheter {
+    color: var(--couleur-emeraude);
+    font-weight: 600;
+}
