@@ -39,6 +39,19 @@
     </div>
 
     <div class="champ">
+        <label for="formatLivre">Format du livre</label>
+        <select id="formatLivre" formControlName="formatLivre">
+            <option value="EBOOK">Ebook</option>
+            <option value="PAPIER">Papier</option>
+        </select>
+    </div>
+
+    <div class="champ">
+        <label for="dateAcquisition">Date d'acquisition</label>
+        <input type="date" id="dateAcquisition" formControlName="dateAcquisition">
+    </div>
+
+    <div class="champ">
         <label for="serie">Série</label>
         @if (serieCourante) {
             <p>{{ serieCourante.nom }}</p>

@@ -28,6 +28,8 @@ export class CreerLivre implements OnInit {
       isbn: ['', Validators.required],
       numeroDansLaSerie: ['', Validators.required],
       statutLivre: ['', Validators.required],
+      formatLivre: ['', Validators.required],
+      dateAcquisition: [''],
       serieId: [{value: serieId, disabled: true}, Validators.required]
     });
   }
