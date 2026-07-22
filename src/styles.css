@@ -1,11 +1,12 @@
 :root {
     --couleur-fond: #1a1a1a;
     --couleur-texte: #f0e6d3;
-    --couleur-or: #d4a843;
-    --couleur-bordeaux: #6d1520;
-    --couleur-emeraude: #2d6a4f;
-    --couleur-bronze: #8b6914;
-    --couleur-violet: #4a1942;
+    --couleur-or: #d4a843;      /* Accent principal : CTA, liens d'action, bordures de mise en avant */
+    --couleur-cuivre: #b5651d;  /* Titres de sections/cartes, éléments décoratifs secondaires */
+    --couleur-bronze: #8b6914;  /* Neutre discret : dates, métadonnées, texte secondaire */
+    --couleur-bordeaux: #6d1520; /* Négatif : suppression, urgence */
+    --couleur-emeraude: #2d6a4f; /* Positif : en cours, actif, ebook */
+    --couleur-violet: #4a1942;  /* Abandonné/en pause (inchangé) */
 }
 
 body {
@@ -24,7 +25,12 @@ a:hover {
     color: var(--couleur-bordeaux);
 }
 
-h1, h2, h3 {
+h1 {
+    font-family: 'Cinzel', serif;
+    color: var(--couleur-or);
+}
+
+h2, h3 {
     font-family: 'Cinzel', serif;
 }
 

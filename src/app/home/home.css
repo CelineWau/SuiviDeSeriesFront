@@ -2,6 +2,8 @@
     padding: 2rem 4rem;
 }
 
+/* LISTES */
+
 .section-pal {
     margin-top: 2rem;
     padding: 1.5rem;
@@ -11,11 +13,11 @@
     min-width: 300px;
 }
 
-.section-pal h2 {
+.section-pal h2, .camembert h2 {
     margin-top: 0;
     margin-bottom: 1rem;
     padding: 0;
-    color: var(--couleur-or);
+    color: var(--couleur-cuivre);
     font-size: 1.2rem;
 }
 
@@ -39,10 +41,80 @@
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: flex-start;
 }
 
 .nombre-a-acheter {
     color: var(--couleur-emeraude);
     font-weight: 600;
+}
+
+/* CAMEMBERT */
+
+.conteneur-camemberts {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+ .camembert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.texte-camembert-valeur {
+    fill: var(--couleur-texte);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.texte-camembert-label {
+    fill: var(--couleur-texte);
+    font-size: 7px;
+}
+
+.anneau-fond {
+    fill: none;
+    stroke-width: 20px;
+}
+
+.anneau-fond-papier {
+    stroke: var(--couleur-bronze);
+}
+
+.anneau-portion-ebook {
+    fill: none;
+    stroke: var(--couleur-emeraude);
+    stroke-width: 20px;
+}
+
+.legende-camembert {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.legende-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pastille {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+}
+
+.pastille-ebook {
+    background-color: var(--couleur-emeraude);
+}
+
+.pastille-papier {
+    background-color: var(--couleur-bronze);
 }

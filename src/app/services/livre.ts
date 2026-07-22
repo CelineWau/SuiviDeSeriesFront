@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { RepartitionFormat } from '../models/repartition-format';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,9 @@ export class Livre {
 
   recupererAuteurs(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiUrl}/auteurs`);
+  }
+
+  calculerRepartitionFormat(): Observable<RepartitionFormat> {
+    return this.http.get<RepartitionFormat>(`${this.apiUrl}/repartitionFormat`)
   }
 }

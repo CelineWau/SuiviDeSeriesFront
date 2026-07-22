@@ -1,6 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Serie } from '../services/serie';
+import { RepartitionFormat } from '../models/repartition-format';
+import { Livre } from '../services/livre';
+import { calculerLongueurArc, calculerProportion } from '../utils/camembert';
 
 @Component({
   selector: 'app-home',
@@ -13,13 +16,17 @@ export class Home implements OnInit{
   series: any[] = [];
   seriesPresqueFinies: any[] = [];
   seriesAvecLivresAAcheter: any[] = [];
+  repartitionFormat: RepartitionFormat = { luEbook: 0, luPapier: 0, palEbook: 0, palPapier: 0 };
+  longueurArcLuEbook: number = 0;
+  longueurArcPalEbook: number = 0;
 
-  constructor(private serieService: Serie, private cdr: ChangeDetectorRef){}
+  constructor(private serieService: Serie, private livreService : Livre, private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
     this.chargerSerie();
     this.chargerSeriesPresqueFinies();
-    this.chargerSeriesAvecLivresAAcheter()
+    this.chargerSeriesAvecLivresAAcheter();
+    this.chargerCalculRepartitionFormat();
   }
   
   chargerSerie():void {
@@ -39,6 +46,22 @@ export class Home implements OnInit{
   chargerSeriesAvecLivresAAcheter(): void {
     this.serieService.getSeriesAvecLivresAAcheter().subscribe(data => {
       this.seriesAvecLivresAAcheter = data;
+      this.cdr.detectChanges();
+    })
+  }
+
+  chargerCalculRepartitionFormat(): void {
+    this.livreService.calculerRepartitionFormat().subscribe(data => {
+      this.repartitionFormat = data;
+
+      const totalLu = data.luEbook + data.luPapier;
+      const proportionLuEbook = calculerProportion(data.luEbook, totalLu);
+      this.longueurArcLuEbook = calculerLongueurArc(proportionLuEbook, 40);
+
+      const totalPal = data.palEbook + data.palPapier;
+      const proportionPalEbook = calculerProportion(data.palEbook, totalPal);
+      this.longueurArcPalEbook = calculerLongueurArc(proportionPalEbook, 40);
+
       this.cdr.detectChanges();
     })
   }

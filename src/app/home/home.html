@@ -3,6 +3,54 @@
   <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} séries en cours</p>
   <a routerLink="/series">Voir mes séries</a>
 
+  <div class="conteneur-camemberts">
+    <div class="camembert">
+      <h2>Proportion livres papier / ebooks lus</h2>
+      <svg viewBox="0 0 100 100" width="160" height="160">
+        <circle cx="50" cy="50" r="40" class="anneau-fond anneau-fond-papier"></circle>
+        <circle
+          cx="50"
+          cy="50"
+          r="40"
+          class="anneau-portion-ebook"
+          [attr.stroke-dasharray]="longueurArcLuEbook + ' 251.33'"
+          transform="rotate(-90 50 50)"
+        ></circle>
+        <text x="50" y="46" text-anchor="middle" class="texte-camembert-valeur">
+          {{ repartitionFormat.luEbook + repartitionFormat.luPapier }}
+        </text>
+        <text x="50" y="58" text-anchor="middle" class="texte-camembert-label">livres lus</text>
+      </svg>
+      <div class="legende-camembert">
+        <span class="legende-item"><span class="pastille pastille-papier"></span>Papier</span>
+        <span class="legende-item"><span class="pastille pastille-ebook"></span>Ebook</span>
+      </div>
+    </div>
+
+    <div class="camembert">
+      <h2>Proportion livres papier / ebooks dans la PAL</h2>
+      <svg viewBox="0 0 100 100" width="160" height="160">
+        <circle cx="50" cy="50" r="40" class="anneau-fond anneau-fond-papier"></circle>
+        <circle
+          cx="50"
+          cy="50"
+          r="40"
+          class="anneau-portion-ebook"
+          [attr.stroke-dasharray]="longueurArcPalEbook + ' 251.33'"
+          transform="rotate(-90 50 50)"
+        ></circle>
+        <text x="50" y="46" text-anchor="middle" class="texte-camembert-valeur">
+          {{ repartitionFormat.palEbook + repartitionFormat.palPapier }}
+        </text>
+        <text x="50" y="58" text-anchor="middle" class="texte-camembert-label">dans la PAL</text>
+      </svg>
+      <div class="legende-camembert">
+        <span class="legende-item"><span class="pastille pastille-papier"></span>Papier</span>
+        <span class="legende-item"><span class="pastille pastille-ebook"></span>Ebook</span>
+      </div>
+    </div>
+  </div>
+
   <div class="conteneur-stat">
     @if (seriesPresqueFinies.length > 0) {
       <div class="section-pal">
@@ -20,7 +68,11 @@
         <h2>Cible tes achats : elles sont si proches de la fin</h2>
         <ul class="liste-pal">
           @for (serie of seriesAvecLivresAAcheter; track serie.idSerie) {
-            <li>{{ serie.nom }} (<span class="nombre-a-acheter"> {{ serie.nombreLivreAAcheter }} à acheter </span>)</li>
+            <li>
+              {{ serie.nom }} (<span class="nombre-a-acheter">
+                {{ serie.nombreLivreAAcheter }} à acheter </span
+              >)
+            </li>
           }
         </ul>
       </div>
