@@ -30,6 +30,7 @@ export class CreerLivre implements OnInit {
       statutLivre: ['', Validators.required],
       formatLivre: ['', Validators.required],
       dateAcquisition: [''],
+      dateLecture: [''],
       serieId: [{value: serieId, disabled: true}, Validators.required]
     });
   }

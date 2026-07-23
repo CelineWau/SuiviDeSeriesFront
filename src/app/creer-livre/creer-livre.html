@@ -46,10 +46,19 @@
         </select>
     </div>
 
-    <div class="champ">
-        <label for="dateAcquisition">Date d'acquisition</label>
-        <input type="date" id="dateAcquisition" formControlName="dateAcquisition">
-    </div>
+    @if (livreForm.get('statutLivre')?.value === 'DANS_PAL' || livreForm.get('statutLivre')?.value === 'LU') {
+        <div class="champ">
+            <label for="dateAcquisition">Date d'acquisition</label>
+            <input type="date" id="dateAcquisition" formControlName="dateAcquisition">
+        </div>
+    }
+
+    @if (livreForm.get('statutLivre')?.value === 'LU') {
+        <div class="champ">
+            <label for="dateLecture">Date de lecture</label>
+            <input type="date" id="dateLecture" formControlName="dateLecture">
+        </div>
+    }
 
     <div class="champ">
         <label for="serie">Série</label>
