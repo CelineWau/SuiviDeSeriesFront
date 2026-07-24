@@ -13,7 +13,7 @@
     min-width: 300px;
 }
 
-.section-pal h2, .camembert h2, .conteneur-cases-defi h2 {
+.section-pal h2, .camembert h2, .conteneur-jauge-serie h2 {
     margin-top: 0;
     margin-bottom: 1rem;
     padding: 0;
@@ -120,24 +120,34 @@
 }
 
 /* JAUGE SERIES FINIES PAR ANNEE*/
-.conteneur-cases-defi {
+.conteneur-jauge-serie {
     margin-top: 2rem;
 }
 
-.cases-defi {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-}
-
-.cases-defi span {
-    width: 24px;
+.jauge-fond {
+    width: 100%;
+    max-width: 400px;
     height: 24px;
+    background-color: #0d0d0d;
     border: 1px solid var(--couleur-bronze);
-    display: inline-block;
 }
 
-.cases-defi span.remplie {
+.jauge-remplissage {
+    height: 100%;
     background-color: var(--couleur-emeraude);
-    border-color: var(--couleur-emeraude);
+    transition: width 0.3s ease;
+}
+
+.formulaire-objectif {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.formulaire-objectif input {
+    background-color: #0d0d0d;
+    border: 1px solid var(--couleur-or);
+    color: var(--couleur-texte);
+    padding: 0.4rem;
+    width: 80px;
 }

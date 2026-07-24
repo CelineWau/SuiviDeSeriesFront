@@ -4,10 +4,13 @@ import { Serie } from '../services/serie';
 import { RepartitionFormat } from '../models/repartition-format';
 import { Livre } from '../services/livre';
 import { calculerLongueurArc, calculerProportion } from '../utils/camembert';
+import { ObjectifAnnuelData } from '../models/objectif-annuel-data';
+import { ObjectifAnnuel } from '../services/objectif-annuel';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -20,8 +23,11 @@ export class Home implements OnInit{
   longueurArcLuEbook: number = 0;
   longueurArcPalEbook: number = 0;
   compteurSerieParAnnee: number = 0;
+  objectifAnnuelData: ObjectifAnnuelData | null = null;
+  nouvelObjectif: number = 12
+  idUtisateur = 1;
 
-  constructor(private serieService: Serie, private livreService : Livre, private cdr: ChangeDetectorRef){}
+  constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
     this.chargerSerie();
@@ -29,6 +35,7 @@ export class Home implements OnInit{
     this.chargerSeriesAvecLivresAAcheter();
     this.chargerCalculRepartitionFormat();
     this.chargerCompteurSeriesParAnnee();
+    this.chargerObjectifAnnuel()
   }
   
   chargerSerie():void {
@@ -75,7 +82,25 @@ export class Home implements OnInit{
     })
   }
 
-  getCasesDefi(): boolean[] {
-    return Array.from({length:12}, (_,i) => i < this.compteurSerieParAnnee);
+  chargerObjectifAnnuel(): void {
+    this.objectifAnnuel.recupererObjectif(this.idUtisateur).subscribe(data => {
+      this.objectifAnnuelData = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  definirObjectif(): void {
+    this.objectifAnnuel.definirObjectif(this.idUtisateur, this.nouvelObjectif).subscribe(data => {
+      this.objectifAnnuelData = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  pourcentageProgression(): number {
+    if (!this.objectifAnnuelData || this.objectifAnnuelData.valeurObjectif === 0) {
+      return 0;
+    }
+    const pourcentage = (this.compteurSerieParAnnee / this.objectifAnnuelData.valeurObjectif) * 100;
+    return Math.min(pourcentage, 100);
   }
 }

@@ -3,13 +3,20 @@
   <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} séries en cours</p>
   <a routerLink="/series">Voir mes séries</a>
 
-  <div class="conteneur-cases-defi">
-    <h2>Séries finies cette année : {{ compteurSerieParAnnee }}</h2>
-    <div class="cases-defi">
-      @for (estRemplie of getCasesDefi(); track $index) {
-        <span [class.remplie]="estRemplie"></span>
-      }
-    </div>
+  <div class="conteneur-jauge-serie">
+    @if (objectifAnnuelData) {
+      <h2>Séries finies cette année : {{ compteurSerieParAnnee }} / {{ objectifAnnuelData.valeurObjectif }}</h2>
+      <div class="jauge-fond">
+        <div class="jauge-remplissage" [style.width.%]="pourcentageProgression()"></div>
+      </div>
+    } @else {
+      <h2>Définir ton objecif de l'année</h2>
+      <div class="formulaire-objectif">
+        <input type="number" [(ngModel)]="nouvelObjectif" min="1" max="50">
+        <button class="btn-livre" (click)="definirObjectif()">Valider</button>
+      </div>
+    }
+    
   </div>
 
   <div class="conteneur-camemberts">
