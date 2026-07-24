@@ -13,7 +13,7 @@
     min-width: 300px;
 }
 
-.section-pal h2, .camembert h2 {
+.section-pal h2, .camembert h2, .conteneur-cases-defi h2 {
     margin-top: 0;
     margin-bottom: 1rem;
     padding: 0;
@@ -117,4 +117,27 @@
 
 .pastille-papier {
     background-color: var(--couleur-bronze);
+}
+
+/* JAUGE SERIES FINIES PAR ANNEE*/
+.conteneur-cases-defi {
+    margin-top: 2rem;
+}
+
+.cases-defi {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.cases-defi span {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--couleur-bronze);
+    display: inline-block;
+}
+
+.cases-defi span.remplie {
+    background-color: var(--couleur-emeraude);
+    border-color: var(--couleur-emeraude);
 }

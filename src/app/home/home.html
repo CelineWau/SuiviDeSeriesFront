@@ -3,6 +3,15 @@
   <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} séries en cours</p>
   <a routerLink="/series">Voir mes séries</a>
 
+  <div class="conteneur-cases-defi">
+    <h2>Séries finies cette année : {{ compteurSerieParAnnee }}</h2>
+    <div class="cases-defi">
+      @for (estRemplie of getCasesDefi(); track $index) {
+        <span [class.remplie]="estRemplie"></span>
+      }
+    </div>
+  </div>
+
   <div class="conteneur-camemberts">
     <div class="camembert">
       <h2>Proportion livres papier / ebooks lus</h2>

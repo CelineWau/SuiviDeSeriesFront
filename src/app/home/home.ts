@@ -19,6 +19,7 @@ export class Home implements OnInit{
   repartitionFormat: RepartitionFormat = { luEbook: 0, luPapier: 0, palEbook: 0, palPapier: 0 };
   longueurArcLuEbook: number = 0;
   longueurArcPalEbook: number = 0;
+  compteurSerieParAnnee: number = 0;
 
   constructor(private serieService: Serie, private livreService : Livre, private cdr: ChangeDetectorRef){}
 
@@ -27,6 +28,7 @@ export class Home implements OnInit{
     this.chargerSeriesPresqueFinies();
     this.chargerSeriesAvecLivresAAcheter();
     this.chargerCalculRepartitionFormat();
+    this.chargerCompteurSeriesParAnnee();
   }
   
   chargerSerie():void {
@@ -64,5 +66,16 @@ export class Home implements OnInit{
 
       this.cdr.detectChanges();
     })
+  }
+
+  chargerCompteurSeriesParAnnee(): void {
+    this.serieService.getCompteurSerieParAnnee().subscribe(data => {
+      this.compteurSerieParAnnee = data;
+      this.cdr.detectChanges();
+    })
+  }
+
+  getCasesDefi(): boolean[] {
+    return Array.from({length:12}, (_,i) => i < this.compteurSerieParAnnee);
   }
 }
