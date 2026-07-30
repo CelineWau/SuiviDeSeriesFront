@@ -91,11 +91,11 @@ export class Home implements OnInit{
   }
 
   definirObjectif(): void {
-    this.objectifAnnuel.definirObjectif(this.idUtisateur, this.nouvelObjectif).subscribe(data => {
-      this.objectifAnnuelData = data;
-      this.cdr.detectChanges();
-    });
-  }
+  this.objectifAnnuel.definirObjectif(this.idUtisateur, this.nouvelObjectif).subscribe(data => {
+    this.objectifAnnuelData = data;
+    this.cdr.detectChanges();
+  });
+}
 
   pourcentageProgression(): number {
     if (!this.objectifAnnuelData || this.objectifAnnuelData.valeurObjectif === 0) {

@@ -57,22 +57,6 @@
     opacity: 0.5;
 }
 
-/* BOUTON SUPPRIMER SERIE */
-
-.btn-supprimer {
-    background-color: transparent;
-    border: 1px solid var(--couleur-bordeaux);
-    color: var(--couleur-bordeaux);
-    padding: 0.2rem 0.6rem;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
-
-.btn-supprimer:hover {
-    background-color: var(--couleur-bordeaux);
-    color: var(--couleur-texte);
-}
-
 /* STATUT PUBLICATION*/
 .statut-publication {
     font-size: 0.75rem;
@@ -92,24 +76,6 @@
     font-size: 0.75rem;
     padding: 0.2rem;
     cursor: pointer;
-}
-
-/* BOUTON AJOUT LIVRE */
-
-.btn-livre {
-    font-size: 0.7rem;
-    padding: 0.2rem 0.6rem;
-    border: 1px solid var(--couleur-or);
-    color: var(--couleur-or);
-    font-family: 'Cinzel', serif;
-    text-decoration: none;
-    background-color: transparent;
-}
-
-.btn-livre:hover {
-    background-color: var(--couleur-bordeaux);
-    border-color: var(--couleur-bordeaux);
-    color: var(--couleur-texte);
 }
 
 /* POP UP CHANGEMENT STATUT LIVRE*/
@@ -142,26 +108,8 @@
 }
 
 /* BOUTON MODIFICATION SERIE */
-.btn-edit {
-    cursor: pointer;
-    font-size: 0.8rem;
-    opacity: 0.4;
-    width: 1.5rem;
-    text-align: center;
-    display: inline-block;
-}
 
 .statut-serie-wrapper {
     position: relative;
     display: inline-block;
-}
-
-.btn-edit-cache {
-    visibility: hidden;
-    cursor: default;
-    pointer-events: none;
-}
-
-.btn-edit:hover {
-    opacity: 1;
 }

@@ -54,6 +54,55 @@ h2, h3 {
     color: var(--couleur-texte);
 }
 
+.btn-supprimer {
+    background-color: transparent;
+    border: 1px solid var(--couleur-bordeaux);
+    color: var(--couleur-bordeaux);
+    padding: 0.2rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-supprimer:hover {
+    background-color: var(--couleur-bordeaux);
+    color: var(--couleur-texte);
+}
+
+.btn-livre {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--couleur-or);
+    color: var(--couleur-or);
+    font-family: 'Cinzel', serif;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.btn-livre:hover {
+    background-color: var(--couleur-bordeaux);
+    border-color: var(--couleur-bordeaux);
+    color: var(--couleur-texte);
+}
+
+.btn-edit {
+    cursor: pointer;
+    font-size: 0.8rem;
+    opacity: 0.4;
+    width: 1.5rem;
+    text-align: center;
+    display: inline-block;
+}
+
+.btn-edit-cache {
+    visibility: hidden;
+    cursor: default;
+    pointer-events: none;
+}
+
+.btn-edit:hover {
+    opacity: 1;
+}
+
 /* FORMULAIRES */
 .formulaire {
     padding: 2rem 4rem;
