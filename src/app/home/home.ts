@@ -26,6 +26,7 @@ export class Home implements OnInit{
   objectifAnnuelData: ObjectifAnnuelData | null = null;
   nouvelObjectif: number = 12
   idUtisateur = 1;
+  modeEditionObjectif: boolean = false;
 
   constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
@@ -102,5 +103,17 @@ export class Home implements OnInit{
     }
     const pourcentage = (this.compteurSerieParAnnee / this.objectifAnnuelData.valeurObjectif) * 100;
     return Math.min(pourcentage, 100);
+  }
+
+  ouvrirEditionObjectif(): void {
+    this.modeEditionObjectif = true;
+    if(this.objectifAnnuelData) {
+      this.nouvelObjectif = this.objectifAnnuelData.valeurObjectif;
+    }
+  }
+
+  validerObjectif(): void {
+    this.definirObjectif();
+    this.modeEditionObjectif = false;
   }
 }
