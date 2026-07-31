@@ -95,5 +95,18 @@
         </ul>
       </div>
     }
+
+    @if (seriesAJour.length > 0) {
+      <div class="section-pal">
+        <h2>À jour : plus qu'à attendre la suite</h2>
+        <ul class="liste-pal">
+          @for (serie of seriesAJour; track serie.idSerie) {
+            <li>
+              {{ serie.nom }} <span><a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a></span>
+            </li>
+          }
+        </ul>
+      </div>
+    }
   </div>
 </div>
