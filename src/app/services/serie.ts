@@ -28,7 +28,11 @@ export class Serie {
   }
 
   getSerieAJour(): Observable<any []> {
-    return this.http.get<any[]>(`${this.apiUrl}/trouverSerieAJour`)
+    return this.http.get<any[]>(`${this.apiUrl}/trouverSerieAJour`);
+  }
+
+  getSeriesDelaissees(): Observable<any []> {
+    return this.http.get<any[]>(`${this.apiUrl}/seriesDelaissees`);
   }
 
   creerSerie(serieData:any): Observable<any> {

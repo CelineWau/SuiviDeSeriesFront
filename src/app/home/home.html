@@ -108,5 +108,18 @@
         </ul>
       </div>
     }
+
+    @if (seriesDelaissees.length > 0) {
+      <div class="section-pal">
+        <h2>Pause prolongée : réveille-les quand tu veux</h2>
+        <ul class="liste-pal">
+          @for (serie of seriesDelaissees; track serie.idSerie) {
+            <li>
+              {{ serie.nom }}
+            </li>
+          }
+        </ul>
+      </div>
+    }
   </div>
 </div>

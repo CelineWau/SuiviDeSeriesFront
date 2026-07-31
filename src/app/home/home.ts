@@ -28,6 +28,7 @@ export class Home implements OnInit{
   idUtisateur = 1;
   modeEditionObjectif: boolean = false;
   seriesAJour: any [] = [];
+  seriesDelaissees: any [] = [];
 
   constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
@@ -39,6 +40,7 @@ export class Home implements OnInit{
     this.chargerCompteurSeriesParAnnee();
     this.chargerObjectifAnnuel()
     this.chargerSeriesAJour();
+    this.chargerSeriesDelaissees();
   }
   
   chargerSerie():void {
@@ -65,6 +67,13 @@ export class Home implements OnInit{
   chargerSeriesAJour(): void {
     this.serieService.getSerieAJour().subscribe(data => {
       this.seriesAJour = data;
+      this.cdr.detectChanges();
+    })
+  }
+
+  chargerSeriesDelaissees(): void {
+    this.serieService.getSeriesDelaissees().subscribe(data => {
+      this.seriesDelaissees = data;
       this.cdr.detectChanges();
     })
   }
