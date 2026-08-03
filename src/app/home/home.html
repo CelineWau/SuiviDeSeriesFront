@@ -46,8 +46,8 @@
         <text x="50" y="58" text-anchor="middle" class="texte-camembert-label">livres lus</text>
       </svg>
       <div class="legende-camembert">
-        <span class="legende-item"><span class="pastille pastille-papier"></span>Papier</span>
-        <span class="legende-item"><span class="pastille pastille-ebook"></span>Ebook</span>
+        <span class="legende-item"><span class="pastille pastille-papier"></span>Papier ({{ repartitionFormat.luPapier }})</span>
+        <span class="legende-item"><span class="pastille pastille-ebook"></span>Ebook ({{ repartitionFormat.luEbook }})</span>
       </div>
     </div>
 
@@ -69,8 +69,28 @@
         <text x="50" y="58" text-anchor="middle" class="texte-camembert-label">dans la PAL</text>
       </svg>
       <div class="legende-camembert">
-        <span class="legende-item"><span class="pastille pastille-papier"></span>Papier</span>
-        <span class="legende-item"><span class="pastille pastille-ebook"></span>Ebook</span>
+        <span class="legende-item"><span class="pastille pastille-papier"></span>Papier ({{ repartitionFormat.palPapier }})</span>
+        <span class="legende-item"><span class="pastille pastille-ebook"></span>Ebook ({{ repartitionFormat.palEbook }})</span>
+      </div>
+    </div>
+
+    <div class="camembert">
+      <h2>Répartition de tes séries</h2>
+      <svg viewBox="0 0 100 100" width="160" height="160">
+        <circle cx="50" cy="50" r="40" class="anneau-fond couleur-en-cours" [attr.stroke-dasharray]="longueurArcEnCours + ' 251.33'" transform="rotate(-90 50 50)"></circle>
+        <circle cx="50" cy="50" r="40" class="anneau-fond couleur-terminees" [attr.stroke-dasharray]="longueurArcTerminees + ' 251.33'" 
+          [attr.stroke-dashoffset]="-decalageTerminees" transform="rotate(-90 50 50)"></circle>
+        <circle cx="50" cy="50" r="40" class="anneau-fond couleur-abandonnees" [attr.stroke-dasharray]="longueurArcAbandonnees + ' 251.33'" 
+          [attr.stroke-dashoffset]="-decalageAbandonnees" transform="rotate(-90 50 50)"></circle>
+        <text x="50" y="46" text-anchor="middle" class="texte-camembert-valeur">
+          {{ repartitionStatutSerie.enCours + repartitionStatutSerie.terminees + repartitionStatutSerie.abandonnees }}
+        </text>
+        <text x="50" y="58" text-anchor="middle" class="texte-camembert-label">séries</text>
+      </svg>
+      <div class="legende-camembert">
+        <span class="legende-item"><span class="pastille pastille-en-cours"></span>En cours ({{ repartitionStatutSerie.enCours }})</span>
+        <span class="legende-item"><span class="pastille pastille-terminees"></span>Terminées ({{ repartitionStatutSerie.terminees }})</span>
+        <span class="legende-item"><span class="pastille pastille-abandonnees"></span>Abandonnées ({{ repartitionStatutSerie.abandonnees }})</span>
       </div>
     </div>
   </div>

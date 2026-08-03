@@ -8,6 +8,7 @@ import { ObjectifAnnuelData } from '../models/objectif-annuel-data';
 import { ObjectifAnnuel } from '../services/objectif-annuel';
 import { FormsModule } from '@angular/forms';
 import { PercentPipe } from '@angular/common';
+import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +32,12 @@ export class Home implements OnInit{
   seriesAJour: any [] = [];
   seriesDelaissees: any [] = [];
   ratioSeries: number = 0;
+  repartitionStatutSerie: RepartitionStatutSerieData = { enCours: 0, terminees: 0, abandonnees: 0 };
+  longueurArcEnCours: number = 0;
+  longueurArcTerminees: number = 0;
+  longueurArcAbandonnees: number = 0;
+  decalageTerminees: number = 0;
+  decalageAbandonnees: number = 0;
 
   constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
@@ -44,6 +51,7 @@ export class Home implements OnInit{
     this.chargerSeriesAJour();
     this.chargerSeriesDelaissees();
     this.chargerRatioSeries();
+    this.chargerRepartitionStatutSerie();
   }
   
   chargerSerie():void {
@@ -99,6 +107,28 @@ export class Home implements OnInit{
       const totalPal = data.palEbook + data.palPapier;
       const proportionPalEbook = calculerProportion(data.palEbook, totalPal);
       this.longueurArcPalEbook = calculerLongueurArc(proportionPalEbook, 40);
+
+      this.cdr.detectChanges();
+    })
+  }
+
+  chargerRepartitionStatutSerie(): void {
+    this.serieService.getRepartitionStatutSerie().subscribe(data => {
+      this.repartitionStatutSerie = data;
+
+      const total = data.enCours + data.terminees + data.abandonnees;
+      const rayon = 40;
+
+      const proportionEnCours = calculerProportion(data.enCours, total);
+      const proportionTerminees = calculerProportion(data.terminees, total);
+      const proportionAbandonnees = calculerProportion(data.abandonnees, total);
+
+      this.longueurArcEnCours = calculerLongueurArc(proportionEnCours, rayon);
+      this.longueurArcTerminees = calculerLongueurArc(proportionTerminees, rayon);
+      this.longueurArcAbandonnees = calculerLongueurArc(proportionAbandonnees, rayon);
+
+      this.decalageTerminees = this.longueurArcEnCours;
+      this.decalageAbandonnees = this.longueurArcEnCours + this.longueurArcTerminees;
 
       this.cdr.detectChanges();
     })

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ObservedValueOf } from 'rxjs';
+import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,10 @@ export class Serie {
 
   getRatioSeries(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/ratioSeries`);
+  }
+
+  getRepartitionStatutSerie(): Observable<RepartitionStatutSerieData> {
+    return this.http.get<RepartitionStatutSerieData>(`${this.apiUrl}/repartitionStatutSerie`);
   }
 
   creerSerie(serieData:any): Observable<any> {

@@ -92,6 +92,18 @@
     stroke-width: 20px;
 }
 
+.couleur-en-cours {
+    stroke: var(--couleur-emeraude);
+}
+
+.couleur-terminees {
+    stroke: var(--couleur-bronze);
+}
+
+.couleur-abandonnees {
+    stroke: var(--couleur-violet);
+}
+
 .legende-camembert {
     display: flex;
     gap: 12px;
@@ -117,6 +129,18 @@
 
 .pastille-papier {
     background-color: var(--couleur-bronze);
+}
+
+.pastille-en-cours {
+    background-color: var(--couleur-emeraude);
+}
+
+.pastille-terminees {
+    background-color: var(--couleur-bronze);
+}
+
+.pastille-abandonnees {
+    background-color: var(--couleur-violet);
 }
 
 /* JAUGE SERIES FINIES PAR ANNEE*/
@@ -154,7 +178,7 @@
 
 /* RATIO SERIES */
 .texte-ratio {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--couleur-texte);
 }
 
