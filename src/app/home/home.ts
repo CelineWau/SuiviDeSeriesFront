@@ -7,10 +7,11 @@ import { calculerLongueurArc, calculerProportion } from '../utils/camembert';
 import { ObjectifAnnuelData } from '../models/objectif-annuel-data';
 import { ObjectifAnnuel } from '../services/objectif-annuel';
 import { FormsModule } from '@angular/forms';
+import { PercentPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, PercentPipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -29,6 +30,7 @@ export class Home implements OnInit{
   modeEditionObjectif: boolean = false;
   seriesAJour: any [] = [];
   seriesDelaissees: any [] = [];
+  ratioSeries: number = 0;
 
   constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
@@ -41,6 +43,7 @@ export class Home implements OnInit{
     this.chargerObjectifAnnuel()
     this.chargerSeriesAJour();
     this.chargerSeriesDelaissees();
+    this.chargerRatioSeries();
   }
   
   chargerSerie():void {
@@ -74,6 +77,13 @@ export class Home implements OnInit{
   chargerSeriesDelaissees(): void {
     this.serieService.getSeriesDelaissees().subscribe(data => {
       this.seriesDelaissees = data;
+      this.cdr.detectChanges();
+    })
+  }
+
+  chargerRatioSeries(): void {
+    this.serieService.getRatioSeries().subscribe(data => {
+      this.ratioSeries = data;
       this.cdr.detectChanges();
     })
   }

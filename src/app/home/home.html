@@ -6,16 +6,22 @@
   <div class="conteneur-jauge-serie">
     @if (objectifAnnuelData && !modeEditionObjectif) {
       <h2>
-        Séries finies cette année : {{ compteurSerieParAnnee }} / {{ objectifAnnuelData.valeurObjectif }}
+        Séries finies cette année : {{ compteurSerieParAnnee }} /
+        {{ objectifAnnuelData.valeurObjectif }}
         <span class="btn-edit" (click)="ouvrirEditionObjectif()">✏️</span>
       </h2>
-      <div class="jauge-fond">
-        <div class="jauge-remplissage" [style.width.%]="pourcentageProgression()"></div>
+      <div class="ligne-jauge-ratio">
+        <div class="jauge-fond">
+          <div class="jauge-remplissage" [style.width.%]="pourcentageProgression()"></div>
+        </div>
+        <p class="texte-ratio">
+          <strong>{{ ratioSeries | percent }}</strong> de tes séries commencées sont terminées
+        </p>
       </div>
     } @else {
       <h2>Définir ton objecif de l'année</h2>
       <div class="formulaire-objectif">
-        <input type="number" [(ngModel)]="nouvelObjectif" min="1" max="50">
+        <input type="number" [(ngModel)]="nouvelObjectif" min="1" max="50" />
         <button class="btn-livre" (click)="validerObjectif()">Valider</button>
       </div>
     }
@@ -102,7 +108,12 @@
         <ul class="liste-pal">
           @for (serie of seriesAJour; track serie.idSerie) {
             <li>
-              {{ serie.nom }} <span><a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a></span>
+              {{ serie.nom }}
+              <span
+                ><a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre"
+                  >+ Livre</a
+                ></span
+              >
             </li>
           }
         </ul>

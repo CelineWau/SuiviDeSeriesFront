@@ -35,6 +35,10 @@ export class Serie {
     return this.http.get<any[]>(`${this.apiUrl}/seriesDelaissees`);
   }
 
+  getRatioSeries(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/ratioSeries`);
+  }
+
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }
