@@ -6,6 +6,7 @@ import { Profil } from './profil/profil';
 import { Login } from './login/login';
 import { CreerSerie } from './creer-serie/creer-serie';
 import { CreerLivre } from './creer-livre/creer-livre';
+import { Stats } from './stats/stats';
 
 export const routes: Routes = [
     { path: 'accueil', component: Home},
@@ -14,5 +15,6 @@ export const routes: Routes = [
     { path: 'profil', component: Profil},
     { path: '', component: Login},
     { path: 'series/creer', component: CreerSerie},
-    { path: 'livres/creer/:serieId', component: CreerLivre}
+    { path: 'livres/creer/:serieId', component: CreerLivre},
+    { path: 'stats', component: Stats}
 ];

@@ -20,7 +20,7 @@ export class Serie {
     return this.http.get<any[]>(`${this.apiUrl}/presqueFiniesPal?seuil=${seuil}`);  
   }
 
-  getSeriesAvecLivresAAcheter(): Observable<any[]> {
+  getSeriesAvecLivresAAcheter(): Observable<any []> {
     return this.http.get<any[]>(`${this.apiUrl}/seriesAvecLivresAAcheter`);
   }
 
@@ -42,6 +42,10 @@ export class Serie {
 
   getRepartitionStatutSerie(): Observable<RepartitionStatutSerieData> {
     return this.http.get<RepartitionStatutSerieData>(`${this.apiUrl}/repartitionStatutSerie`);
+  }
+
+  getSeriesLesPlusLongues(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/seriesLesPlusLongues`);
   }
 
   creerSerie(serieData:any): Observable<any> {

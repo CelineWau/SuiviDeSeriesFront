@@ -1,0 +1,21 @@
+<div class="page-stats">
+    <h1>Les statistiques du dragon : la vérité, aussi brute que ses écailles</h1>
+
+    <div class="conteneur-records-vol">
+        @if (seriesLesPlusLongues?.serieEnCoursLaPlusLongue) {
+            <div class="carte-record">
+                <h2>Le plus long vol jamais entamé</h2>
+                <p class="nom-record">{{ seriesLesPlusLongues.serieEnCoursLaPlusLongue.nom}}</p>
+                <p class="valeur-record">{{ seriesLesPlusLongues.serieEnCoursLaPlusLongue.nombreLivreTotal}} tomes</p>
+            </div>
+        }
+
+        @if (seriesLesPlusLongues?.serieTermineeLaPlusLongue) {
+            <div class="carte-record">
+                <h2>Le plus long vol achevé</h2>
+                <p class="nom-record">{{ seriesLesPlusLongues.serieTermineeLaPlusLongue.nom}}</p>
+                <p class="valeur-record">{{ seriesLesPlusLongues.serieTermineeLaPlusLongue.nombreLivreTotal}} tomes</p>
+            </div>
+        }
+    </div>
+</div>

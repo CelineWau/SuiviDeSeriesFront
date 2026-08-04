@@ -1,0 +1,48 @@
+.page-stats {
+    padding: 2rem 4rem;
+}
+
+.page-stats h1 {
+    color: var(--couleur-or);
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    letter-spacing: 0.05rem;
+}
+
+/* SERIES LES PLUS LONGUES */
+.conteneur-records-vol {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 4rem;
+}
+
+.carte-record {
+    padding: 1.5rem 2rem;
+    border: 2px solid var(--couleur-bronze);
+    background-color: #0d0d0d;
+    text-align: center;
+    flex: 1;
+    max-width: 500px;
+}
+
+.nom-record {
+    color: var(--couleur-texte);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.valeur-record {
+    font-family: 'Cinzel', serif;
+    color: var(--couleur-or);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.carte-record h2 {
+    color: var(--couleur-cuivre);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
