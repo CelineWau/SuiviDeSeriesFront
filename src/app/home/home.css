@@ -50,6 +50,19 @@
     font-weight: 600;
 }
 
+.ligne-delaissee {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date-delaissee {
+    color: var(--couleur-bronze);
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
 /* CAMEMBERT */
 
 .conteneur-camemberts {

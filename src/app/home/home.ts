@@ -7,12 +7,12 @@ import { calculerLongueurArc, calculerProportion } from '../utils/camembert';
 import { ObjectifAnnuelData } from '../models/objectif-annuel-data';
 import { ObjectifAnnuel } from '../services/objectif-annuel';
 import { FormsModule } from '@angular/forms';
-import { PercentPipe } from '@angular/common';
+import { DatePipe, PercentPipe } from '@angular/common';
 import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, FormsModule, PercentPipe],
+  imports: [RouterLink, FormsModule, PercentPipe, DatePipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

@@ -144,9 +144,10 @@
       <div class="section-pal">
         <h2>Pause prolongée : réveille-les quand tu veux</h2>
         <ul class="liste-pal">
-          @for (serie of seriesDelaissees; track serie.idSerie) {
-            <li>
-              {{ serie.nom }}
+          @for (serie of seriesDelaissees; track $index) {
+            <li class="ligne-delaissee">
+              <span>{{ serie.nom }}</span> 
+              <span class="date-delaissee">{{ serie.derniereLecture | date:'MMMM yyyy' }}</span>
             </li>
           }
         </ul>
