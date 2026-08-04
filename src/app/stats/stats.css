@@ -11,12 +11,12 @@
 }
 
 /* SERIES LES PLUS LONGUES */
-.conteneur-records-vol {
+.conteneur-cartes {
     display: flex;
-    gap: 4rem;
+    gap: 2rem;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 0 4rem;
+    margin-bottom: 3rem;
 }
 
 .carte-record {
@@ -24,8 +24,7 @@
     border: 2px solid var(--couleur-bronze);
     background-color: #0d0d0d;
     text-align: center;
-    flex: 1;
-    max-width: 500px;
+    flex: 0 1 280px;
 }
 
 .nom-record {
@@ -45,4 +44,18 @@
     color: var(--couleur-cuivre);
     font-size: 1.3rem;
     margin-bottom: 1rem;
+}
+
+/* REPARTITION TAILLE SERIES*/
+.sous-texte-record {
+    color: var(--couleur-bronze);
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.titre-section {
+    color: var(--couleur-or);
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
 }

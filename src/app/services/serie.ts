@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ObservedValueOf } from 'rxjs';
 import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
+import { TailleSerieData } from '../models/taille-serie';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +47,10 @@ export class Serie {
 
   getSeriesLesPlusLongues(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/seriesLesPlusLongues`);
+  }
+
+  getRepartitionTailleSeries(): Observable<TailleSerieData> {
+    return this.http.get<TailleSerieData>(`${this.apiUrl}/repartitionTailleSeries`)
   }
 
   creerSerie(serieData:any): Observable<any> {

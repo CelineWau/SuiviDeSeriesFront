@@ -1,7 +1,7 @@
 <div class="page-stats">
     <h1>Les statistiques du dragon : la vérité, aussi brute que ses écailles</h1>
 
-    <div class="conteneur-records-vol">
+    <div class="conteneur-cartes">
         @if (seriesLesPlusLongues?.serieEnCoursLaPlusLongue) {
             <div class="carte-record">
                 <h2>Le plus long vol jamais entamé</h2>
@@ -17,5 +17,26 @@
                 <p class="valeur-record">{{ seriesLesPlusLongues.serieTermineeLaPlusLongue.nombreLivreTotal}} tomes</p>
             </div>
         }
+    </div>
+
+    <h2 class="titre-section">Le bestiaire de tes séries, classé par ampleur</h2>
+    <div class="conteneur-cartes">
+        <div class="carte-record">
+            <h2>Dragonnet de poche</h2>
+            <p class="valeur-record">{{ tailleSeries.petites }}</p>
+            <p class="sous-texte-valeur">1 à 3 tomes</p>
+        </div>
+
+        <div class="carte-record">
+            <h2>Wyrm de bibliothèque</h2>
+            <p class="valeur-record">{{ tailleSeries.moyennes }}</p>
+            <p class="sous-texte-valeur">4 à 7 tomes</p>
+        </div>
+
+        <div class="carte-record">
+            <h2>Dragon des pavés</h2>
+            <p class="valeur-record">{{ tailleSeries.sagas }}</p>
+            <p class="sous-texte-valeur">8 tomes et plus</p>
+        </div>
     </div>
 </div>
