@@ -1,42 +1,59 @@
 <div class="page-stats">
-    <h1>Les statistiques du dragon : la vérité, aussi brute que ses écailles</h1>
+  <h1>Les statistiques du dragon : la vérité, aussi brute que ses écailles</h1>
 
-    <div class="conteneur-cartes">
-        @if (seriesLesPlusLongues?.serieEnCoursLaPlusLongue) {
-            <div class="carte-record">
-                <h2>Le plus long vol jamais entamé</h2>
-                <p class="nom-record">{{ seriesLesPlusLongues.serieEnCoursLaPlusLongue.nom}}</p>
-                <p class="valeur-record">{{ seriesLesPlusLongues.serieEnCoursLaPlusLongue.nombreLivreTotal}} tomes</p>
-            </div>
-        }
+  <div class="conteneur-cartes">
+    @if (seriesLesPlusLongues?.serieEnCoursLaPlusLongue) {
+      <div class="carte-record">
+        <h2>Le plus long vol jamais entamé</h2>
+        <p class="nom-record">{{ seriesLesPlusLongues.serieEnCoursLaPlusLongue.nom }}</p>
+        <p class="valeur-record">
+          {{ seriesLesPlusLongues.serieEnCoursLaPlusLongue.nombreLivreTotal }} tomes
+        </p>
+      </div>
+    }
 
-        @if (seriesLesPlusLongues?.serieTermineeLaPlusLongue) {
-            <div class="carte-record">
-                <h2>Le plus long vol achevé</h2>
-                <p class="nom-record">{{ seriesLesPlusLongues.serieTermineeLaPlusLongue.nom}}</p>
-                <p class="valeur-record">{{ seriesLesPlusLongues.serieTermineeLaPlusLongue.nombreLivreTotal}} tomes</p>
-            </div>
-        }
+    @if (seriesLesPlusLongues?.serieTermineeLaPlusLongue) {
+      <div class="carte-record">
+        <h2>Le plus long vol achevé</h2>
+        <p class="nom-record">{{ seriesLesPlusLongues.serieTermineeLaPlusLongue.nom }}</p>
+        <p class="valeur-record">
+          {{ seriesLesPlusLongues.serieTermineeLaPlusLongue.nombreLivreTotal }} tomes
+        </p>
+      </div>
+    }
+  </div>
+
+  <h2 class="titre-section">Le bestiaire de tes séries, classé par ampleur</h2>
+  <div class="conteneur-cartes">
+    <div class="carte-record">
+      <h2>Dragonnet de poche</h2>
+      <p class="valeur-record">{{ tailleSeries.petites }}</p>
+      <p class="sous-texte-valeur">1 à 3 tomes</p>
     </div>
 
-    <h2 class="titre-section">Le bestiaire de tes séries, classé par ampleur</h2>
-    <div class="conteneur-cartes">
-        <div class="carte-record">
-            <h2>Dragonnet de poche</h2>
-            <p class="valeur-record">{{ tailleSeries.petites }}</p>
-            <p class="sous-texte-valeur">1 à 3 tomes</p>
-        </div>
-
-        <div class="carte-record">
-            <h2>Wyrm de bibliothèque</h2>
-            <p class="valeur-record">{{ tailleSeries.moyennes }}</p>
-            <p class="sous-texte-valeur">4 à 7 tomes</p>
-        </div>
-
-        <div class="carte-record">
-            <h2>Dragon des pavés</h2>
-            <p class="valeur-record">{{ tailleSeries.sagas }}</p>
-            <p class="sous-texte-valeur">8 tomes et plus</p>
-        </div>
+    <div class="carte-record">
+      <h2>Wyrm de bibliothèque</h2>
+      <p class="valeur-record">{{ tailleSeries.moyennes }}</p>
+      <p class="sous-texte-valeur">4 à 7 tomes</p>
     </div>
+
+    <div class="carte-record">
+      <h2>Dragon des pavés</h2>
+      <p class="valeur-record">{{ tailleSeries.sagas }}</p>
+      <p class="sous-texte-valeur">8 tomes et plus</p>
+    </div>
+  </div>
+
+  <div class="conteneur-auteurs">
+    <h2 class="titre-section">Ceux que le dragon ne laisse pas filer</h2>
+    <div class="carte-record-auteurs">
+      <ul class="liste-auteurs">
+        @for (auteur of auteursSeriesEnCours; track $index) {
+          <li>
+            {{ auteur.auteur }} (<span class="nombre-series-auteur">{{ auteur.nombreSeries }}</span>)
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
 </div>

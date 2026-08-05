@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RepartitionFormat } from '../models/repartition-format';
+import { AuteursSerieEnCours } from '../models/auteurs-series-en-cours';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,9 @@ export class Livre {
 
   calculerRepartitionFormat(): Observable<RepartitionFormat> {
     return this.http.get<RepartitionFormat>(`${this.apiUrl}/repartitionFormat`)
+  }
+
+  getAuteursSeriesEnCours(): Observable<AuteursSerieEnCours []> {
+    return this.http.get<AuteursSerieEnCours []>(`${this.apiUrl}/auteursSeriesEnCours`);
   }
 }

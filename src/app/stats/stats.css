@@ -59,3 +59,45 @@
     font-size: 1.3rem;
     margin-bottom: 1.5rem;
 }
+
+/* LISTE AUTEURS AVEC SERIES EN COURS */
+.conteneur-auteurs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+}
+
+.conteneur-auteurs .titre-section {
+    text-align: left;
+}
+
+.carte-record-auteurs {
+    padding: 1.5rem 2rem;
+    border: 2px solid var(--couleur-bronze);
+    background-color: #0d0d0d;
+    text-align: left;
+    width: fit-content;
+}
+
+.liste-auteurs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.liste-auteurs li {
+    padding: 0.4rem 0;
+    color: var(--couleur-texte);
+    border-bottom: 1px solid var(--couleur-bronze);
+}
+
+.liste-auteurs li:last-child {
+    border-bottom: none;
+}
+
+.nombre-series-auteur {
+    color: var(--couleur-emeraude);
+    font-weight: 600;
+}
