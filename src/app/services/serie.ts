@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ObservedValueOf } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
 import { TailleSerieData } from '../models/taille-serie';
+import { EbookALeatoireData } from '../models/ebook-aleatoire';
 
 @Injectable({
   providedIn: 'root',
@@ -55,6 +56,10 @@ export class Serie {
 
   getDureeMoyenneLectureSerie(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/dureeMoyenneLectureSerie`);
+  }
+
+  getEbookAleatoire(): Observable<EbookALeatoireData> {
+    return this.http.get<EbookALeatoireData>(`${this.apiUrl}/ebookAleatoire`);
   }
 
   creerSerie(serieData:any): Observable<any> {

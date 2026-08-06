@@ -9,6 +9,7 @@ import { ObjectifAnnuel } from '../services/objectif-annuel';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, PercentPipe } from '@angular/common';
 import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
+import { EbookALeatoireData } from '../models/ebook-aleatoire';
 
 @Component({
   selector: 'app-home',
@@ -38,6 +39,7 @@ export class Home implements OnInit{
   longueurArcAbandonnees: number = 0;
   decalageTerminees: number = 0;
   decalageAbandonnees: number = 0;
+  ebookPropose: EbookALeatoireData | null = null;
 
   constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
@@ -173,5 +175,12 @@ export class Home implements OnInit{
   validerObjectif(): void {
     this.definirObjectif();
     this.modeEditionObjectif = false;
+  }
+
+  proposerEbook(): void {
+    this.serieService.getEbookAleatoire().subscribe(data => {
+      this.ebookPropose = data;
+      this.cdr.detectChanges();
+    });
   }
 }
