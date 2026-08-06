@@ -101,3 +101,41 @@
     color: var(--couleur-emeraude);
     font-weight: 600;
 }
+
+/* DUREE MOYENNE LECTURE SERIE */
+.conteneur-cote-a-cote {
+    display: flex;
+    gap: 6rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.conteneur-decompte {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.bloc-decompte {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0d0d0d;
+    border: 1px solid var(--couleur-emeraude);
+    padding: 0.8rem 1.2rem;
+    min-width: 70px;
+}
+
+.chiffre-decompte {
+    font-family: 'Cinzel', serif;
+    color: var(--couleur-or);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.label-decompte {
+    color: var(--couleur-texte);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    margin-top: 0.3rem;
+}

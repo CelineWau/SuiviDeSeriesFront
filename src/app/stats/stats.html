@@ -44,16 +44,39 @@
     </div>
   </div>
 
-  <div class="conteneur-auteurs">
-    <h2 class="titre-section">Ceux que le dragon ne laisse pas filer</h2>
-    <div class="carte-record-auteurs">
-      <ul class="liste-auteurs">
-        @for (auteur of auteursSeriesEnCours; track $index) {
-          <li>
-            {{ auteur.auteur }} (<span class="nombre-series-auteur">{{ auteur.nombreSeries }}</span>)
-          </li>
-        }
-      </ul>
+  <div class="conteneur-cote-a-cote">
+    <div class="conteneur-auteurs">
+      <h2 class="titre-section">Ceux que le dragon ne laisse pas filer</h2>
+      <div class="carte-record-auteurs">
+        <ul class="liste-auteurs">
+          @for (auteur of auteursSeriesEnCours; track $index) {
+            <li>
+              {{ auteur.auteur }} (<span class="nombre-series-auteur">{{
+                auteur.nombreSeries
+              }}</span
+              >)
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="conteneur-auteurs">
+      <h2 class="titre-section">Le temps moyen passé enfermé(e) avec un dragon</h2>
+      <div class="conteneur-decompte">
+        <div class="bloc-decompte">
+          <span class="chiffre-decompte">{{ dureeDecomposee.annees }}</span>
+          <span class="label-decompte">an{{ dureeDecomposee.annees > 1 ? 's' : '' }}</span>
+        </div>
+        <div class="bloc-decompte">
+          <span class="chiffre-decompte">{{ dureeDecomposee.mois }}</span>
+          <span class="label-decompte">mois</span>
+        </div>
+        <div class="bloc-decompte">
+          <span class="chiffre-decompte">{{ dureeDecomposee.jours }}</span>
+          <span class="label-decompte">jour{{ dureeDecomposee.jours > 1 ? 's' : '' }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>

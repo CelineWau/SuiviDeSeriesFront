@@ -50,7 +50,11 @@ export class Serie {
   }
 
   getRepartitionTailleSeries(): Observable<TailleSerieData> {
-    return this.http.get<TailleSerieData>(`${this.apiUrl}/repartitionTailleSeries`)
+    return this.http.get<TailleSerieData>(`${this.apiUrl}/repartitionTailleSeries`);
+  }
+
+  getDureeMoyenneLectureSerie(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/dureeMoyenneLectureSerie`);
   }
 
   creerSerie(serieData:any): Observable<any> {
