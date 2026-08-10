@@ -28,7 +28,7 @@
 
     @if (ebookPropose) {
       <p class="texte-suggestion">
-        <strong>{{ ebookPropose.titre }}</strong> — {{ ebookPropose.auteur }} ({{ ebookPropose.nomSerie }})
+        <strong>{{ ebookPropose.titre }}</strong> — Tome {{ ebookPropose.numeroDansLaSerie}} de {{ ebookPropose.nomSerie }} ({{ ebookPropose.auteur }})
       </p>
     }
 
@@ -162,62 +162,83 @@
   </div>
 
   <div class="conteneur-stat">
-    @if (seriesPresqueFinies.length > 0) {
-      <div class="section-pal">
-        <h2>Objectif PAL à 0 : ces séries n'attendent que toi</h2>
-        <ul class="liste-pal">
-          @for (serie of seriesPresqueFinies; track serie.idSerie) {
-            <li>{{ serie.nom }}</li>
-          }
-        </ul>
-      </div>
-    }
+    <div class="rangee-stat rangee-listes-longues">
+      @if (seriesPresqueFinies.length > 0) {
+        <div class="section-pal">
+          <h2>Objectif PAL à 0 : ces séries n'attendent que toi</h2>
+          <ul class="liste-pal">
+            @for (serie of seriesPresqueFinies; track serie.idSerie) {
+              <li>{{ serie.nom }}</li>
+            }
+          </ul>
+        </div>
+      }
 
-    @if (seriesAvecLivresAAcheter.length > 0) {
-      <div class="section-pal">
-        <h2>Cible tes achats : elles sont si proches de la fin</h2>
-        <ul class="liste-pal">
-          @for (serie of seriesAvecLivresAAcheter; track serie.idSerie) {
-            <li>
-              {{ serie.nom }} (<span class="nombre-a-acheter">
-                {{ serie.nombreLivreAAcheter }} à acheter </span
-              >)
-            </li>
-          }
-        </ul>
-      </div>
-    }
+      @if (seriesAJour.length > 0) {
+        <div class="section-pal">
+          <h2>À jour : plus qu'à attendre la suite</h2>
+          <ul class="liste-pal">
+            @for (serie of seriesAJour; track serie.idSerie) {
+              <li>
+                {{ serie.nom }}
+                <span
+                  ><a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre"
+                    >+ Livre</a
+                  ></span
+                >
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
 
-    @if (seriesAJour.length > 0) {
-      <div class="section-pal">
-        <h2>À jour : plus qu'à attendre la suite</h2>
-        <ul class="liste-pal">
-          @for (serie of seriesAJour; track serie.idSerie) {
-            <li>
-              {{ serie.nom }}
-              <span
-                ><a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre"
-                  >+ Livre</a
-                ></span
-              >
-            </li>
-          }
-        </ul>
-      </div>
-    }
+    <div class="rangee-stat rangee-listes-moyennes">
+      @if (seriesAvecLivresAAcheter.length > 0) {
+        <div class="section-pal">
+          <h2>Cible tes achats : elles sont si proches de la fin</h2>
+          <ul class="liste-pal">
+            @for (serie of seriesAvecLivresAAcheter; track serie.idSerie) {
+              <li>
+                {{ serie.nom }} (<span class="nombre-a-acheter">
+                  {{ serie.nombreLivreAAcheter }} à acheter </span
+                >)
+              </li>
+            }
+          </ul>
+        </div>
+      }
 
-    @if (seriesDelaissees.length > 0) {
-      <div class="section-pal">
-        <h2>Pause prolongée : réveille-les quand tu veux</h2>
-        <ul class="liste-pal">
-          @for (serie of seriesDelaissees; track $index) {
-            <li class="ligne-delaissee">
-              <span>{{ serie.nom }}</span>
-              <span class="date-delaissee">{{ serie.derniereLecture | date: 'MMMM yyyy' }}</span>
-            </li>
-          }
-        </ul>
-      </div>
-    }
+      @if (seriesDelaissees.length > 0) {
+        <div class="section-pal">
+          <h2>Pause prolongée : réveille-les quand tu veux</h2>
+          <ul class="liste-pal">
+            @for (serie of seriesDelaissees; track $index) {
+              <li class="ligne-delaissee">
+                <span>{{ serie.nom }}</span>
+                <span class="date-delaissee">{{ serie.derniereLecture | date: 'MMMM yyyy' }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <div class="rangee-stat rangee-listes-courtes">
+      @if (palVieillissante.length > 0) {
+        <div class="section-pal">
+          <h2>Défi PAL vieillissante : dépoussière ces ebooks</h2>
+          <ul class="liste-pal">
+            @for (livre of palVieillissante; track $index) {
+              <li class="ligne-delaissee">
+                <span>{{ livre.titre }} — Tome {{ livre.numeroDansLaSerie }} de {{ livre.nomSerie }} ({{ livre.auteur }})</span>
+                <span class="date-delaissee">
+                  {{ livre.dateAcquisition ? (livre.dateAcquisition | date: 'MMMM yyyy') : 'Depuis toujours' }}
+                </span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
   </div>
-</div>

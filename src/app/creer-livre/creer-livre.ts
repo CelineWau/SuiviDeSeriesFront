@@ -40,6 +40,8 @@ export class CreerLivre implements OnInit {
       this.livreService.creerLivre(this.livreForm.getRawValue()).subscribe(() => {
         this.router.navigate(['/series']);
       });
+    } else {
+      this.livreForm.markAllAsTouched();
     }
   }
 

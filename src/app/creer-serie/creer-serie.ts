@@ -30,6 +30,8 @@ export class CreerSerie {
           this.router.navigate(['/series']);
         });
       });
+    } else {
+      this.serieForm.markAllAsTouched();
     }
   }
 }

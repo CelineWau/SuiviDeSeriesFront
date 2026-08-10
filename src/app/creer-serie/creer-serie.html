@@ -4,29 +4,43 @@
     <div class="champ">
         <label for="nom">Nom de la série</label>
         <input type="text" id="nom" formControlName="nom" placeholder="Nom de la série">
+        @if (serieForm.get('nom')?.invalid && serieForm.get('nom')?.touched) {
+      <span class="message-erreur">Le nom de la série est obligatoire.</span>
+    }
     </div>
     
     <div class="champ">
         <label for="statutSerie">Statut de la série</label>
         <select id="statutSerie" formControlName="statutSerie">
+            <option value="" disabled selected>-- Choisir --</option>
             <option value="ABANDONNEE">Abandonnée</option>
             <option value="EN_COURS">En cours</option>
             <option value="TERMINEE">Terminée</option>
         </select>
+        @if (serieForm.get('statutSerie')?.invalid && serieForm.get('statutSerie')?.touched) {
+      <span class="message-erreur">Le statut de la série est obligatoire.</span>
+    }
     </div>
 
     <div class="champ">
         <label for="statutPublication">Statut de publication de la série</label>
         <select id="statutPublication" formControlName="statutPublication">
+            <option value="" disabled selected>-- Choisir --</option>
             <option value="INCONNU">Inconnu</option>
             <option value="EN_COURS">En cours de publication</option>
             <option value="TERMINEE">Publication terminée</option>
         </select>
+        @if (serieForm.get('statutPublication')?.invalid && serieForm.get('statutPublication')?.touched) {
+      <span class="message-erreur">Le statut de publication de la série est obligatoire.</span>
+    }
     </div>
     
     <div class="champ">
         <label for="nombreLivreTotal">Nombre de livre dans la série</label>
         <input type="number" id="nombreLivreTotal" formControlName="nombreLivreTotal">
+        @if (serieForm.get('nombreLivreTotal')?.invalid && serieForm.get('nombreLivreTotal')?.touched) {
+      <span class="message-erreur">Le nombre de livre total de la série est obligatoire.</span>
+    }
     </div>
 
     <button type="submit" class="btn-dragon">Créer</button>

@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe, PercentPipe } from '@angular/common';
 import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
 import { EbookALeatoireData } from '../models/ebook-aleatoire';
+import { PalVieillissanteData } from '../models/pal-vieillissante';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,7 @@ export class Home implements OnInit{
   decalageTerminees: number = 0;
   decalageAbandonnees: number = 0;
   ebookPropose: EbookALeatoireData | null = null;
+  palVieillissante: PalVieillissanteData[] = [];
 
   constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
@@ -54,6 +56,7 @@ export class Home implements OnInit{
     this.chargerSeriesDelaissees();
     this.chargerRatioSeries();
     this.chargerRepartitionStatutSerie();
+    this.chargerPalVieillissante();
   }
   
   chargerSerie():void {
@@ -94,6 +97,13 @@ export class Home implements OnInit{
   chargerRatioSeries(): void {
     this.serieService.getRatioSeries().subscribe(data => {
       this.ratioSeries = data;
+      this.cdr.detectChanges();
+    })
+  }
+
+  chargerPalVieillissante(): void {
+    this.serieService.getPalVieillissante().subscribe(data => {
+      this.palVieillissante = data;
       this.cdr.detectChanges();
     })
   }

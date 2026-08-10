@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ObservedValuesFromArray } from 'rxjs';
 import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
 import { TailleSerieData } from '../models/taille-serie';
 import { EbookALeatoireData } from '../models/ebook-aleatoire';
+import { PalVieillissanteData } from '../models/pal-vieillissante';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +19,11 @@ export class Serie {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  getSeriesPresqueFiniesPal(seuil: number): Observable<any []> {
+  getSeriesPresqueFiniesPal(seuil: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/presqueFiniesPal?seuil=${seuil}`);  
   }
 
-  getSeriesAvecLivresAAcheter(): Observable<any []> {
+  getSeriesAvecLivresAAcheter(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/seriesAvecLivresAAcheter`);
   }
 
@@ -34,7 +35,7 @@ export class Serie {
     return this.http.get<any[]>(`${this.apiUrl}/trouverSerieAJour`);
   }
 
-  getSeriesDelaissees(): Observable<any []> {
+  getSeriesDelaissees(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/seriesDelaissees`);
   }
 
@@ -60,6 +61,10 @@ export class Serie {
 
   getEbookAleatoire(): Observable<EbookALeatoireData> {
     return this.http.get<EbookALeatoireData>(`${this.apiUrl}/ebookAleatoire`);
+  }
+
+  getPalVieillissante(): Observable<PalVieillissanteData[]> {
+    return this.http.get<PalVieillissanteData[]>(`${this.apiUrl}/palVieillissante`);
   }
 
   creerSerie(serieData:any): Observable<any> {
