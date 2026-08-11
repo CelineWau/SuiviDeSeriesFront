@@ -1,6 +1,10 @@
 <form [formGroup]="livreForm" (ngSubmit)="onSubmit()" class="formulaire">
   <h1>Enregistrer un livre</h1>
 
+  @if (erreurServeur) {
+    <p class="erreur-serveur">{{ erreurServeur }}</p>
+  }
+
   <div class="champ">
     <label for="titre">Titre du livre</label>
     <input type="text" id="titre" formControlName="titre" placeholder="Titre du livre" />

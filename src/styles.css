@@ -137,3 +137,13 @@ h2, h3 {
     margin-top: 0.3rem;
     display: block;
 }
+
+.erreur-serveur {
+    color: var(--couleur-texte);
+    background-color: var(--couleur-bordeaux);
+    border: 1px solid var(--couleur-bordeaux);
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    display: block;
+}

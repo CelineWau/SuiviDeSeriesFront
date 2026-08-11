@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class CreerSerie {
 
   serieForm: FormGroup;
+  erreurServeur: string | null = null; 
+  
 
   constructor(private fb: FormBuilder, private serieService: Serie, private router: Router) {
     this.serieForm = this.fb.group({
@@ -25,10 +27,15 @@ export class CreerSerie {
 
   onSubmit(){
     if (this.serieForm.valid) {
-      this.serieService.creerSerie(this.serieForm.value).subscribe(() => {
+      this.serieService.creerSerie(this.serieForm.value).subscribe({
+        next: () => {
         this.router.navigateByUrl('/accueil', {skipLocationChange: true}).then(() => {
           this.router.navigate(['/series']);
         });
+      },
+        error: (err) => {
+          this.erreurServeur = err.error.message;
+        }
       });
     } else {
       this.serieForm.markAllAsTouched();

@@ -1,6 +1,10 @@
 <form [formGroup]="serieForm" (ngSubmit)="onSubmit()" class="formulaire">
     <h1>Créer une série à suivre</h1>
 
+    @if (erreurServeur) {
+      <p class="erreur-serveur">{{ erreurServeur }}</p>
+    }
+
     <div class="champ">
         <label for="nom">Nom de la série</label>
         <input type="text" id="nom" formControlName="nom" placeholder="Nom de la série">

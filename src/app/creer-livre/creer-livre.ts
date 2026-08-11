@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class CreerLivre implements OnInit {
 
   livreForm: FormGroup;
+  erreurServeur: string | null = null;
   series: any[] = [];
   serieCourante: any;
   auteurs: string[] = [];
@@ -37,8 +38,13 @@ export class CreerLivre implements OnInit {
 
   onSubmit(){
     if (this.livreForm.valid){
-      this.livreService.creerLivre(this.livreForm.getRawValue()).subscribe(() => {
-        this.router.navigate(['/series']);
+      this.livreService.creerLivre(this.livreForm.getRawValue()).subscribe({
+        next: () => {
+          this.router.navigate(['/series']);
+        },
+        error: (err) => {
+          this.erreurServeur = err.error.message;
+        }
       });
     } else {
       this.livreForm.markAllAsTouched();
