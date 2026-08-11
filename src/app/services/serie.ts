@@ -5,6 +5,7 @@ import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
 import { TailleSerieData } from '../models/taille-serie';
 import { EbookALeatoireData } from '../models/ebook-aleatoire';
 import { PalVieillissanteData } from '../models/pal-vieillissante';
+import { SeriesASurveillerData } from '../models/serie-a-surveiller';
 
 @Injectable({
   providedIn: 'root',
@@ -65,6 +66,10 @@ export class Serie {
 
   getPalVieillissante(): Observable<PalVieillissanteData[]> {
     return this.http.get<PalVieillissanteData[]>(`${this.apiUrl}/palVieillissante`);
+  }
+
+  getSerieASurveiller(): Observable<SeriesASurveillerData[]> {
+    return this.http.get<SeriesASurveillerData[]>(`${this.apiUrl}/aSurveiller`);
   }
 
   creerSerie(serieData:any): Observable<any> {

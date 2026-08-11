@@ -191,6 +191,22 @@
           </ul>
         </div>
       }
+
+      @if (serieASurveiller.length > 0) {
+        <div class="section-pal">
+          <h2>Séries à surveiller : guette les prochaines sorties</h2>
+          <ul class="liste-pal">
+            @for (serie of serieASurveiller; track serie.idSerie) {
+              <li>
+                {{ serie.nom }} ({{ serie.auteur}})
+                <span>
+                  <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
+                </span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
     </div>
 
     <div class="rangee-stat rangee-listes-moyennes">
