@@ -12,6 +12,7 @@ import { RepartitionStatutSerieData } from '../models/repartition-statut-serie';
 import { EbookALeatoireData } from '../models/ebook-aleatoire';
 import { PalVieillissanteData } from '../models/pal-vieillissante';
 import { SeriesASurveillerData } from '../models/serie-a-surveiller';
+import { ListeCourseLivreData } from '../models/liste-course-livre';
 
 @Component({
   selector: 'app-home',
@@ -44,6 +45,10 @@ export class Home implements OnInit{
   ebookPropose: EbookALeatoireData | null = null;
   palVieillissante: PalVieillissanteData[] = [];
   serieASurveiller: SeriesASurveillerData[] = [];
+  listeCoursePapier: ListeCourseLivreData[] = [];
+  listeCourseEbook : ListeCourseLivreData [] = [];
+  popupPapierOuverte: boolean = false;  
+  popupEbookOuverte: boolean = false;
 
   constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
@@ -60,6 +65,8 @@ export class Home implements OnInit{
     this.chargerRepartitionStatutSerie();
     this.chargerPalVieillissante();
     this.chargerSeriesASurveiller();
+    this.chargerListeCoursePapier();
+    this.chargerListeCourseEbook();
   }
   
   chargerSerie():void {
@@ -114,6 +121,20 @@ export class Home implements OnInit{
   chargerSeriesASurveiller(): void {
     this.serieService.getSerieASurveiller().subscribe(data => {
       this.serieASurveiller = data;
+      this.cdr.detectChanges();
+    })
+  }
+
+  chargerListeCoursePapier(): void {
+    this.serieService.getListeCourseLivrePapier().subscribe(data => {
+      this.listeCoursePapier = data;
+      this.cdr.detectChanges();
+    })
+  }
+
+  chargerListeCourseEbook(): void {
+    this.serieService.getListeCourseEbook().subscribe(data => {
+      this.listeCourseEbook = data;
       this.cdr.detectChanges();
     })
   }
@@ -202,5 +223,21 @@ export class Home implements OnInit{
       this.ebookPropose = data;
       this.cdr.detectChanges();
     });
+  }
+
+  ouvrirPopupPapier(): void {
+    this.popupPapierOuverte = true;
+  }
+
+  ouvrirPopupEbook(): void {
+    this.popupEbookOuverte = true;
+  }
+
+  fermerPopupPapier(): void {
+    this.popupPapierOuverte = false;
+  }
+
+  fermerPopupEbook(): void {
+    this.popupEbookOuverte = false;
   }
 }

@@ -1,44 +1,46 @@
 <div class="page-accueil">
   <div class="conteneur-header-accueil">
-  <div class="colonne-gauche">
-    <h1>Bonjour Céline</h1>
-    <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} séries en cours</p>
-    <a routerLink="/series">Voir mes séries</a>
+    <div class="colonne-gauche">
+      <h1>Bonjour Céline</h1>
+      <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} séries en cours</p>
+      <a routerLink="/series">Voir mes séries</a>
 
-    @if (objectifAnnuelData && !modeEditionObjectif) {
-      <h2>
-        Séries finies cette année : {{ compteurSerieParAnnee }} / {{ objectifAnnuelData.valeurObjectif }}
-        <span class="btn-edit" (click)="ouvrirEditionObjectif()">✏️</span>
-      </h2>
-      <div class="jauge-fond">
-        <div class="jauge-remplissage" [style.width.%]="pourcentageProgression()"></div>
-      </div>
-    } @else {
-      <h2>Définir ton objecif de l'année</h2>
-      <div class="formulaire-objectif">
-        <input type="number" [(ngModel)]="nouvelObjectif" min="1" max="50" />
-        <button class="btn-livre" (click)="validerObjectif()">Valider</button>
-      </div>
-    }
+      @if (objectifAnnuelData && !modeEditionObjectif) {
+        <h2>
+          Séries finies cette année : {{ compteurSerieParAnnee }} /
+          {{ objectifAnnuelData.valeurObjectif }}
+          <span class="btn-edit" (click)="ouvrirEditionObjectif()">✏️</span>
+        </h2>
+        <div class="jauge-fond">
+          <div class="jauge-remplissage" [style.width.%]="pourcentageProgression()"></div>
+        </div>
+      } @else {
+        <h2>Définir ton objecif de l'année</h2>
+        <div class="formulaire-objectif">
+          <input type="number" [(ngModel)]="nouvelObjectif" min="1" max="50" />
+          <button class="btn-livre" (click)="validerObjectif()">Valider</button>
+        </div>
+      }
+    </div>
+
+    <div class="colonne-droite">
+      <h2>Le dragon te souffle une suggestion</h2>
+      <button class="btn-dragon" (click)="proposerEbook()">Je ne sais pas quoi lire</button>
+
+      @if (ebookPropose) {
+        <p class="texte-suggestion">
+          <strong>{{ ebookPropose.titre }}</strong> — Tome {{ ebookPropose.numeroDansLaSerie }} de
+          {{ ebookPropose.nomSerie }} ({{ ebookPropose.auteur }})
+        </p>
+      }
+
+      @if (objectifAnnuelData) {
+        <p class="texte-ratio">
+          <strong>{{ ratioSeries | percent }}</strong> de tes séries commencées sont terminées
+        </p>
+      }
+    </div>
   </div>
-
-  <div class="colonne-droite">
-    <h2>Le dragon te souffle une suggestion</h2>
-    <button class="btn-dragon" (click)="proposerEbook()">Je ne sais pas quoi lire</button>
-
-    @if (ebookPropose) {
-      <p class="texte-suggestion">
-        <strong>{{ ebookPropose.titre }}</strong> — Tome {{ ebookPropose.numeroDansLaSerie}} de {{ ebookPropose.nomSerie }} ({{ ebookPropose.auteur }})
-      </p>
-    }
-
-    @if (objectifAnnuelData) {
-      <p class="texte-ratio">
-        <strong>{{ ratioSeries | percent }}</strong> de tes séries commencées sont terminées
-      </p>
-    }
-  </div>
-</div>
 
   <div class="conteneur-camemberts">
     <div class="camembert">
@@ -198,7 +200,7 @@
           <ul class="liste-pal">
             @for (serie of serieASurveiller; track serie.idSerie) {
               <li>
-                {{ serie.nom }} ({{ serie.auteur}})
+                {{ serie.nom }} ({{ serie.auteur }})
                 <span>
                   <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
                 </span>
@@ -222,6 +224,14 @@
               </li>
             }
           </ul>
+          <div class="bouton-liste-course">
+            <button type="button" class="btn-livre" (click)="ouvrirPopupPapier()">
+              Liste de courses papier
+            </button>
+            <button type="button" class="btn-livre" (click)="ouvrirPopupEbook()">
+              Liste de courses ebook
+            </button>
+          </div>
         </div>
       }
 
@@ -247,9 +257,16 @@
           <ul class="liste-pal">
             @for (livre of palVieillissante; track $index) {
               <li class="ligne-delaissee">
-                <span>{{ livre.titre }} — Tome {{ livre.numeroDansLaSerie }} de {{ livre.nomSerie }} ({{ livre.auteur }})</span>
+                <span
+                  >{{ livre.titre }} — Tome {{ livre.numeroDansLaSerie }} de
+                  {{ livre.nomSerie }} ({{ livre.auteur }})</span
+                >
                 <span class="date-delaissee">
-                  {{ livre.dateAcquisition ? (livre.dateAcquisition | date: 'MMMM yyyy') : 'Depuis toujours' }}
+                  {{
+                    livre.dateAcquisition
+                      ? (livre.dateAcquisition | date: 'MMMM yyyy')
+                      : 'Depuis toujours'
+                  }}
                 </span>
               </li>
             }
@@ -258,3 +275,33 @@
       }
     </div>
   </div>
+
+  @if (popupPapierOuverte) {
+    <div class="fond-popup" (click)="fermerPopupPapier()">
+      <div class="contenu-popup" (click)="$event.stopPropagation()">
+        <h2>Pille les rayons pendant qu'il est encore temps</h2>
+        <ul class="liste-pal">
+          @for (livre of listeCoursePapier; track $index) {
+            <li>{{ livre.nom }} - Tome {{ livre.tome }} de {{ livre.nomSerie }} ({{ livre.auteur }})</li>
+          }
+        </ul>
+        <button type="button" class="btn-livre" (click)="fermerPopupPapier()">Fermer</button>
+      </div>
+    </div>
+  }
+
+  @if (popupEbookOuverte) {
+    <div class="fond-popup" (click)="fermerPopupEbook()">
+      <div class="contenu-popup" (click)="$event.stopPropagation()">
+        <h2>La liseuse a encore faim</h2>
+        <ul class="liste-pal">
+          @for (livre of listeCourseEbook; track $index) {
+            <li>{{ livre.nom }} - Tome {{ livre.tome }} de {{ livre.nomSerie }} ({{ livre.auteur }})</li>
+          }
+        </ul>
+        <button type="button" class="btn-livre" (click)="fermerPopupEbook()">Fermer</button>
+      </div>
+    </div>
+  }
+
+</div>

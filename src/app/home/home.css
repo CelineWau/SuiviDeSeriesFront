@@ -237,3 +237,41 @@
 .colonne-droite h2 {
     color: var(--couleur-cuivre);
 }
+
+/* POPUP LISTE COURSE LIVRE*/
+.bouton-liste-course {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.fond-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.contenu-popup {
+    background-color: var(--couleur-fond);
+    border: 1px solid var(--couleur-or);
+    border-radius: 4px;
+    padding: 1.5rem;
+    max-width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.contenu-popup h2 {
+    color: var(--couleur-cuivre);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}

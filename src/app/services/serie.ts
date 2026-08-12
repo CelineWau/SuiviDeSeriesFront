@@ -6,6 +6,7 @@ import { TailleSerieData } from '../models/taille-serie';
 import { EbookALeatoireData } from '../models/ebook-aleatoire';
 import { PalVieillissanteData } from '../models/pal-vieillissante';
 import { SeriesASurveillerData } from '../models/serie-a-surveiller';
+import { ListeCourseLivreData } from '../models/liste-course-livre';
 
 @Injectable({
   providedIn: 'root',
@@ -70,6 +71,14 @@ export class Serie {
 
   getSerieASurveiller(): Observable<SeriesASurveillerData[]> {
     return this.http.get<SeriesASurveillerData[]>(`${this.apiUrl}/aSurveiller`);
+  }
+
+  getListeCourseLivrePapier(): Observable<ListeCourseLivreData[]> {
+    return this.http.get<ListeCourseLivreData[]>(`${this.apiUrl}/listeCoursePapier`);
+  }
+
+  getListeCourseEbook(): Observable<ListeCourseLivreData[]> {
+    return this.http.get<ListeCourseLivreData[]>(`${this.apiUrl}/listeCourseEbook`);
   }
 
   creerSerie(serieData:any): Observable<any> {
