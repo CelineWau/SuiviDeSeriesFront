@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RepartitionFormat } from '../models/repartition-format';
 import { AuteursSerieEnCours } from '../models/auteurs-series-en-cours';
+import { LivreDetailData } from '../models/livre-detail';
+import { ModifierLivreData } from '../models/modifier-livre';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +19,20 @@ export class Livre {
     return this.http.post<any>(this.apiUrl, livreData);
   }
 
+  supprimerLivre(id: number): Observable<any> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
   modifierStatutLivre(id: number, statut: string): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${id}/statut`, {statut: statut});
+  }
+
+  modifierFormatLivre(id: number, nouveauFormat: string): Observable<LivreDetailData> {
+    return this.http.patch<LivreDetailData>(`${this.apiUrl}/${id}/formatLivre`, {formatLivre: nouveauFormat});
+  }
+
+  modifierLivre(id: number, modifierLivreData: ModifierLivreData): Observable<LivreDetailData> {
+    return this.http.patch<LivreDetailData>(`${this.apiUrl}/${id}`, modifierLivreData)
   }
 
   recupererAuteurs(): Observable<string[]> {

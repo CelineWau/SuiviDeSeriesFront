@@ -7,6 +7,7 @@ import { EbookALeatoireData } from '../models/ebook-aleatoire';
 import { PalVieillissanteData } from '../models/pal-vieillissante';
 import { SeriesASurveillerData } from '../models/serie-a-surveiller';
 import { ListeCourseLivreData } from '../models/liste-course-livre';
+import { SerieDetailData } from '../models/serie-detail';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,10 @@ export class Serie {
 
   getSeries(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
+  }
+
+  getSerie(id: number): Observable<SerieDetailData> {
+    return this.http.get<SerieDetailData>(`${this.apiUrl}/${id}`)
   }
 
   getSeriesPresqueFiniesPal(seuil: number): Observable<any[]> {
@@ -81,6 +86,10 @@ export class Serie {
     return this.http.get<ListeCourseLivreData[]>(`${this.apiUrl}/listeCourseEbook`);
   }
 
+  getTempsLecture(id: number): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/${id}/tempsLecture`);
+  }
+
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }
@@ -99,5 +108,9 @@ export class Serie {
 
   modifierStatutSerie(id: number, nouveauStatutSerie: string): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}/${id}/statutSerie`, {statutSerie: nouveauStatutSerie});
+  }
+
+  modifierNomSerie(id: number, nouveauNom: string): Observable<SerieDetailData> {
+    return this.http.patch<SerieDetailData>(`${this.apiUrl}/${id}/nom`, {nom: nouveauNom});
   }
 }
