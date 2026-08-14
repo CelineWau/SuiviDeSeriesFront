@@ -1,1 +1,81 @@
-<p>serie-detail works!</p>
+@if (serie) {
+    <div class="fiche-serie">
+        @if (!modeEditionNom) {
+            <h1 (click)="ouvrirEditionNom()" class="titre-editable">{{ serie.nom }}</h1>
+        } @else {
+            <div class="edition-champ edition-nom">
+                <input type="text" [(ngModel)]="nouveauNom">
+                <button type="button" class="btn-livre" (click)="sauvegarderNom()">Enregistrer</button>
+                <button type="button" class="btn-supprimer" (click)="modeEditionNom = false">Annuler</button>
+            </div>
+        }
+        
+        <div class="section-pal infos-globales">
+            <h2>Anatomie du dragon</h2>
+
+            <div class="ligne-info">
+                <span class="label-info">Statut de la série : </span>
+                @if (!modeEditionStatutSerie) {
+                    <span (click)="ouvrirEditionStatutSerie()" class="valeur-editable">{{ serie.statutSerie }}</span>
+                } @else {
+                    <select [(ngModel)]="nouveauStatutSerie">
+                        <option value="EN_COURS">En cours</option>
+                        <option value="TERMINEE">Terminée</option>
+                        <option value="ABANDONNEE">Abandonnée</option>
+                    </select>
+                    <button type="button" class="btn-livre" (click)="sauvegarderStatutSerie()">Enregistrer</button>
+                    <button type="button" class="btn-supprimer" (click)="modeEditionStatutSerie = false">Annuler</button>
+                }
+            </div>
+            
+            <div class="ligne-info">
+                <span class="label-info">Statut de publication : </span>
+                @if (!modeEditionStatutPublication) {
+                    <span (click)="ouvrirEditionStatutPublication()" class="valeur-editable">{{ serie.statutPublication }}</span>
+                } @else {
+                    <select [(ngModel)]="nouveauStatutPublication">
+                        <option value="EN_COURS">En cours</option>
+                        <option value="TERMINEE">Terminée</option>
+                        <option value="INCONNU">Inconnu</option>
+                    </select>
+                    <button type="button" class="btn-livre" (click)="sauvegarderStatutPublication()">Enregistrer</button>
+                    <button type="button" class="btn-supprimer" (click)="modeEditionStatutPublication = false">Annuler</button>
+                }
+            </div>
+
+            <div class="ligne-info">
+                <span class="label-info">Nombre de tome total : </span>
+                @if (!modeEditionTotal) {
+                    <span (click)="ouvrirEditionTotal()" class="valeur-editable">{{ serie.nombreLivreTotal }}</span>
+                } @else {
+                    <input type="number" [(ngModel)]="nouveauTotal">
+                    <button type="button" class="btn-livre" (click)="sauvegarderTotal()">Enregistrer</button>
+                    <button type="button" class="btn-supprimer" (click)="modeEditionTotal = false">Annuler</button>
+                }
+            </div>
+        </div>
+
+        <div class="section-pal stat-lecture">
+            <h2>Le temps passé enfermée avec ce dragon</h2>
+            <p>{{ tempsLecture }} jours entre le premier et le dernier tome lu.</p>
+        </div>
+
+        <div class="section-pal liste-livres-fiche">
+            <h2>Les écailles du dragon</h2>
+            <ul class="liste-pal">
+                @for (livre of serie.livres; track livre.idLivre) {
+                    <li class="ligne-livre-fiche">
+                        <span>Tome {{ livre.numeroDansLaSerie }} - {{ livre.titre }} ({{ livre.auteur }})</span>
+                        <span class="action-livre-fiche">
+                            <span class="badge-format" (click)="changerFormatLivre(livre)">{{ livre.formatLivre }}</span>
+                            <button type="button" class="btn-livre">Modifier</button>
+                            <button type="button" class="btn-supprimer" (click)="supprimerLivre(livre)">Supprimer</button>
+                        </span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+} @else {
+    <p>Chargement de la fiche série...</p>
+}

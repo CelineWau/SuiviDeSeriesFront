@@ -73,7 +73,7 @@ export class Home implements OnInit{
     this.serieService.getSeries().subscribe(data => {
         this.series = data;
         this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerSeriesPresqueFinies(): void {
@@ -87,56 +87,56 @@ export class Home implements OnInit{
     this.serieService.getSeriesAvecLivresAAcheter().subscribe(data => {
       this.seriesAvecLivresAAcheter = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerSeriesAJour(): void {
     this.serieService.getSerieAJour().subscribe(data => {
       this.seriesAJour = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerSeriesDelaissees(): void {
     this.serieService.getSeriesDelaissees().subscribe(data => {
       this.seriesDelaissees = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerRatioSeries(): void {
     this.serieService.getRatioSeries().subscribe(data => {
       this.ratioSeries = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerPalVieillissante(): void {
     this.serieService.getPalVieillissante().subscribe(data => {
       this.palVieillissante = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerSeriesASurveiller(): void {
     this.serieService.getSerieASurveiller().subscribe(data => {
       this.serieASurveiller = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerListeCoursePapier(): void {
     this.serieService.getListeCourseLivrePapier().subscribe(data => {
       this.listeCoursePapier = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerListeCourseEbook(): void {
     this.serieService.getListeCourseEbook().subscribe(data => {
       this.listeCourseEbook = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerCalculRepartitionFormat(): void {
@@ -152,7 +152,7 @@ export class Home implements OnInit{
       this.longueurArcPalEbook = calculerLongueurArc(proportionPalEbook, 40);
 
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerRepartitionStatutSerie(): void {
@@ -174,14 +174,14 @@ export class Home implements OnInit{
       this.decalageAbandonnees = this.longueurArcEnCours + this.longueurArcTerminees;
 
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerCompteurSeriesParAnnee(): void {
     this.serieService.getCompteurSerieParAnnee().subscribe(data => {
       this.compteurSerieParAnnee = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerObjectifAnnuel(): void {
@@ -201,7 +201,7 @@ export class Home implements OnInit{
   pourcentageProgression(): number {
     if (!this.objectifAnnuelData || this.objectifAnnuelData.valeurObjectif === 0) {
       return 0;
-    }
+    };
     const pourcentage = (this.compteurSerieParAnnee / this.objectifAnnuelData.valeurObjectif) * 100;
     return Math.min(pourcentage, 100);
   }
@@ -210,7 +210,7 @@ export class Home implements OnInit{
     this.modeEditionObjectif = true;
     if(this.objectifAnnuelData) {
       this.nouvelObjectif = this.objectifAnnuelData.valeurObjectif;
-    }
+    };
   }
 
   validerObjectif(): void {
