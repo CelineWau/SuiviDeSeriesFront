@@ -77,3 +77,15 @@
     background-color: var(--couleur-emeraude);
     color: var(--couleur-fond);
 }
+
+.lien-retour {
+    display: inline-block;
+    margin: 1rem 0 0 1.5rem;
+    color: var(--couleur-bronze);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.lien-retour:hover {
+    color: var(--couleur-or);
+}

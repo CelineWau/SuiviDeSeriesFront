@@ -46,4 +46,8 @@ export class Livre {
   getAuteursSeriesEnCours(): Observable<AuteursSerieEnCours []> {
     return this.http.get<AuteursSerieEnCours []>(`${this.apiUrl}/auteursSeriesEnCours`);
   }
+
+  getLivre(id: number): Observable<LivreDetailData> {
+    return this.http.get<LivreDetailData>(`${this.apiUrl}/${id}`);
+  }
 }

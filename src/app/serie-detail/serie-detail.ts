@@ -1,14 +1,15 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SerieDetailData } from '../models/serie-detail';
 import { Serie } from '../services/serie';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Livre } from '../services/livre';
 import { LivreDetailData } from '../models/livre-detail';
 import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-serie-detail',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './serie-detail.html',
   styleUrl: './serie-detail.css',
 })
@@ -35,6 +36,14 @@ export class SerieDetail implements OnInit{
     this.chargerTempsLecture()
   }
 
+  sauvegarderChamp<T>(nouvelleValeur: T, appelService: (valeur: T) => Observable<any>, appliquerLocalement: (valeur: T) => void, fermerEdition: () => void) {
+    appelService(nouvelleValeur).subscribe(() => {
+      appliquerLocalement(nouvelleValeur);
+      fermerEdition();
+      this.cdr.detectChanges();
+    });
+  }
+
   chargerSerie(): void {
     this.serieService.getSerie(this.idSerie).subscribe(data => {
       this.serie = data;
@@ -50,7 +59,7 @@ export class SerieDetail implements OnInit{
   }
 
   changerFormatLivre(livre: LivreDetailData): void {
-    let nouveauFormat: 'EBOOK' | 'PAPIER';;
+    let nouveauFormat: 'EBOOK' | 'PAPIER';
     if(livre.formatLivre === 'EBOOK') {
       nouveauFormat = 'PAPIER';
     } else {
@@ -77,11 +86,12 @@ export class SerieDetail implements OnInit{
   }
 
   sauvegarderTotal(): void {
-    this.serieService.modifierNombreLivreTotal(this.idSerie, this.nouveauTotal).subscribe(() => {
-      this.serie!.nombreLivreTotal = this.nouveauTotal;
-      this.modeEditionTotal = false;
-      this.cdr.detectChanges();
-    });
+    this.sauvegarderChamp(
+      this.nouveauTotal,
+      (valeur) => this.serieService.modifierNombreLivreTotal(this.idSerie, valeur),
+      (valeur) => this.serie!.nombreLivreTotal = valeur,
+      () => this.modeEditionTotal = false
+    );
   }
 
   ouvrirEditionNom(): void {
@@ -90,11 +100,12 @@ export class SerieDetail implements OnInit{
   }
 
   sauvegarderNom(): void {
-    this.serieService.modifierNomSerie(this.idSerie, this.nouveauNom).subscribe(() => {
-      this.serie!.nom = this.nouveauNom;
-      this.modeEditionNom = false;
-      this.cdr.detectChanges();
-    });
+    this.sauvegarderChamp(
+      this.nouveauNom,
+      (valeur) => this.serieService.modifierNomSerie(this.idSerie, valeur),
+      (valeur) => this.serie!.nom = valeur,
+      () => this.modeEditionNom = false
+    );
   }
 
   ouvrirEditionStatutPublication(): void {
@@ -103,11 +114,12 @@ export class SerieDetail implements OnInit{
   }
 
   sauvegarderStatutPublication(): void {
-    this.serieService.modifierStatutPublication(this.idSerie, this.nouveauStatutPublication).subscribe(() => {
-      this.serie!.statutPublication = this.nouveauStatutPublication;
-      this.modeEditionStatutPublication = false;
-      this.cdr.detectChanges();
-    });
+    this.sauvegarderChamp(
+      this.nouveauStatutPublication,
+      (valeur) => this.serieService.modifierStatutPublication(this.idSerie, valeur),
+      (valeur) => this.serie!.statutPublication = valeur,
+      () => this.modeEditionStatutPublication = false
+    );
   }
 
   ouvrirEditionStatutSerie(): void {
@@ -116,10 +128,11 @@ export class SerieDetail implements OnInit{
   }
 
   sauvegarderStatutSerie(): void {
-    this.serieService.modifierStatutSerie(this.idSerie, this.nouveauStatutSerie).subscribe(() => {
-      this.serie!.statutSerie = this.nouveauStatutSerie;
-      this.modeEditionStatutSerie = false;
-      this.cdr.detectChanges();
-    });
+    this.sauvegarderChamp(
+      this.nouveauStatutSerie,
+      (valeur) => this.serieService.modifierStatutSerie(this.idSerie, valeur),
+      (valeur) => this.serie!.statutSerie = valeur,
+      () => this.modeEditionStatutSerie = false
+    );
   }
 }

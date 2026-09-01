@@ -113,7 +113,6 @@ export class SerieItem {
   }
 
   tousLesLivresEnregistres(serie: any): boolean {
-    console.log('livres:', serie.livres, 'total:', serie.nombreLivreTotal);
     return (serie.livres?.length ?? 0) >= serie.nombreLivreTotal;
   }
 }

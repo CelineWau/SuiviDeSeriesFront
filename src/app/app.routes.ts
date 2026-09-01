@@ -8,6 +8,7 @@ import { CreerSerie } from './creer-serie/creer-serie';
 import { CreerLivre } from './creer-livre/creer-livre';
 import { Stats } from './stats/stats';
 import { SerieDetail } from './serie-detail/serie-detail';
+import { LivreDetail } from './livre-detail/livre-detail';
 
 export const routes: Routes = [
     { path: 'accueil', component: Home},
@@ -19,4 +20,5 @@ export const routes: Routes = [
     { path: 'livres/creer/:serieId', component: CreerLivre},
     { path: 'stats', component: Stats},
     { path: 'series/:serieId', component: SerieDetail},
+    { path: 'livres/modifier/:serieId/:livreId', component: LivreDetail},
 ];
