@@ -1,1 +1,30 @@
-<p>livre-detail works!</p>
+@if (livre) {
+  <div class="formulaire">
+    <h1>Modifier "{{ livre.titre }}"</h1>
+
+    <div class="champ">
+      <label for="titre">Titre du livre</label>
+      <input type="text" id="titre" [(ngModel)]="nouveauTitre">
+    </div>
+
+    <div class="champ">
+      <label for="auteur">Auteur du livre</label>
+      <input type="text" id="auteur" [(ngModel)]="nouveauAuteur">
+    </div>
+
+    <div class="champ">
+      <label for="isbn">ISBN du livre</label>
+      <input type="text" id="isbn" [(ngModel)]="nouveauIsbn">
+    </div>
+
+    <div class="champ">
+      <label for="numero">Place dans la série</label>
+      <input type="number" id="numero" [(ngModel)]="nouveauNumero">
+    </div>
+
+    <button type="button" class="btn-dragon" (click)="enregistrerModification()">Enregistrer</button>
+    <a [routerLink]="['/series', idSerie]" class="lien-retour">Annuler</a>
+  </div>
+} @else {
+  <p>Chargement du livre...</p>
+}
