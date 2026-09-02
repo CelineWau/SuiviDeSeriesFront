@@ -26,19 +26,19 @@
   <h2 class="titre-section">Le bestiaire de tes séries, classé par ampleur</h2>
   <div class="conteneur-cartes">
     <div class="carte-record">
-      <h2>Dragonnet de poche</h2>
+      <h2>Couvée de dragonnet de poche</h2>
       <p class="valeur-record">{{ tailleSeries.petites }}</p>
       <p class="sous-texte-valeur">1 à 3 tomes</p>
     </div>
 
     <div class="carte-record">
-      <h2>Wyrm de bibliothèque</h2>
+      <h2>Couvée de wyrm de bibliothèque</h2>
       <p class="valeur-record">{{ tailleSeries.moyennes }}</p>
       <p class="sous-texte-valeur">4 à 7 tomes</p>
     </div>
 
     <div class="carte-record">
-      <h2>Dragon des pavés</h2>
+      <h2>Couvée de dragon des pavés</h2>
       <p class="valeur-record">{{ tailleSeries.sagas }}</p>
       <p class="sous-texte-valeur">8 tomes et plus</p>
     </div>
@@ -46,7 +46,7 @@
 
   <div class="conteneur-cote-a-cote">
     <div class="conteneur-auteurs">
-      <h2 class="titre-section">Ceux que le dragon ne laisse pas filer</h2>
+      <h2 class="titre-section">Ceux qui pondent le plus de couvées</h2>
       <div class="carte-record-auteurs">
         <ul class="liste-auteurs">
           @for (auteur of auteursSeriesEnCours; track $index) {
@@ -62,7 +62,7 @@
     </div>
 
     <div class="conteneur-auteurs">
-      <h2 class="titre-section">Le temps moyen passé enfermé(e) avec un dragon</h2>
+      <h2 class="titre-section">Le temps moyen passé enfermé(e) avec une couvée</h2>
       <div class="conteneur-decompte">
         <div class="bloc-decompte">
           <span class="chiffre-decompte">{{ dureeDecomposee.annees }}</span>
@@ -75,6 +75,24 @@
         <div class="bloc-decompte">
           <span class="chiffre-decompte">{{ dureeDecomposee.jours }}</span>
           <span class="label-decompte">jour{{ dureeDecomposee.jours > 1 ? 's' : '' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="conteneur-auteurs">
+      <h2 class="titre-section">Le temps que met un dragon à éclore</h2>
+      <div class="conteneur-decompte">
+        <div class="bloc-decompte">
+          <span class="chiffre-decompte">{{ dureeMoyennePalDecomposee.annees }}</span>
+          <span class="label-decompte">an{{ dureeMoyennePalDecomposee.annees > 1 ? 's' : '' }}</span>
+        </div>
+        <div class="bloc-decompte">
+          <span class="chiffre-decompte">{{ dureeMoyennePalDecomposee.mois }}</span>
+          <span class="label-decompte">mois</span>
+        </div>
+        <div class="bloc-decompte">
+          <span class="chiffre-decompte">{{ dureeMoyennePalDecomposee.jours }}</span>
+          <span class="label-decompte">jour{{ dureeMoyennePalDecomposee.jours > 1 ? 's' : '' }}</span>
         </div>
       </div>
     </div>

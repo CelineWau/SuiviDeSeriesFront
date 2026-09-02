@@ -50,4 +50,8 @@ export class Livre {
   getLivre(id: number): Observable<LivreDetailData> {
     return this.http.get<LivreDetailData>(`${this.apiUrl}/${id}`);
   }
+
+  getDureeMoyenneDansPal(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/dureeMoyenneDansPal`)
+  }
 }

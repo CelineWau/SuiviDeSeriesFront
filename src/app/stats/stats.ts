@@ -18,6 +18,8 @@ export class Stats implements OnInit{
   auteursSeriesEnCours: AuteursSerieEnCours [] = [];
   dureeMoyenneLecture: number = 0;
   dureeDecomposee: DureeDecomposee = { annees: 0, mois: 0, jours: 0 };
+  dureeMoyennePal: number = 0;
+  dureeMoyennePalDecomposee: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
 
   constructor(private serieService: Serie, private livreService: Livre, private cdr: ChangeDetectorRef){}
 
@@ -26,6 +28,7 @@ export class Stats implements OnInit{
     this.chargerRepartitionTailleSeries();
     this.chargerAuteursSeriesEnCours();
     this.chargerDureeMoyenneLectureSerie();
+    this.chargerDureeMoyennePal();
     }
 
   chargerSeriesLesPlusLongues(): void {
@@ -39,14 +42,14 @@ export class Stats implements OnInit{
     this.serieService.getRepartitionTailleSeries().subscribe(data => {
       this.tailleSeries = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerAuteursSeriesEnCours(): void {
     this.livreService.getAuteursSeriesEnCours().subscribe(data => {
       this.auteursSeriesEnCours = data;
       this.cdr.detectChanges();
-    })
+    });
   }
 
   chargerDureeMoyenneLectureSerie(): void {
@@ -54,6 +57,14 @@ export class Stats implements OnInit{
       this.dureeDecomposee = decomposerDureeEnJours(data)
       this.dureeMoyenneLecture = data;
       this.cdr.detectChanges();
-    })
+    });
+  }
+
+  chargerDureeMoyennePal(): void {
+    this.livreService.getDureeMoyenneDansPal().subscribe(data => {
+      this.dureeMoyennePalDecomposee = decomposerDureeEnJours(data)
+      this.dureeMoyennePal = data;
+      this.cdr.detectChanges();
+    });
   }
 }

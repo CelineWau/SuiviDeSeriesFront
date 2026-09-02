@@ -2,12 +2,12 @@
   <div class="conteneur-header-accueil">
     <div class="colonne-gauche">
       <h1>Bonjour Céline</h1>
-      <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} séries en cours</p>
-      <a routerLink="/series">Voir mes séries</a>
+      <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} couvées en cours</p>
+      <a routerLink="/series">Voir mes couvées</a>
 
       @if (objectifAnnuelData && !modeEditionObjectif) {
         <h2>
-          Séries finies cette année : {{ compteurSerieParAnnee }} /
+          Couvées finies cette année : {{ compteurSerieParAnnee }} /
           {{ objectifAnnuelData.valeurObjectif }}
           <span class="btn-edit" (click)="ouvrirEditionObjectif()">✏️</span>
         </h2>
@@ -15,7 +15,7 @@
           <div class="jauge-remplissage" [style.width.%]="pourcentageProgression()"></div>
         </div>
       } @else {
-        <h2>Définir ton objecif de l'année</h2>
+        <h2>Définir ton objecif de couvées lues pour l'année</h2>
         <div class="formulaire-objectif">
           <input type="number" [(ngModel)]="nouvelObjectif" min="1" max="50" />
           <button class="btn-livre" (click)="validerObjectif()">Valider</button>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="colonne-droite">
-      <h2>Le dragon te souffle une suggestion</h2>
+      <h2>Un dragon réclame ton attention</h2>
       <button class="btn-dragon" (click)="proposerEbook()">Je ne sais pas quoi lire</button>
 
       @if (ebookPropose) {
@@ -36,7 +36,7 @@
 
       @if (objectifAnnuelData) {
         <p class="texte-ratio">
-          <strong>{{ ratioSeries | percent }}</strong> de tes séries commencées sont terminées
+          <strong>{{ ratioSeries | percent }}</strong> de tes couvées commencées sont terminées
         </p>
       }
     </div>
@@ -44,7 +44,7 @@
 
   <div class="conteneur-camemberts">
     <div class="camembert">
-      <h2>Proportion livres papier / ebooks lus</h2>
+      <h2>Proportion dragons papier / ebooks lus</h2>
       <svg viewBox="0 0 100 100" width="160" height="160">
         <circle cx="50" cy="50" r="40" class="anneau-fond anneau-fond-papier"></circle>
         <circle
@@ -75,7 +75,7 @@
     </div>
 
     <div class="camembert">
-      <h2>Proportion livres papier / ebooks dans la PAL</h2>
+      <h2>Proportion dragons papier / ebooks dans la PAL</h2>
       <svg viewBox="0 0 100 100" width="160" height="160">
         <circle cx="50" cy="50" r="40" class="anneau-fond anneau-fond-papier"></circle>
         <circle
@@ -106,7 +106,7 @@
     </div>
 
     <div class="camembert">
-      <h2>Répartition de tes séries</h2>
+      <h2>Répartition de tes couvées</h2>
       <svg viewBox="0 0 100 100" width="160" height="160">
         <circle
           cx="50"
@@ -167,7 +167,7 @@
     <div class="rangee-stat rangee-listes-longues">
       @if (seriesPresqueFinies.length > 0) {
         <div class="section-pal">
-          <h2>Objectif PAL à 0 : ces séries n'attendent que toi</h2>
+          <h2>Objectif PAL à 0 : ces couvées n'attendent que toi</h2>
           <ul class="liste-pal">
             @for (serie of seriesPresqueFinies; track serie.idSerie) {
               <li>{{ serie.nom }}</li>
@@ -178,7 +178,7 @@
 
       @if (seriesAJour.length > 0) {
         <div class="section-pal">
-          <h2>À jour : plus qu'à attendre la suite</h2>
+          <h2>À jour : plus qu'à attendre un nouveau dragon</h2>
           <ul class="liste-pal">
             @for (serie of seriesAJour; track serie.idSerie) {
               <li>
@@ -196,7 +196,7 @@
 
       @if (serieASurveiller.length > 0) {
         <div class="section-pal">
-          <h2>Séries à surveiller : guette les prochaines sorties</h2>
+          <h2>Séries à surveiller : guette leur prochain dragon</h2>
           <ul class="liste-pal">
             @for (serie of serieASurveiller; track serie.idSerie) {
               <li>
@@ -214,7 +214,7 @@
     <div class="rangee-stat rangee-listes-moyennes">
       @if (seriesAvecLivresAAcheter.length > 0) {
         <div class="section-pal">
-          <h2>Cible tes achats : elles sont si proches de la fin</h2>
+          <h2>Cible tes achats : les couvées si proches de la fin</h2>
           <ul class="liste-pal">
             @for (serie of seriesAvecLivresAAcheter; track serie.idSerie) {
               <li>
@@ -253,7 +253,7 @@
     <div class="rangee-stat rangee-listes-courtes">
       @if (palVieillissante.length > 0) {
         <div class="section-pal">
-          <h2>Défi PAL vieillissante : dépoussière ces ebooks</h2>
+          <h2>Défi PAL vieillissante : dépoussière les dragons de ta liseuse</h2>
           <ul class="liste-pal">
             @for (livre of palVieillissante; track $index) {
               <li class="ligne-delaissee">

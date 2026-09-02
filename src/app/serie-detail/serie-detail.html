@@ -15,10 +15,10 @@
         }
         
         <div class="section-pal infos-globales">
-            <h2>Anatomie du dragon</h2>
+            <h2>Anatomie de la couvée</h2>
 
             <div class="ligne-info">
-                <span class="label-info">Statut de la série : </span>
+                <span class="label-info">Statut de la couvée : </span>
                 @if (!modeEditionStatutSerie) {
                     <span>{{ serie.statutSerie }}</span>
                     <span (click)="ouvrirEditionStatutSerie()" class="btn-edit">✏️</span>
@@ -34,7 +34,7 @@
             </div>
             
             <div class="ligne-info">
-                <span class="label-info">Statut de publication : </span>
+                <span class="label-info">Statut de publication de la couvée : </span>
                 @if (!modeEditionStatutPublication) {
                     <span>{{ serie.statutPublication }}</span>
                     <span (click)="ouvrirEditionStatutPublication()" class="btn-edit">✏️</span>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="ligne-info">
-                <span class="label-info">Nombre de tome total : </span>
+                <span class="label-info">Nombre de dragons total : </span>
                 @if (!modeEditionTotal) {
                     <span>{{ serie.nombreLivreTotal }}</span>
                     <span (click)="ouvrirEditionTotal()" class="btn-edit">✏️</span>
@@ -63,12 +63,12 @@
         </div>
 
         <div class="section-pal stat-lecture">
-            <h2>Le temps passé enfermée avec ce dragon</h2>
-            <p>{{ tempsLecture }} jours entre le premier et le dernier tome lu.</p>
+            <h2>Le temps passé enfermée avec cette couvée</h2>
+            <p>{{ tempsLecture }} jours entre le premier et le dernier dragon lu.</p>
         </div>
 
         <div class="section-pal liste-livres-fiche">
-            <h2>Les écailles du dragon</h2>
+            <h2>Les dragons de la couvée</h2>
             <ul class="liste-pal">
                 @for (livre of serie.livres; track livre.idLivre) {
                     <li class="ligne-livre-fiche">
