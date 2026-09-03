@@ -94,6 +94,10 @@ export class Serie {
     return this.http.get<number>(`${this.apiUrl}/compteurSeriesCommenceesParAnnee`);
   }
 
+  getRatioSeriesCommenceesEtFiniesMemeAnnee(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/ratioSeriesCommenceesEtFiniesParAnnee`);
+  }
+
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }

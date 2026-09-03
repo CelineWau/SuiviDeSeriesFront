@@ -4,10 +4,11 @@ import { TailleSerieData } from '../models/taille-serie';
 import { Livre } from '../services/livre';
 import { AuteursSerieEnCours } from '../models/auteurs-series-en-cours';
 import { decomposerDureeEnJours, DureeDecomposee } from '../utils/duree';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-stats',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './stats.html',
   styleUrl: './stats.css',
 })
@@ -21,6 +22,7 @@ export class Stats implements OnInit{
   dureeMoyennePal: number = 0;
   dureeMoyennePalDecomposee: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
   seriesCommenceesCetteAnnee: number = 0;
+  ratioSeriesCommenceesEtFiniesMemeAnnee: number = 0;
 
   constructor(private serieService: Serie, private livreService: Livre, private cdr: ChangeDetectorRef){}
 
@@ -31,6 +33,7 @@ export class Stats implements OnInit{
     this.chargerDureeMoyenneLectureSerie();
     this.chargerDureeMoyennePal();
     this.chargerSeriesCommenceesCetteAnnee();
+    this.chargerRatioSeriesCommenceesEtFiniesMemeAnnee();
     }
 
   chargerSeriesLesPlusLongues(): void {
@@ -75,5 +78,12 @@ export class Stats implements OnInit{
         this.seriesCommenceesCetteAnnee = data;
         this.cdr.detectChanges();
       });
+  }
+
+  chargerRatioSeriesCommenceesEtFiniesMemeAnnee(): void {
+    this.serieService.getRatioSeriesCommenceesEtFiniesMemeAnnee().subscribe(data => {
+      this.ratioSeriesCommenceesEtFiniesMemeAnnee = data;
+      this.cdr.detectChanges();
+    });
   }
 }
