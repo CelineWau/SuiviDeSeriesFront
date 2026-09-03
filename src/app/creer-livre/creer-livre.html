@@ -1,12 +1,12 @@
 <form [formGroup]="livreForm" (ngSubmit)="onSubmit()" class="formulaire">
-  <h1>Enregistrer un livre</h1>
+  <h1>Enregistrer un dragon</h1>
 
   @if (erreurServeur) {
     <p class="erreur-serveur">{{ erreurServeur }}</p>
   }
 
   <div class="champ">
-    <label for="titre">Titre du livre</label>
+    <label for="titre">Titre du dragon</label>
     <input type="text" id="titre" formControlName="titre" placeholder="Titre du livre" />
     @if (livreForm.get('titre')?.invalid && livreForm.get('titre')?.touched) {
       <span class="message-erreur">Le titre du livre est obligatoire.</span>
@@ -14,7 +14,7 @@
   </div>
 
   <div class="champ champ-autocomplete">
-    <label for="auteur">Auteur du livre</label>
+    <label for="auteur">Invocateur du dragon</label>
     <input
       type="text"
       id="auteur"
@@ -38,7 +38,7 @@
   </div>
 
   <div class="champ">
-    <label for="isbn">ISBN du livre</label>
+    <label for="isbn">ISBN du dragon</label>
     <input type="text" id="isbn" formControlName="isbn" placeholder="ISBN du livre" />
     @if (livreForm.get('isbn')?.invalid && livreForm.get('isbn')?.touched) {
       <span class="message-erreur">L'ISBN du livre est obligatoire.</span>
@@ -46,7 +46,7 @@
   </div>
 
   <div class="champ">
-    <label for="numeroDansLaSerie">Place dans la série</label>
+    <label for="numeroDansLaSerie">Place dans la couvée</label>
     <input
       type="number"
       id="numeroDansLaSerie"
@@ -59,7 +59,7 @@
   </div>
 
   <div class="champ">
-    <label for="formatLivre">Format du livre</label>
+    <label for="formatLivre">Format du dragon</label>
     <select id="formatLivre" formControlName="formatLivre">
       <option value="" disabled selected>-- Choisir --</option>
       <option value="EBOOK">Ebook</option>
@@ -71,7 +71,7 @@
   </div>
 
   <div class="champ">
-    <label for="statutLivre">Statut du livre</label>
+    <label for="statutLivre">Statut du dragon</label>
     <select id="statutLivre" formControlName="statutLivre">
       <option value="" disabled selected>-- Choisir --</option>
       <option value="LU">Lu</option>
@@ -101,7 +101,7 @@
   }
 
   <div class="champ">
-    <label for="serie">Série</label>
+    <label for="serie">Couvée</label>
     @if (serieCourante) {
       <p>{{ serieCourante.nom }}</p>
     }

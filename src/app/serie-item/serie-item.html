@@ -4,7 +4,7 @@
       <a [routerLink]="['/series', serie.idSerie]" class="nom-serie-lien">{{ serie.nom }}</a>
       <button (click)="supprimer(serie.idSerie)" class="btn-supprimer">X</button>
       @if (serie.statutSerie === 'EN_COURS' && !tousLesLivresEnregistres(serie)) {
-        <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
+        <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Dragon</a>
       }
     </div>
     <div class="carres">

@@ -3,7 +3,7 @@
 }
 
 .page-stats h1 {
-    color: var(--couleur-or);
+    color: var(--couleur-emeraude);
     font-size: 1.8rem;
     text-align: center;
     margin-bottom: 3rem;
@@ -40,7 +40,7 @@
     font-weight: 700;
 }
 
-.carte-record h2 {
+.carte-record h3 {
     color: var(--couleur-cuivre);
     font-size: 1.3rem;
     margin-bottom: 1rem;

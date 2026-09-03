@@ -1,12 +1,12 @@
 <form [formGroup]="serieForm" (ngSubmit)="onSubmit()" class="formulaire">
-    <h1>Créer une série à suivre</h1>
+    <h1>Créer une couvée à suivre</h1>
 
     @if (erreurServeur) {
       <p class="erreur-serveur">{{ erreurServeur }}</p>
     }
 
     <div class="champ">
-        <label for="nom">Nom de la série</label>
+        <label for="nom">Nom de la couvée</label>
         <input type="text" id="nom" formControlName="nom" placeholder="Nom de la série">
         @if (serieForm.get('nom')?.invalid && serieForm.get('nom')?.touched) {
       <span class="message-erreur">Le nom de la série est obligatoire.</span>
@@ -14,7 +14,7 @@
     </div>
     
     <div class="champ">
-        <label for="statutSerie">Statut de la série</label>
+        <label for="statutSerie">Statut de la couvée</label>
         <select id="statutSerie" formControlName="statutSerie">
             <option value="" disabled selected>-- Choisir --</option>
             <option value="ABANDONNEE">Abandonnée</option>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="champ">
-        <label for="statutPublication">Statut de publication de la série</label>
+        <label for="statutPublication">Statut de publication de la couvée</label>
         <select id="statutPublication" formControlName="statutPublication">
             <option value="" disabled selected>-- Choisir --</option>
             <option value="INCONNU">Inconnu</option>
@@ -40,7 +40,7 @@
     </div>
     
     <div class="champ">
-        <label for="nombreLivreTotal">Nombre de livre dans la série</label>
+        <label for="nombreLivreTotal">Nombre de dragons dans la couvée</label>
         <input type="number" id="nombreLivreTotal" formControlName="nombreLivreTotal">
         @if (serieForm.get('nombreLivreTotal')?.invalid && serieForm.get('nombreLivreTotal')?.touched) {
       <span class="message-erreur">Le nombre de livre total de la série est obligatoire.</span>
@@ -48,5 +48,4 @@
     </div>
 
     <button type="submit" class="btn-dragon">Créer</button>
-
 </form>

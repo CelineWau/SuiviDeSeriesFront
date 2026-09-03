@@ -1,6 +1,6 @@
-<a routerLink="/series/creer" class="btn-dragon">Créer une série à suivre</a>
+<a routerLink="/series/creer" class="btn-dragon">Créer une couvées à suivre</a>
 
-<h2 class="seriesEnCours">Séries en cours</h2>
+<h2 class="seriesEnCours">Couvées en cours</h2>
 <div class="liste-series">
     @for (serie of seriesEnCours; track serie.idSerie) {
         <app-serie-item
@@ -11,7 +11,7 @@
     }
 </div>
 
-<h2 class="seriesAbandonnees">Séries abandonnées</h2>
+<h2 class="seriesAbandonnees">Couvées abandonnées</h2>
 <div class="liste-series">
     @for (serie of seriesAbandonnee; track serie.idSerie) {
         <app-serie-item
@@ -22,7 +22,7 @@
     }
 </div>
 
-<h2 class="seriesTerminees">Séries terminées</h2>
+<h2 class="seriesTerminees">Couvées terminées</h2>
 <div class="liste-series">
     @for (serie of seriesTerminee; track serie.idSerie) {
         <app-serie-item

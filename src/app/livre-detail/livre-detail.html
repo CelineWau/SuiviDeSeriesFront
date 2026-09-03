@@ -3,28 +3,28 @@
     <h1>Modifier "{{ livre.titre }}"</h1>
 
     <div class="champ">
-      <label for="titre">Titre du livre</label>
-      <input type="text" id="titre" [(ngModel)]="nouveauTitre">
+      <label for="titre">Titre du dragon</label>
+      <input type="text" id="titre" [(ngModel)]="nouveauTitre" placeholder="Titre du livre">
     </div>
 
     <div class="champ">
-      <label for="auteur">Auteur du livre</label>
-      <input type="text" id="auteur" [(ngModel)]="nouveauAuteur">
+      <label for="auteur">Invocateur du dragon</label>
+      <input type="text" id="auteur" [(ngModel)]="nouveauAuteur" placeholder="Auteur du livre">
     </div>
 
     <div class="champ">
-      <label for="isbn">ISBN du livre</label>
-      <input type="text" id="isbn" [(ngModel)]="nouveauIsbn">
+      <label for="isbn">ISBN du dragon</label>
+      <input type="text" id="isbn" [(ngModel)]="nouveauIsbn" placeholder="ISBN du livre">
     </div>
 
     <div class="champ">
-      <label for="numero">Place dans la série</label>
-      <input type="number" id="numero" [(ngModel)]="nouveauNumero">
+      <label for="numero">Place du dragon dans la couvée</label>
+      <input type="number" id="numero" [(ngModel)]="nouveauNumero" placeholder="Place dans la série">
     </div>
 
     <button type="button" class="btn-dragon" (click)="enregistrerModification()">Enregistrer</button>
     <a [routerLink]="['/series', idSerie]" class="lien-retour">Annuler</a>
   </div>
 } @else {
-  <p>Chargement du livre...</p>
+  <p>Chargement du dragon...</p>
 }
