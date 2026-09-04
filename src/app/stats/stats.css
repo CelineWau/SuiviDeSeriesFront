@@ -139,3 +139,9 @@
     letter-spacing: 0.05rem;
     margin-top: 0.3rem;
 }
+
+.nom-serie-record {
+    color: var(--couleur-bronze);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}

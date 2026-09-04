@@ -5,6 +5,7 @@ import { Livre } from '../services/livre';
 import { AuteursSerieEnCours } from '../models/auteurs-series-en-cours';
 import { decomposerDureeEnJours, DureeDecomposee } from '../utils/duree';
 import { DecimalPipe } from '@angular/common';
+import { SeriesPlusLonguePlusCourteData } from '../models/series-plus-longue-plus-courte';
 
 @Component({
   selector: 'app-stats',
@@ -24,6 +25,9 @@ export class Stats implements OnInit{
   seriesCommenceesCetteAnnee: number = 0;
   ratioSeriesCommenceesEtFiniesMemeAnnee: number = 0;
   nombreSeriesAvecSeulTomeUnLuDansAnnee: number = 0;
+  seriesTermineesPlusLonguePlusCourte: SeriesPlusLonguePlusCourteData | null = null;
+  dureePlusCourte: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
+  dureePlusLongue: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
 
   constructor(private serieService: Serie, private livreService: Livre, private cdr: ChangeDetectorRef){}
 
@@ -36,6 +40,7 @@ export class Stats implements OnInit{
     this.chargerSeriesCommenceesCetteAnnee();
     this.chargerRatioSeriesCommenceesEtFiniesMemeAnnee();
     this.chargerNombreSeriesAvecSeulTomeUnLuDansAnnee();
+    this.chargerSeriesTermineesPlusLonguePlusCourte();
     }
 
   chargerSeriesLesPlusLongues(): void {
@@ -92,6 +97,19 @@ export class Stats implements OnInit{
   chargerNombreSeriesAvecSeulTomeUnLuDansAnnee(): void {
     this.serieService.getNombreSeriesAvecSeulTomeUnLuDansAnnee().subscribe(data => {
       this.nombreSeriesAvecSeulTomeUnLuDansAnnee = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  chargerSeriesTermineesPlusLonguePlusCourte(): void {
+    this.serieService.getSeriesTermineesPlusLonguePlusCourte().subscribe(data => {
+      if(data.serieTermineePlusCourte?.dureeLecture) {
+        this.dureePlusCourte = decomposerDureeEnJours(data.serieTermineePlusCourte?.dureeLecture);
+      }
+      if(data.serieTermineePlusLongue?.dureeLecture) {
+        this.dureePlusLongue = decomposerDureeEnJours(data.serieTermineePlusLongue?.dureeLecture);
+      }
+      this.seriesTermineesPlusLonguePlusCourte = data;
       this.cdr.detectChanges();
     });
   }

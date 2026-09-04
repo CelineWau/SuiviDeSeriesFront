@@ -1,7 +1,7 @@
 <div class="page-stats">
   <h1>Le grand registre des couvées : rien ne leur échappe</h1>
 
-  <h2 class="titre-section">Les plus grands vols de tes couvées</h2>
+  <h2 class="titre-section">🕊️ Les plus grands vols de tes couvées</h2>
   <div class="conteneur-cartes">
     @if (seriesLesPlusLongues?.serieEnCoursLaPlusLongue) {
       <div class="carte-record">
@@ -24,7 +24,7 @@
     }
   </div>
 
-  <h2 class="titre-section">Le bestiaire de tes couvées, classé par ampleur</h2>
+  <h2 class="titre-section">🐾 Le bestiaire de tes couvées, classé par ampleur</h2>
   <div class="conteneur-cartes">
     <div class="carte-record">
       <h3>Couvée de dragonnet de poche</h3>
@@ -47,7 +47,7 @@
 
   <div class="conteneur-cote-a-cote">
     <div class="conteneur-auteurs">
-      <h2 class="titre-section">Ceux qui pondent le plus de couvées</h2>
+      <h2 class="titre-section">🥚 Ceux qui pondent le plus de couvées</h2>
       <div class="carte-record-auteurs">
         <ul class="liste-auteurs">
           @for (auteur of auteursSeriesEnCours; track $index) {
@@ -63,7 +63,7 @@
     </div>
 
     <div class="conteneur-auteurs">
-      <h2 class="titre-section">Le temps moyen passé enfermé(e) avec une couvée</h2>
+      <h2 class="titre-section">⏳ Le temps moyen passé enfermé(e) avec une couvée</h2>
       <div class="conteneur-decompte">
         <div class="bloc-decompte">
           <span class="chiffre-decompte">{{ dureeDecomposee.annees }}</span>
@@ -81,11 +81,13 @@
     </div>
 
     <div class="conteneur-auteurs">
-      <h2 class="titre-section">Le temps que met un dragon à éclore</h2>
+      <h2 class="titre-section">🐣 Le temps que met un dragon à éclore</h2>
       <div class="conteneur-decompte">
         <div class="bloc-decompte">
           <span class="chiffre-decompte">{{ dureeMoyennePalDecomposee.annees }}</span>
-          <span class="label-decompte">an{{ dureeMoyennePalDecomposee.annees > 1 ? 's' : '' }}</span>
+          <span class="label-decompte"
+            >an{{ dureeMoyennePalDecomposee.annees > 1 ? 's' : '' }}</span
+          >
         </div>
         <div class="bloc-decompte">
           <span class="chiffre-decompte">{{ dureeMoyennePalDecomposee.mois }}</span>
@@ -93,12 +95,14 @@
         </div>
         <div class="bloc-decompte">
           <span class="chiffre-decompte">{{ dureeMoyennePalDecomposee.jours }}</span>
-          <span class="label-decompte">jour{{ dureeMoyennePalDecomposee.jours > 1 ? 's' : '' }}</span>
+          <span class="label-decompte"
+            >jour{{ dureeMoyennePalDecomposee.jours > 1 ? 's' : '' }}</span
+          >
         </div>
       </div>
     </div>
   </div>
-  <h2 class="titre-section">Le bilan des couvées éclot cette année</h2>
+  <h2 class="titre-section">📊 Le bilan des couvées éclot cette année</h2>
   <div class="conteneur-cartes">
     <div class="carte-record">
       <h3>Couvées commencées</h3>
@@ -107,12 +111,46 @@
 
     <div class="carte-record">
       <h3>Couvées commencées ET finies</h3>
-      <p class="valeur-record">{{ ratioSeriesCommenceesEtFiniesMemeAnnee * 100 | number: '1.0-0'}} %</p>
+      <p class="valeur-record">
+        {{ ratioSeriesCommenceesEtFiniesMemeAnnee * 100 | number: '1.0-0' }} %
+      </p>
     </div>
 
     <div class="carte-record">
       <h3>Couvées à dragon unique</h3>
       <p class="valeur-record">{{ nombreSeriesAvecSeulTomeUnLuDansAnnee }}</p>
     </div>
+  </div>
+
+  <h2 class="titre-section">📖 Le grimoire des curiosités draconiques : inutile mais fascinant</h2>
+  <div class="conteneur-cartes">
+    @if (seriesTermineesPlusLonguePlusCourte?.serieTermineePlusLongue) {
+      <div class="carte-record">
+        <h3>Le vol traînant en longueur</h3>
+        <p class="valeur-record">
+          {{ dureePlusLongue.annees }} an{{ dureePlusLongue.annees > 1 ? 's' : '' }},
+          {{ dureePlusLongue.mois }} mois et {{ dureePlusLongue.jours }} jour{{
+            dureePlusLongue.jours > 1 ? 's' : ''
+          }}
+        </p>
+        <p class="nom-serie-record">
+          {{ seriesTermineesPlusLonguePlusCourte!.serieTermineePlusLongue!.nom }}
+        </p>
+      </div>
+    }
+    @if (seriesTermineesPlusLonguePlusCourte?.serieTermineePlusCourte) {
+      <div class="carte-record">
+        <h3>Le vol éclair</h3>
+        <p class="valeur-record">
+          {{ dureePlusCourte.annees }} an{{ dureePlusCourte.annees > 1 ? 's' : '' }},
+          {{ dureePlusCourte.mois }} mois et {{ dureePlusCourte.jours }} jour{{
+            dureePlusCourte.jours > 1 ? 's' : ''
+          }}
+        </p>
+        <p class="nom-serie-record">
+          {{ seriesTermineesPlusLonguePlusCourte!.serieTermineePlusCourte!.nom }}
+        </p>
+      </div>
+    }
   </div>
 </div>

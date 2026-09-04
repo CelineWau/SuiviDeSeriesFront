@@ -8,6 +8,7 @@ import { PalVieillissanteData } from '../models/pal-vieillissante';
 import { SeriesASurveillerData } from '../models/serie-a-surveiller';
 import { ListeCourseLivreData } from '../models/liste-course-livre';
 import { SerieDetailData } from '../models/serie-detail';
+import { SeriesPlusLonguePlusCourteData } from '../models/series-plus-longue-plus-courte';
 
 @Injectable({
   providedIn: 'root',
@@ -100,6 +101,10 @@ export class Serie {
 
   getNombreSeriesAvecSeulTomeUnLuDansAnnee(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/nombreSeriesAvecQueTomeUnLuDansAnnee`);
+  }
+
+  getSeriesTermineesPlusLonguePlusCourte(): Observable<SeriesPlusLonguePlusCourteData> {
+    return this.http.get<SeriesPlusLonguePlusCourteData>(`${this.apiUrl}/seriesTermineesPlusLonguePlusCourte`)
   }
 
   creerSerie(serieData:any): Observable<any> {
