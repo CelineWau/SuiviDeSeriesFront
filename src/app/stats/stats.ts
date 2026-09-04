@@ -23,6 +23,7 @@ export class Stats implements OnInit{
   dureeMoyennePalDecomposee: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
   seriesCommenceesCetteAnnee: number = 0;
   ratioSeriesCommenceesEtFiniesMemeAnnee: number = 0;
+  nombreSeriesAvecSeulTomeUnLuDansAnnee: number = 0;
 
   constructor(private serieService: Serie, private livreService: Livre, private cdr: ChangeDetectorRef){}
 
@@ -34,6 +35,7 @@ export class Stats implements OnInit{
     this.chargerDureeMoyennePal();
     this.chargerSeriesCommenceesCetteAnnee();
     this.chargerRatioSeriesCommenceesEtFiniesMemeAnnee();
+    this.chargerNombreSeriesAvecSeulTomeUnLuDansAnnee();
     }
 
   chargerSeriesLesPlusLongues(): void {
@@ -83,6 +85,13 @@ export class Stats implements OnInit{
   chargerRatioSeriesCommenceesEtFiniesMemeAnnee(): void {
     this.serieService.getRatioSeriesCommenceesEtFiniesMemeAnnee().subscribe(data => {
       this.ratioSeriesCommenceesEtFiniesMemeAnnee = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  chargerNombreSeriesAvecSeulTomeUnLuDansAnnee(): void {
+    this.serieService.getNombreSeriesAvecSeulTomeUnLuDansAnnee().subscribe(data => {
+      this.nombreSeriesAvecSeulTomeUnLuDansAnnee = data;
       this.cdr.detectChanges();
     });
   }

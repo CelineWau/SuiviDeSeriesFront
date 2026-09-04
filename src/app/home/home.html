@@ -141,7 +141,7 @@
               repartitionStatutSerie.abandonnees
           }}
         </text>
-        <text x="50" y="58" text-anchor="middle" class="texte-camembert-label">séries</text>
+        <text x="50" y="58" text-anchor="middle" class="texte-camembert-label">couvées</text>
       </svg>
       <div class="legende-camembert">
         <span class="legende-item"
@@ -185,7 +185,7 @@
                 {{ serie.nom }}
                 <span
                   ><a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre"
-                    >+ Livre</a
+                    >+ Dragon</a
                   ></span
                 >
               </li>
@@ -202,7 +202,7 @@
               <li>
                 {{ serie.nom }} ({{ serie.auteur }})
                 <span>
-                  <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Livre</a>
+                  <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Dragon</a>
                 </span>
               </li>
             }

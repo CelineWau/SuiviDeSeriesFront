@@ -98,6 +98,10 @@ export class Serie {
     return this.http.get<number>(`${this.apiUrl}/ratioSeriesCommenceesEtFiniesParAnnee`);
   }
 
+  getNombreSeriesAvecSeulTomeUnLuDansAnnee(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/nombreSeriesAvecQueTomeUnLuDansAnnee`);
+  }
+
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }
