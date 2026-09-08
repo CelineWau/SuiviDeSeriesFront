@@ -5,6 +5,7 @@ import { RepartitionFormat } from '../models/repartition-format';
 import { AuteursSerieEnCours } from '../models/auteurs-series-en-cours';
 import { LivreDetailData } from '../models/livre-detail';
 import { ModifierLivreData } from '../models/modifier-livre';
+import { CreerLivreData } from '../models/creer-livre';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,8 @@ export class Livre {
 
   constructor (private http: HttpClient) {}
 
-  creerLivre(livreData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, livreData);
+  creerLivre(livreData: CreerLivreData): Observable<LivreDetailData> {
+    return this.http.post<LivreDetailData>(this.apiUrl, livreData);
   }
 
   supprimerLivre(id: number): Observable<any> {
