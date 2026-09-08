@@ -107,6 +107,10 @@ export class Serie {
     return this.http.get<SeriesPlusLonguePlusCourteData>(`${this.apiUrl}/seriesTermineesPlusLonguePlusCourte`)
   }
 
+  getSeriesJamaisCommencees(): Observable<SerieDetailData[]> {
+    return this.http.get<SerieDetailData[]>(`${this.apiUrl}/seriesJamaisCommencees`)
+  }
+
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }

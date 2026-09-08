@@ -5,6 +5,7 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Livre } from '../services/livre';
 import { FormsModule } from '@angular/forms';
 import { SerieItem } from '../serie-item/serie-item';
+import { SerieDetailData } from '../models/serie-detail';
 
 @Component({
   selector: 'app-series',
@@ -15,6 +16,7 @@ import { SerieItem } from '../serie-item/serie-item';
 export class Series implements OnInit {
 
   series: any[] = [];
+  seriesJamaisCommencees: SerieDetailData[] = [];
 
   constructor(private serieService: Serie, private livreService: Livre, private router: Router, private cdr: ChangeDetectorRef){}
 
@@ -25,6 +27,7 @@ export class Series implements OnInit {
         this.chargerSeries();
       }
     });
+    this.chargerSerieJamaisCommencees();
   }
 
   chargerSeries(): void {
@@ -43,8 +46,29 @@ export class Series implements OnInit {
     });
   }
 
+  estJamaisCommencee(idSerie: number): boolean {
+    return this.seriesJamaisCommencees.some(s => s.idSerie === idSerie);
+  }
+
   get seriesEnCours(): any[] {
-    return this.series.filter( s => s.statutSerie === 'EN_COURS');
+    return this.series.filter( s => s.statutSerie === 'EN_COURS')
+                      .sort((a,b) => {
+                        let prioriteA: number
+                        if(this.estJamaisCommencee(a.idSerie)) {
+                          prioriteA = 0;
+                        } else {
+                          prioriteA = 1;
+                        }
+
+                        let prioriteB: number
+                        if(this.estJamaisCommencee(b.idSerie)) {
+                          prioriteB = 0;
+                        } else {
+                          prioriteB = 1;
+                        }
+
+                        return prioriteA - prioriteB;
+                      });
   }
 
   get seriesAbandonnee(): any[] {
@@ -53,5 +77,12 @@ export class Series implements OnInit {
 
   get seriesTerminee(): any[] {
     return this.series.filter( s => s.statutSerie === 'TERMINEE');
+  }
+
+  chargerSerieJamaisCommencees(): void {
+    this.serieService.getSeriesJamaisCommencees().subscribe(data => {
+      this.seriesJamaisCommencees = data;
+      this.cdr.detectChanges();
+    });
   }
 }
