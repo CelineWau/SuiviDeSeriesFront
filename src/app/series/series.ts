@@ -17,6 +17,7 @@ export class Series implements OnInit {
 
   series: any[] = [];
   seriesJamaisCommencees: SerieDetailData[] = [];
+  seriesAJour: SerieDetailData[] = [];
 
   constructor(private serieService: Serie, private livreService: Livre, private router: Router, private cdr: ChangeDetectorRef){}
 
@@ -28,6 +29,7 @@ export class Series implements OnInit {
       }
     });
     this.chargerSerieJamaisCommencees();
+    this.chargerSerieAJour();
   }
 
   chargerSeries(): void {
@@ -50,12 +52,18 @@ export class Series implements OnInit {
     return this.seriesJamaisCommencees.some(s => s.idSerie === idSerie);
   }
 
+  estAJour(idSerie: number): boolean {
+    return this.seriesAJour.some(s => s.idSerie === idSerie);
+  }
+
   get seriesEnCours(): any[] {
     return this.series.filter( s => s.statutSerie === 'EN_COURS')
                       .sort((a,b) => {
                         let prioriteA: number
                         if(this.estJamaisCommencee(a.idSerie)) {
                           prioriteA = 0;
+                        } else if (this.estAJour(a.idSerie)) {
+                          prioriteA = 2;
                         } else {
                           prioriteA = 1;
                         }
@@ -63,8 +71,10 @@ export class Series implements OnInit {
                         let prioriteB: number
                         if(this.estJamaisCommencee(b.idSerie)) {
                           prioriteB = 0;
+                        } else if (this.estAJour(b.idSerie)) {
+                          prioriteB = 2;
                         } else {
-                          prioriteB = 1;
+                          prioriteB = 1
                         }
 
                         return prioriteA - prioriteB;
@@ -82,6 +92,13 @@ export class Series implements OnInit {
   chargerSerieJamaisCommencees(): void {
     this.serieService.getSeriesJamaisCommencees().subscribe(data => {
       this.seriesJamaisCommencees = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  chargerSerieAJour(): void {
+    this.serieService.getSerieAJour().subscribe(data => {
+      this.seriesAJour = data;
       this.cdr.detectChanges();
     });
   }
