@@ -79,6 +79,7 @@ h2, h3 {
     text-decoration: none;
     background-color: transparent;
     border-radius: 4px;
+    white-space: nowrap;
 }
 
 .btn-livre:hover {

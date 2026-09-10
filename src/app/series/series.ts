@@ -57,7 +57,7 @@ export class Series implements OnInit {
   }
 
   get seriesEnCours(): any[] {
-    return this.series.filter( s => s.statutSerie === 'EN_COURS')
+    return this.series.filter(s => s.statutSerie === 'EN_COURS')
                       .sort((a,b) => {
                         let prioriteA: number
                         if(this.estJamaisCommencee(a.idSerie)) {

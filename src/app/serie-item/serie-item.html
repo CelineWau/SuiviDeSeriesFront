@@ -7,6 +7,7 @@
         <a [routerLink]="['/livres/creer', serie.idSerie]" class="btn-livre">+ Dragon</a>
       }
     </div>
+    <div class="ligne-pointillee"></div>
     <div class="carres">
       @for (
         carre of getCarreaux(serie.nombreLivreTotal, serie.livres, serie.statutSerie);

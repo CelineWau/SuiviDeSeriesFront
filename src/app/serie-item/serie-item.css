@@ -4,7 +4,6 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 1rem;
     padding: 0.3rem 1rem;
 }
 
@@ -17,10 +16,10 @@
 .carres {
     display: flex;
     flex-direction: row-reverse;
+    flex-wrap: wrap;
     gap: 0.2rem;
     position: relative;
     margin-left: auto;
-    align-items: center;
 }
 
 .carres span:not(.btn-edit) {
@@ -29,6 +28,7 @@
     width: 1.5rem;
     text-align: center;
     cursor: pointer;
+    transform: translateY(0.35rem);
 }
 
 .carres span.carre-lu {
@@ -123,4 +123,10 @@
 .nom-serie-lien:hover {
     color: var(--couleur-or);
     text-decoration: underline;
+}
+
+.ligne-pointillee {
+    flex: 1;
+    border-bottom: 2px dotted var(--couleur-bronze);
+    margin: 0 0.75rem;
 }
