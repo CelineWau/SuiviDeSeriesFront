@@ -74,6 +74,7 @@
                     <li class="ligne-livre-fiche">
                         <span>Tome {{ livre.numeroDansLaSerie }} - {{ livre.titre }} ({{ livre.auteur }})</span>
                         <span class="action-livre-fiche">
+                            <span class="badge-lu-pal-aacheter"> {{ livre.statutLivre }}</span>
                             <span class="badge-format" (click)="changerFormatLivre(livre)">{{ livre.formatLivre }}</span>
                             <a [routerLink]="['/livres/modifier', serie.idSerie, livre.idLivre]" class="btn-livre">Modifier</a>
                             <button type="button" class="btn-supprimer" (click)="supprimerLivre(livre)">Supprimer</button>
