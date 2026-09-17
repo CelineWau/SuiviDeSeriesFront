@@ -273,6 +273,17 @@
           </ul>
         </div>
       }
+
+      @if (lireEnAnglais.length > 0) {
+        <div class="section-pal">
+          <h2>Couvées à apprivoiser en anglais</h2>
+          <ul class="liste-pal">
+            @for (serie of lireEnAnglais; track serie.idSerie) {
+              <li>{{ serie.nom }}</li>
+            }
+          </ul>
+        </div>
+      }
     </div>
   </div>
 

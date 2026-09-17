@@ -98,3 +98,11 @@
     font-size: 0.8rem;
     font-weight: 600;
 }
+
+.label-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--couleur-texte);
+}

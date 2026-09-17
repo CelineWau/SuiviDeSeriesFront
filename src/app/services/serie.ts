@@ -9,6 +9,7 @@ import { SeriesASurveillerData } from '../models/serie-a-surveiller';
 import { ListeCourseLivreData } from '../models/liste-course-livre';
 import { SerieDetailData } from '../models/serie-detail';
 import { SeriesPlusLonguePlusCourteData } from '../models/series-plus-longue-plus-courte';
+import { LireEnAnglaisData } from '../models/lire-en-anglais';
 
 @Injectable({
   providedIn: 'root',
@@ -111,6 +112,10 @@ export class Serie {
     return this.http.get<SerieDetailData[]>(`${this.apiUrl}/seriesJamaisCommencees`)
   }
 
+  getSeriesALireEnAnglais(): Observable<SerieDetailData[]> {
+    return this.http.get<SerieDetailData[]>(`${this.apiUrl}/lireEnAnglais`);
+  }
+
   creerSerie(serieData:any): Observable<any> {
     return this.http.post<any>(this.apiUrl, serieData);
   }
@@ -133,5 +138,9 @@ export class Serie {
 
   modifierNomSerie(id: number, nouveauNom: string): Observable<SerieDetailData> {
     return this.http.patch<SerieDetailData>(`${this.apiUrl}/${id}/nom`, {nom: nouveauNom});
+  }
+
+  modifierLireEnAnglais(id: number, lireEnAnglais: boolean): Observable<SerieDetailData> {
+    return this.http.patch<SerieDetailData>(`${this.apiUrl}/${id}/lireEnAnglais`, {lireEnAnglais: lireEnAnglais});
   }
 }

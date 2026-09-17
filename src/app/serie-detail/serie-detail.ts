@@ -135,4 +135,13 @@ export class SerieDetail implements OnInit{
       () => this.modeEditionStatutSerie = false
     );
   }
+
+  toggleLireEnAnglais(serie: SerieDetailData): void {
+    let nouveauLireEnAnglais: boolean = !serie.lireEnAnglais;
+
+    this.serieService.modifierLireEnAnglais(serie.idSerie, nouveauLireEnAnglais).subscribe(data => {
+      serie.lireEnAnglais = nouveauLireEnAnglais;
+      this.cdr.detectChanges();
+    });
+  }
 }

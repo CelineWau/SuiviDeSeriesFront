@@ -7,4 +7,5 @@ export interface SerieDetailData {
     statutSerie : 'EN_COURS' | 'TERMINEE' | 'ABANDONNEE';
     statutPublication : 'EN_COURS' | 'TERMINEE' | 'INCONNU';
     livres: LivreDetailData[];
+    lireEnAnglais: boolean;
 }

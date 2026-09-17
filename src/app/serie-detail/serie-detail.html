@@ -60,6 +60,13 @@
                     <button type="button" class="btn-supprimer" (click)="modeEditionTotal = false">Annuler</button>
                 }
             </div>
+
+            <div class="ligne-info">
+                <label class="labal-checkbox">
+                    <input type="checkbox" [checked]="serie.lireEnAnglais" (change)="toggleLireEnAnglais(serie)">
+                    Lire en Anglais
+                </label>
+            </div>
         </div>
 
         <div class="section-pal stat-lecture">

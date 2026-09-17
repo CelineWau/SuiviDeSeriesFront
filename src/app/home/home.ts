@@ -13,6 +13,7 @@ import { EbookALeatoireData } from '../models/ebook-aleatoire';
 import { PalVieillissanteData } from '../models/pal-vieillissante';
 import { SeriesASurveillerData } from '../models/serie-a-surveiller';
 import { ListeCourseLivreData } from '../models/liste-course-livre';
+import { SerieDetailData } from '../models/serie-detail';
 
 @Component({
   selector: 'app-home',
@@ -49,6 +50,7 @@ export class Home implements OnInit{
   listeCourseEbook : ListeCourseLivreData [] = [];
   popupPapierOuverte: boolean = false;  
   popupEbookOuverte: boolean = false;
+  lireEnAnglais: SerieDetailData[] = [];
 
   constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
 
@@ -67,6 +69,7 @@ export class Home implements OnInit{
     this.chargerSeriesASurveiller();
     this.chargerListeCoursePapier();
     this.chargerListeCourseEbook();
+    this.chargerLireEnAnglais();
   }
   
   chargerSerie():void {
@@ -187,6 +190,13 @@ export class Home implements OnInit{
   chargerObjectifAnnuel(): void {
     this.objectifAnnuel.recupererObjectif(this.idUtisateur).subscribe(data => {
       this.objectifAnnuelData = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  chargerLireEnAnglais(): void {
+    this.serieService.getSeriesALireEnAnglais().subscribe(data => {
+      this.lireEnAnglais = data;
       this.cdr.detectChanges();
     });
   }
