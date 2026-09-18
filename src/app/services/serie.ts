@@ -9,7 +9,6 @@ import { SeriesASurveillerData } from '../models/serie-a-surveiller';
 import { ListeCourseLivreData } from '../models/liste-course-livre';
 import { SerieDetailData } from '../models/serie-detail';
 import { SeriesPlusLonguePlusCourteData } from '../models/series-plus-longue-plus-courte';
-import { LireEnAnglaisData } from '../models/lire-en-anglais';
 
 @Injectable({
   providedIn: 'root',
@@ -142,5 +141,9 @@ export class Serie {
 
   modifierLireEnAnglais(id: number, lireEnAnglais: boolean): Observable<SerieDetailData> {
     return this.http.patch<SerieDetailData>(`${this.apiUrl}/${id}/lireEnAnglais`, {lireEnAnglais: lireEnAnglais});
+  }
+
+  modifierNatureSerie(id: number, nouveauNatureSerie: 'ROMAN' | 'BANDE_DESSINE' | 'COMICS' | 'MANGA' | 'BEAU_LIVRE' | 'NON_DEFINI'): Observable<SerieDetailData> {
+    return this.http.patch<SerieDetailData>(`${this.apiUrl}/${id}/natureSerie`, {natureSerie: nouveauNatureSerie});
   }
 }

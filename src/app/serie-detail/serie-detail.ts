@@ -22,10 +22,12 @@ export class SerieDetail implements OnInit{
   modeEditionNom: boolean = false;
   modeEditionStatutPublication: boolean = false;
   modeEditionStatutSerie: boolean = false;
+  modeEditionNatureSerie: boolean = false;
   nouveauTotal: number = 0;
   nouveauNom: string = '';
   nouveauStatutPublication: 'EN_COURS' | 'TERMINEE' | 'INCONNU' = 'EN_COURS';
-  nouveauStatutSerie : 'EN_COURS' | 'ABANDONNEE' | 'TERMINEE' = 'EN_COURS';
+  nouveauStatutSerie: 'EN_COURS' | 'ABANDONNEE' | 'TERMINEE' = 'EN_COURS';
+  nouveauNatureSerie: 'ROMAN' | 'BANDE_DESSINE' | 'COMICS' | 'MANGA' | 'BEAU_LIVRE' | 'NON_DEFINI' = 'NON_DEFINI';
 
   constructor(private serieService: Serie, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private livreService: Livre){
     this.idSerie = Number(this.route.snapshot.paramMap.get('serieId'));
@@ -143,5 +145,19 @@ export class SerieDetail implements OnInit{
       serie.lireEnAnglais = nouveauLireEnAnglais;
       this.cdr.detectChanges();
     });
+  }
+
+  ouvrirEditionNatureSerie(): void {
+    this.modeEditionNatureSerie = true;
+    this.nouveauNatureSerie = this.serie!.natureSerie;
+  }
+
+  sauvegarderNatureSerie(): void {
+    this.sauvegarderChamp(
+      this.nouveauNatureSerie,
+      (valeur) => this.serieService.modifierNatureSerie(this.idSerie, valeur),
+      (valeur) => this.serie!.natureSerie = valeur,
+      () => this.modeEditionNatureSerie = false
+    );
   }
 }

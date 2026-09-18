@@ -8,4 +8,5 @@ export interface SerieDetailData {
     statutPublication : 'EN_COURS' | 'TERMINEE' | 'INCONNU';
     livres: LivreDetailData[];
     lireEnAnglais: boolean;
+    natureSerie: 'ROMAN' | 'BANDE_DESSINE' | 'COMICS' | 'MANGA' | 'BEAU_LIVRE' | 'NON_DEFINI';
 }

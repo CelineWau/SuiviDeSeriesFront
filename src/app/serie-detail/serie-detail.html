@@ -1,96 +1,145 @@
 @if (serie) {
-    <a [routerLink]="['/series']" class="lien-retour">← Retour à mes couvées</a>
-    <div class="fiche-serie">
-        @if (!modeEditionNom) {
-            <h1>
-                {{ serie.nom }}
-                <span (click)="ouvrirEditionNom()" class="btn-edit">✏️</span>
-            </h1>
+  <a [routerLink]="['/series']" class="lien-retour">← Retour à mes couvées</a>
+  <div class="fiche-serie">
+    @if (!modeEditionNom) {
+      <h1>
+        {{ serie.nom }}
+        <span (click)="ouvrirEditionNom()" class="btn-edit">✏️</span>
+      </h1>
+    } @else {
+      <div class="edition-champ edition-nom">
+        <input type="text" [(ngModel)]="nouveauNom" />
+        <button type="button" class="btn-livre" (click)="sauvegarderNom()">Enregistrer</button>
+        <button type="button" class="btn-supprimer" (click)="modeEditionNom = false">
+          Annuler
+        </button>
+      </div>
+    }
+
+    <div class="section-pal infos-globales">
+      <h2>Anatomie de la couvée</h2>
+
+      <div class="ligne-info">
+        <span class="label-info">Statut de la couvée : </span>
+        @if (!modeEditionStatutSerie) {
+          <span>{{ serie.statutSerie }}</span>
+          <span (click)="ouvrirEditionStatutSerie()" class="btn-edit">✏️</span>
         } @else {
-            <div class="edition-champ edition-nom">
-                <input type="text" [(ngModel)]="nouveauNom">
-                <button type="button" class="btn-livre" (click)="sauvegarderNom()">Enregistrer</button>
-                <button type="button" class="btn-supprimer" (click)="modeEditionNom = false">Annuler</button>
-            </div>
+          <select [(ngModel)]="nouveauStatutSerie">
+            <option value="EN_COURS">En cours</option>
+            <option value="TERMINEE">Terminée</option>
+            <option value="ABANDONNEE">Abandonnée</option>
+          </select>
+          <button type="button" class="btn-livre" (click)="sauvegarderStatutSerie()">
+            Enregistrer
+          </button>
+          <button type="button" class="btn-supprimer" (click)="modeEditionStatutSerie = false">
+            Annuler
+          </button>
         }
-        
-        <div class="section-pal infos-globales">
-            <h2>Anatomie de la couvée</h2>
+      </div>
 
-            <div class="ligne-info">
-                <span class="label-info">Statut de la couvée : </span>
-                @if (!modeEditionStatutSerie) {
-                    <span>{{ serie.statutSerie }}</span>
-                    <span (click)="ouvrirEditionStatutSerie()" class="btn-edit">✏️</span>
-                } @else {
-                    <select [(ngModel)]="nouveauStatutSerie">
-                        <option value="EN_COURS">En cours</option>
-                        <option value="TERMINEE">Terminée</option>
-                        <option value="ABANDONNEE">Abandonnée</option>
-                    </select>
-                    <button type="button" class="btn-livre" (click)="sauvegarderStatutSerie()">Enregistrer</button>
-                    <button type="button" class="btn-supprimer" (click)="modeEditionStatutSerie = false">Annuler</button>
-                }
-            </div>
-            
-            <div class="ligne-info">
-                <span class="label-info">Statut de publication de la couvée : </span>
-                @if (!modeEditionStatutPublication) {
-                    <span>{{ serie.statutPublication }}</span>
-                    <span (click)="ouvrirEditionStatutPublication()" class="btn-edit">✏️</span>
-                } @else {
-                    <select [(ngModel)]="nouveauStatutPublication">
-                        <option value="EN_COURS">En cours</option>
-                        <option value="TERMINEE">Terminée</option>
-                        <option value="INCONNU">Inconnu</option>
-                    </select>
-                    <button type="button" class="btn-livre" (click)="sauvegarderStatutPublication()">Enregistrer</button>
-                    <button type="button" class="btn-supprimer" (click)="modeEditionStatutPublication = false">Annuler</button>
-                }
-            </div>
+      <div class="ligne-info">
+        <span class="label-info">Statut de publication de la couvée : </span>
+        @if (!modeEditionStatutPublication) {
+          <span>{{ serie.statutPublication }}</span>
+          <span (click)="ouvrirEditionStatutPublication()" class="btn-edit">✏️</span>
+        } @else {
+          <select [(ngModel)]="nouveauStatutPublication">
+            <option value="EN_COURS">En cours</option>
+            <option value="TERMINEE">Terminée</option>
+            <option value="INCONNU">Inconnu</option>
+          </select>
+          <button type="button" class="btn-livre" (click)="sauvegarderStatutPublication()">
+            Enregistrer
+          </button>
+          <button
+            type="button"
+            class="btn-supprimer"
+            (click)="modeEditionStatutPublication = false"
+          >
+            Annuler
+          </button>
+        }
+      </div>
 
-            <div class="ligne-info">
-                <span class="label-info">Nombre de dragons total : </span>
-                @if (!modeEditionTotal) {
-                    <span>{{ serie.nombreLivreTotal }}</span>
-                    <span (click)="ouvrirEditionTotal()" class="btn-edit">✏️</span>
-                } @else {
-                    <input type="number" [(ngModel)]="nouveauTotal">
-                    <button type="button" class="btn-livre" (click)="sauvegarderTotal()">Enregistrer</button>
-                    <button type="button" class="btn-supprimer" (click)="modeEditionTotal = false">Annuler</button>
-                }
-            </div>
+      <div class="ligne-info">
+        <span class="label-info">Nombre de dragons total : </span>
+        @if (!modeEditionTotal) {
+          <span>{{ serie.nombreLivreTotal }}</span>
+          <span (click)="ouvrirEditionTotal()" class="btn-edit">✏️</span>
+        } @else {
+          <input type="number" [(ngModel)]="nouveauTotal" />
+          <button type="button" class="btn-livre" (click)="sauvegarderTotal()">Enregistrer</button>
+          <button type="button" class="btn-supprimer" (click)="modeEditionTotal = false">
+            Annuler
+          </button>
+        }
+      </div>
 
-            <div class="ligne-info">
-                <label class="labal-checkbox">
-                    <input type="checkbox" [checked]="serie.lireEnAnglais" (change)="toggleLireEnAnglais(serie)">
-                    Lire en Anglais
-                </label>
-            </div>
-        </div>
+      <div class="ligne-info">
+        <span class="label-info">Nature de la couvée :</span>
+        @if (!modeEditionNatureSerie) {
+          <span>{{ serie.natureSerie }}</span>
+          <span (click)="ouvrirEditionNatureSerie()" class="btn-edit">✏️</span>
+        } @else {
+          <select [(ngModel)]="nouveauNatureSerie">
+            <option value="ROMAN">Roman</option>
+            <option value="BANDE_DESSINE">Bande dessinée</option>
+            <option value="COMICS">Comics</option>
+            <option value="MANGA">Manga</option>
+            <option value="BEAU_LIVRE">Beau Livre</option>
+            <option value="NON_DEFINI">Non défini</option>
+          </select>
+          <button type="button" class="btn-livre" (click)="sauvegarderNatureSerie()">
+            Enregistrer
+          </button>
+          <button type="button" class="btn-supprimer" (click)="modeEditionNatureSerie = false">
+            Annuler
+          </button>
+        }
+      </div>
 
-        <div class="section-pal stat-lecture">
-            <h2>Le temps passé enfermée avec cette couvée</h2>
-            <p>{{ tempsLecture }} jours entre le premier et le dernier dragon lu.</p>
-        </div>
-
-        <div class="section-pal liste-livres-fiche">
-            <h2>Les dragons de la couvée</h2>
-            <ul class="liste-pal">
-                @for (livre of serie.livres; track livre.idLivre) {
-                    <li class="ligne-livre-fiche">
-                        <span>Tome {{ livre.numeroDansLaSerie }} - {{ livre.titre }} ({{ livre.auteur }})</span>
-                        <span class="action-livre-fiche">
-                            <span class="badge-lu-pal-aacheter"> {{ livre.statutLivre }}</span>
-                            <span class="badge-format" (click)="changerFormatLivre(livre)">{{ livre.formatLivre }}</span>
-                            <a [routerLink]="['/livres/modifier', serie.idSerie, livre.idLivre]" class="btn-livre">Modifier</a>
-                            <button type="button" class="btn-supprimer" (click)="supprimerLivre(livre)">Supprimer</button>
-                        </span>
-                    </li>
-                }
-            </ul>
-        </div>
+      <div class="ligne-info">
+        <label class="label-checkbox">
+          <input
+            type="checkbox"
+            [checked]="serie.lireEnAnglais"
+            (change)="toggleLireEnAnglais(serie)"
+          />
+          Lire en Anglais
+        </label>
+      </div>
     </div>
+
+    <div class="section-pal stat-lecture">
+      <h2>Le temps passé enfermée avec cette couvée</h2>
+      <p>{{ tempsLecture }} jours entre le premier et le dernier dragon lu.</p>
+    </div>
+
+    <div class="section-pal liste-livres-fiche">
+      <h2>Les dragons de la couvée</h2>
+      <ul class="liste-pal">
+        @for (livre of serie.livres; track livre.idLivre) {
+          <li class="ligne-livre-fiche">
+            <span>Tome {{ livre.numeroDansLaSerie }} - {{ livre.titre }} ({{ livre.auteur }})</span>
+            <span class="action-livre-fiche">
+              <span class="badge-lu-pal-aacheter"> {{ livre.statutLivre }}</span>
+              <span class="badge-format" (click)="changerFormatLivre(livre)">{{
+                livre.formatLivre
+              }}</span>
+              <a [routerLink]="['/livres/modifier', serie.idSerie, livre.idLivre]" class="btn-livre"
+                >Modifier</a
+              >
+              <button type="button" class="btn-supprimer" (click)="supprimerLivre(livre)">
+                Supprimer
+              </button>
+            </span>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
 } @else {
-    <p>Chargement de la fiche série...</p>
+  <p>Chargement de la fiche série...</p>
 }
