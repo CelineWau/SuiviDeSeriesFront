@@ -101,6 +101,30 @@
       </div>
 
       <div class="ligne-info">
+        <span class="label-info">Genre de la couvée : </span>
+        @if (!modeEditionGenre) {
+          <span>{{ serie.genre ? serie.genre.nom : 'Non défini' }}</span>
+          <span (click)="ouvrirEditionGenre()" class="btn-edit">✏️</span>
+        } @else {
+          <select [(ngModel)]="idGenreSelectionne">
+            <option [value]="0">-- Aucun --</option>
+            @for (genre of genres; track genre.id) {
+              <option [value]="genre.id">{{ genre.nom }}</option>
+            }
+          </select>
+          <button type="button" class="btn-livre" (click)="sauvegarderGenre()">Enregistrer</button>
+          <button type="button" class="btn-supprimer" (click)="modeEditionGenre = false">
+            Annuler
+          </button>
+
+          <div class="edition-champ">
+            <input type="text" placeholder="Nouveau genre..." [(ngModel)]="nouveauNomGenre" />
+            <button type="button" class="btn-livre" (click)="creerEtAssignerGenre()">Créer</button>
+          </div>
+        }
+      </div>
+
+      <div class="ligne-info">
         <label class="label-checkbox">
           <input
             type="checkbox"

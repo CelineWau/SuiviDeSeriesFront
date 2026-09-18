@@ -146,4 +146,8 @@ export class Serie {
   modifierNatureSerie(id: number, nouveauNatureSerie: 'ROMAN' | 'BANDE_DESSINE' | 'COMICS' | 'MANGA' | 'BEAU_LIVRE' | 'NON_DEFINI'): Observable<SerieDetailData> {
     return this.http.patch<SerieDetailData>(`${this.apiUrl}/${id}/natureSerie`, {natureSerie: nouveauNatureSerie});
   }
+
+  modifierGenreSerie(id: number, idGenre: number): Observable<SerieDetailData> {
+    return this.http.patch<SerieDetailData>(`${this.apiUrl}/${id}/genre`, {idGenre: idGenre});
+  }
 }

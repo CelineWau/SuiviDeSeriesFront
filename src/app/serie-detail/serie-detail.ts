@@ -6,6 +6,8 @@ import { Livre } from '../services/livre';
 import { LivreDetailData } from '../models/livre-detail';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { GenreData } from '../models/genre';
+import { Genre } from '../services/genre';
 
 @Component({
   selector: 'app-serie-detail',
@@ -17,25 +19,30 @@ export class SerieDetail implements OnInit{
 
   idSerie: number;
   serie: SerieDetailData | null = null;
+  genres: GenreData[] = [];
   tempsLecture: number = 0;
+  idGenreSelectionne: number = 0;
   modeEditionTotal: boolean = false;
   modeEditionNom: boolean = false;
   modeEditionStatutPublication: boolean = false;
   modeEditionStatutSerie: boolean = false;
   modeEditionNatureSerie: boolean = false;
+  modeEditionGenre: boolean = false;
   nouveauTotal: number = 0;
   nouveauNom: string = '';
   nouveauStatutPublication: 'EN_COURS' | 'TERMINEE' | 'INCONNU' = 'EN_COURS';
   nouveauStatutSerie: 'EN_COURS' | 'ABANDONNEE' | 'TERMINEE' = 'EN_COURS';
   nouveauNatureSerie: 'ROMAN' | 'BANDE_DESSINE' | 'COMICS' | 'MANGA' | 'BEAU_LIVRE' | 'NON_DEFINI' = 'NON_DEFINI';
+  nouveauNomGenre: string = '';
 
-  constructor(private serieService: Serie, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private livreService: Livre){
+  constructor(private serieService: Serie, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private livreService: Livre, private genreService: Genre){
     this.idSerie = Number(this.route.snapshot.paramMap.get('serieId'));
   }
 
   ngOnInit(): void {
     this.chargerSerie();
-    this.chargerTempsLecture()
+    this.chargerTempsLecture();
+    this.chargerGenres();
   }
 
   sauvegarderChamp<T>(nouvelleValeur: T, appelService: (valeur: T) => Observable<any>, appliquerLocalement: (valeur: T) => void, fermerEdition: () => void) {
@@ -160,4 +167,38 @@ export class SerieDetail implements OnInit{
       () => this.modeEditionNatureSerie = false
     );
   }
+
+  chargerGenres(): void {
+  this.genreService.getGenres().subscribe(data => {
+    this.genres = data;
+    this.cdr.detectChanges();
+  });
+}
+
+ouvrirEditionGenre(): void {
+  this.modeEditionGenre = true;
+  this.idGenreSelectionne = this.serie!.genre ? this.serie!.genre.id : 0;
+}
+
+sauvegarderGenre(): void {
+  console.log('sauvegarderGenre appelée', this.idGenreSelectionne);
+  this.serieService.modifierGenreSerie(this.idSerie, this.idGenreSelectionne).subscribe(data => {
+    this.serie!.genre = data.genre;
+    this.modeEditionGenre = false;
+    this.cdr.detectChanges();
+  });
+}
+
+creerEtAssignerGenre(): void {
+  this.genreService.creerGenre(this.nouveauNomGenre).subscribe(nouveauGenre => {
+    this.genres.push(nouveauGenre);
+    this.idGenreSelectionne = nouveauGenre.id;
+    this.nouveauNomGenre = '';
+    this.cdr.detectChanges();
+    setTimeout(() => {
+      this.idGenreSelectionne = nouveauGenre.id;
+      this.cdr.detectChanges();
+    }, 0);
+  });
+}
 }

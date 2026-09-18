@@ -1,3 +1,4 @@
+import { GenreData } from "./genre";
 import { LivreDetailData } from "./livre-detail";
 
 export interface SerieDetailData {
@@ -9,4 +10,5 @@ export interface SerieDetailData {
     livres: LivreDetailData[];
     lireEnAnglais: boolean;
     natureSerie: 'ROMAN' | 'BANDE_DESSINE' | 'COMICS' | 'MANGA' | 'BEAU_LIVRE' | 'NON_DEFINI';
+    genre: GenreData | null;
 }
