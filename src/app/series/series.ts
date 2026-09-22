@@ -40,12 +40,15 @@ export class Series implements OnInit {
   }
 
   supprimer(id: number): void {
-    this.serieService.supprimerSerie(id).subscribe(() => {
-      this.serieService.getSeries().subscribe(data => {
-        this.series = data;
-        this.cdr.detectChanges();
+    const confirmation = confirm('Supprimer cette série ?')
+    if(confirmation) {
+      this.serieService.supprimerSerie(id).subscribe(() => {
+        this.serieService.getSeries().subscribe(data => {
+          this.series = data;
+          this.cdr.detectChanges();
+        });
       });
-    });
+    }
   }
 
   estJamaisCommencee(idSerie: number): boolean {
