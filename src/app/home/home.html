@@ -2,8 +2,11 @@
   <div class="conteneur-header-accueil">
     <div class="colonne-gauche">
       <h1>Bonjour Céline</h1>
-      <p>Tu as {{ series.filter((s) => s.statutSerie === 'EN_COURS').length }} couvées en cours</p>
-      <a routerLink="/series">Voir mes couvées</a>
+      <div class="stat-hero">
+        <span class="stat-hero-nombre">{{ nombreSeriesEnCoursCommencees }}</span>
+        <span class="stat-hero-label"> couvées en cours</span>
+      </div>
+      <a routerLink="/series" class="lien-voir-couvees">Voir mes couvées →</a>
 
       @if (objectifAnnuelData && !modeEditionObjectif) {
         <h2>
@@ -293,7 +296,9 @@
         <h2>Pille les rayons pendant qu'il est encore temps</h2>
         <ul class="liste-pal">
           @for (livre of listeCoursePapier; track $index) {
-            <li>{{ livre.nom }} - Tome {{ livre.tome }} de {{ livre.nomSerie }} ({{ livre.auteur }})</li>
+            <li>
+              {{ livre.nom }} - Tome {{ livre.tome }} de {{ livre.nomSerie }} ({{ livre.auteur }})
+            </li>
           }
         </ul>
         <button type="button" class="btn-livre" (click)="fermerPopupPapier()">Fermer</button>
@@ -307,12 +312,13 @@
         <h2>La liseuse a encore faim</h2>
         <ul class="liste-pal">
           @for (livre of listeCourseEbook; track $index) {
-            <li>{{ livre.nom }} - Tome {{ livre.tome }} de {{ livre.nomSerie }} ({{ livre.auteur }})</li>
+            <li>
+              {{ livre.nom }} - Tome {{ livre.tome }} de {{ livre.nomSerie }} ({{ livre.auteur }})
+            </li>
           }
         </ul>
         <button type="button" class="btn-livre" (click)="fermerPopupEbook()">Fermer</button>
       </div>
     </div>
   }
-
 </div>

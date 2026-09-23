@@ -250,4 +250,10 @@ export class Home implements OnInit{
   fermerPopupEbook(): void {
     this.popupEbookOuverte = false;
   }
+
+  get nombreSeriesEnCoursCommencees(): number {
+  return this.series.filter(
+    (s) => s.statutSerie === 'EN_COURS' && s.livres.some((l: any) => l.statutLivre === 'LU')
+  ).length;
+}
 }
