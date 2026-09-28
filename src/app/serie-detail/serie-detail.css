@@ -78,6 +78,24 @@
     color: var(--couleur-fond);
 }
 
+.badge-nature {
+    border: 1px solid var(--couleur-cuivre);
+    color: var(--couleur-cuivre);
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-genre {
+    border: 1px solid var(--couleur-or);
+    color: var(--couleur-or);
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
 .lien-retour {
     display: inline-block;
     margin: 1rem 0 0 1.5rem;

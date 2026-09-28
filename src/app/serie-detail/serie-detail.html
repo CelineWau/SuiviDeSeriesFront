@@ -80,7 +80,7 @@
       <div class="ligne-info">
         <span class="label-info">Nature de la couvée :</span>
         @if (!modeEditionNatureSerie) {
-          <span>{{ serie.natureSerie }}</span>
+          <span class="badge-nature">{{ traduireNatureSerie(serie.natureSerie) }}</span>
           <span (click)="ouvrirEditionNatureSerie()" class="btn-edit">✏️</span>
         } @else {
           <select [(ngModel)]="nouveauNatureSerie">
@@ -103,7 +103,7 @@
       <div class="ligne-info">
         <span class="label-info">Genre de la couvée : </span>
         @if (!modeEditionGenre) {
-          <span>{{ serie.genre ? serie.genre.nom : 'Non défini' }}</span>
+          <span class="badge-genre">{{ serie.genre ? serie.genre.nom : 'Non défini' }}</span>
           <span (click)="ouvrirEditionGenre()" class="btn-edit">✏️</span>
         } @else {
           <select [(ngModel)]="idGenreSelectionne">

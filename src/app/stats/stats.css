@@ -145,3 +145,50 @@
     font-size: 1.1rem;
     margin-top: 0.5rem;
 }
+
+.conteneur-barres {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+}
+
+.ligne-barre {
+    display: grid;
+    grid-template-columns: 140px 1fr 40px;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.label-barre {
+    color: var(--couleur-texte);
+    font-size: 0.9rem;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.piste-barre {
+    background-color: #0d0d0d;
+    border: 1px solid var(--couleur-bronze);
+    height: 1.2rem;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.barre-remplie {
+    height: 100%;
+    background: linear-gradient(90deg, var(--couleur-cuivre), var(--couleur-or));
+    border-radius: 4px 0 0 4px;
+    transition: width 0.4s ease;
+}
+
+.valeur-barre {
+    color: var(--couleur-or);
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: left;
+}

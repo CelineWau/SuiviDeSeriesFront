@@ -45,6 +45,38 @@
     </div>
   </div>
 
+  <h2 class="titre-section">📚 Les genres qui peuplent ton repaire</h2>
+<div class="conteneur-barres">
+  @for (categorie of repartitionCategorieGenre; track categorie.nom) {
+    <div class="ligne-barre">
+      <span class="label-barre">{{ categorie.nom }}</span>
+      <div class="piste-barre">
+        <div
+          class="barre-remplie"
+          [style.width.%]="calculerLargeurBarre(categorie.nombreSerie, repartitionCategorieGenre)"
+        ></div>
+      </div>
+      <span class="valeur-barre">{{ categorie.nombreSerie }}</span>
+    </div>
+  }
+</div>
+
+<h2 class="titre-section">🐉 La nature de tes couvées</h2>
+<div class="conteneur-barres">
+  @for (categorie of repartitionCategorieNature; track categorie.nom) {
+    <div class="ligne-barre">
+      <span class="label-barre">{{ traduireNatureSerie(categorie.nom) }}</span>
+      <div class="piste-barre">
+        <div
+          class="barre-remplie"
+          [style.width.%]="calculerLargeurBarre(categorie.nombreSerie, repartitionCategorieNature)"
+        ></div>
+      </div>
+      <span class="valeur-barre">{{ categorie.nombreSerie }}</span>
+    </div>
+  }
+</div>
+
   <div class="conteneur-cote-a-cote">
     <div class="conteneur-auteurs">
       <h2 class="titre-section">🥚 Ceux qui pondent le plus de couvées</h2>

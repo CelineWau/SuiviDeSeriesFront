@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { GenreData } from '../models/genre';
 import { Genre } from '../services/genre';
+import { traduireNatureSerie as traduireNature } from '../utils/nature-serie';
 
 @Component({
   selector: 'app-serie-detail',
@@ -200,5 +201,9 @@ creerEtAssignerGenre(): void {
       this.cdr.detectChanges();
     }, 0);
   });
+}
+
+traduireNatureSerie(nature: string): string {
+  return traduireNature(nature);
 }
 }

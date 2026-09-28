@@ -9,6 +9,7 @@ import { SeriesASurveillerData } from '../models/serie-a-surveiller';
 import { ListeCourseLivreData } from '../models/liste-course-livre';
 import { SerieDetailData } from '../models/serie-detail';
 import { SeriesPlusLonguePlusCourteData } from '../models/series-plus-longue-plus-courte';
+import { RepartitionCategorieData } from '../models/repartition-categorie';
 
 @Injectable({
   providedIn: 'root',
@@ -113,6 +114,14 @@ export class Serie {
 
   getSeriesALireEnAnglais(): Observable<SerieDetailData[]> {
     return this.http.get<SerieDetailData[]>(`${this.apiUrl}/lireEnAnglais`);
+  }
+
+  getRepartitionGenre(): Observable<RepartitionCategorieData[]> {
+    return this.http.get<RepartitionCategorieData[]>(`${this.apiUrl}/seriesParGenre`);
+  }
+
+  getRepartitionNature(): Observable<RepartitionCategorieData[]> {
+    return this.http.get<RepartitionCategorieData[]>(`${this.apiUrl}/seriesParNature`);
   }
 
   creerSerie(serieData:any): Observable<any> {

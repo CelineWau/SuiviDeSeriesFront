@@ -63,6 +63,7 @@ h2, h3 {
     cursor: pointer;
     font-size: 0.8rem;
     border-radius: 4px;
+    font-weight: 600;
 }
 
 .btn-supprimer:hover {

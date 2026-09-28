@@ -6,6 +6,8 @@ import { AuteursSerieEnCours } from '../models/auteurs-series-en-cours';
 import { decomposerDureeEnJours, DureeDecomposee } from '../utils/duree';
 import { DecimalPipe } from '@angular/common';
 import { SeriesPlusLonguePlusCourteData } from '../models/series-plus-longue-plus-courte';
+import { RepartitionCategorieData } from '../models/repartition-categorie';
+import { traduireNatureSerie as traduireNature } from '../utils/nature-serie';
 
 @Component({
   selector: 'app-stats',
@@ -28,6 +30,8 @@ export class Stats implements OnInit{
   seriesTermineesPlusLonguePlusCourte: SeriesPlusLonguePlusCourteData | null = null;
   dureePlusCourte: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
   dureePlusLongue: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
+  repartitionCategorieGenre: RepartitionCategorieData[] = [];
+  repartitionCategorieNature: RepartitionCategorieData[] = [];
 
   constructor(private serieService: Serie, private livreService: Livre, private cdr: ChangeDetectorRef){}
 
@@ -41,6 +45,8 @@ export class Stats implements OnInit{
     this.chargerRatioSeriesCommenceesEtFiniesMemeAnnee();
     this.chargerNombreSeriesAvecSeulTomeUnLuDansAnnee();
     this.chargerSeriesTermineesPlusLonguePlusCourte();
+    this.chargerRepartitionGenre();
+    this.chargerRepartitionNature();
     }
 
   chargerSeriesLesPlusLongues(): void {
@@ -113,4 +119,27 @@ export class Stats implements OnInit{
       this.cdr.detectChanges();
     });
   }
+
+  chargerRepartitionGenre(): void {
+    this.serieService.getRepartitionGenre().subscribe(data => {
+      this.repartitionCategorieGenre = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+    chargerRepartitionNature(): void {
+    this.serieService.getRepartitionNature().subscribe(data => {
+      this.repartitionCategorieNature = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  traduireNatureSerie(nature: string): string {
+  return traduireNature(nature);
+}
+
+calculerLargeurBarre(nombre: number, categories: RepartitionCategorieData[]): number {
+  const max = Math.max(...categories.map(c => c.nombreSerie), 1);
+  return (nombre / max) * 100;
+}
 }
