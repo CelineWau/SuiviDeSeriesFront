@@ -1,1 +1,82 @@
-<p>login works!</p>
+<div class="page-login">
+    <h1>Les Archives Dragonesque</h1>
+
+    <div class="bascule-onglets">
+        <button type="button" class="onglet" [class.onglet-actif]="!modeInscription" (click)="basculerModeConnexion()">
+            Connexion
+        </button>
+        <button type="button" class="onglet" [class.onglet-actif]="modeInscription" (click)="basculerModeInscription()">
+            Inscription
+        </button>
+    </div>
+
+    @if (erreurServeur) {
+        <p class="erreur-serveur">{{ erreurServeur }}</p>
+    }
+
+    @if (!modeInscription) {
+    <form [formGroup]="connexionForm" (ngSubmit)="seConnecter()" class="formulaire">
+      <div class="champ">
+        <label for="pseudo-connexion">Pseudo</label>
+        <input type="text" id="pseudo-connexion" formControlName="pseudo" placeholder="Ton pseudo" />
+        @if (connexionForm.get('pseudo')?.invalid && connexionForm.get('pseudo')?.touched) {
+          <span class="message-erreur">Le pseudo est obligatoire.</span>
+        }
+      </div>
+
+      <div class="champ">
+        <label for="mdp-connexion">Mot de passe</label>
+        <input type="password" id="mdp-connexion" formControlName="mdp" placeholder="Ton mot de passe" />
+        @if (connexionForm.get('mdp')?.invalid && connexionForm.get('mdp')?.touched) {
+          <span class="message-erreur">Le mot de passe est obligatoire.</span>
+        }
+      </div>
+
+      <button type="submit" class="btn-dragon">Se connecter</button>
+    </form>
+  } @else {
+    <form [formGroup]="inscriptionForm" (ngSubmit)="sInscrire()" class="formulaire">
+      <div class="champ">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" formControlName="nom" placeholder="Ton nom" />
+        @if (inscriptionForm.get('nom')?.invalid && inscriptionForm.get('nom')?.touched) {
+          <span class="message-erreur">Le nom est obligatoire.</span>
+        }
+      </div>
+
+      <div class="champ">
+        <label for="prenom">Prénom</label>
+        <input type="text" id="prenom" formControlName="prenom" placeholder="Ton prénom" />
+        @if (inscriptionForm.get('prenom')?.invalid && inscriptionForm.get('prenom')?.touched) {
+          <span class="message-erreur">Le prénom est obligatoire.</span>
+        }
+      </div>
+
+      <div class="champ">
+        <label for="pseudo-inscription">Pseudo</label>
+        <input type="text" id="pseudo-inscription" formControlName="pseudo" placeholder="Choisis un pseudo" />
+        @if (inscriptionForm.get('pseudo')?.invalid && inscriptionForm.get('pseudo')?.touched) {
+          <span class="message-erreur">Le pseudo est obligatoire.</span>
+        }
+      </div>
+
+      <div class="champ">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="ton@email.fr" />
+        @if (inscriptionForm.get('email')?.invalid && inscriptionForm.get('email')?.touched) {
+          <span class="message-erreur">Un email valide est obligatoire.</span>
+        }
+      </div>
+
+      <div class="champ">
+        <label for="mdp-inscription">Mot de passe</label>
+        <input type="password" id="mdp-inscription" formControlName="mdp" placeholder="Choisis un mot de passe" />
+        @if (inscriptionForm.get('mdp')?.invalid && inscriptionForm.get('mdp')?.touched) {
+          <span class="message-erreur">Le mot de passe est obligatoire.</span>
+        }
+      </div>
+
+      <button type="submit" class="btn-dragon">S'inscrire</button>
+    </form>
+  }
+</div>

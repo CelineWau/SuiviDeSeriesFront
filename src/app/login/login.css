@@ -1,0 +1,33 @@
+.page-login {
+    max-width: 500px;
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.bascule-onglets {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.onglet {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--couleur-bronze);
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    letter-spacing: 0.05rem;
+}
+
+.onglet:hover {
+    color: var(--couleur-or);
+}
+
+.onglet-actif {
+    color: var(--couleur-or);
+    border-bottom-color: var(--couleur-or);
+}
