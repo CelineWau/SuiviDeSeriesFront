@@ -9,16 +9,17 @@ import { CreerLivre } from './creer-livre/creer-livre';
 import { Stats } from './stats/stats';
 import { SerieDetail } from './serie-detail/serie-detail';
 import { LivreDetail } from './livre-detail/livre-detail';
+import { authGuard } from './auth-guard';
 
 export const routes: Routes = [
-    { path: 'accueil', component: Home},
-    { path: 'series', component: Series},
-    { path: 'livre', component: Livre},
-    { path: 'profil', component: Profil},
+    { path: 'accueil', component: Home, canActivate: [authGuard]},
+    { path: 'series', component: Series, canActivate: [authGuard]},
+    { path: 'livre', component: Livre, canActivate: [authGuard]},
+    { path: 'profil', component: Profil, canActivate: [authGuard]},
     { path: '', component: Login},
-    { path: 'series/creer', component: CreerSerie},
-    { path: 'livres/creer/:serieId', component: CreerLivre},
-    { path: 'stats', component: Stats},
-    { path: 'series/:serieId', component: SerieDetail},
-    { path: 'livres/modifier/:serieId/:livreId', component: LivreDetail},
+    { path: 'series/creer', component: CreerSerie, canActivate: [authGuard]},
+    { path: 'livres/creer/:serieId', component: CreerLivre, canActivate: [authGuard]},
+    { path: 'stats', component: Stats, canActivate: [authGuard]},
+    { path: 'series/:serieId', component: SerieDetail, canActivate: [authGuard]},
+    { path: 'livres/modifier/:serieId/:livreId', component: LivreDetail, canActivate: [authGuard]},
 ];
