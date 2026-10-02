@@ -26,8 +26,7 @@ export class CreerSerie {
       nombreLivreTotal: ['', Validators.required],
       statutPublication: ['', Validators.required],
       natureSerie: ['NON_DEFINI', Validators.required],
-      idGenre: [0],
-      utilisateurId: [1]
+      idGenre: [0]
     });
     this.chargerGenres();
   }

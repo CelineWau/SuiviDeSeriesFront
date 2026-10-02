@@ -32,7 +32,6 @@ export class Home implements OnInit{
   compteurSerieParAnnee: number = 0;
   objectifAnnuelData: ObjectifAnnuelData | null = null;
   nouvelObjectif: number = 12
-  idUtisateur = 1;
   modeEditionObjectif: boolean = false;
   seriesAJour: any [] = [];
   seriesDelaissees: any [] = [];
@@ -188,7 +187,7 @@ export class Home implements OnInit{
   }
 
   chargerObjectifAnnuel(): void {
-    this.objectifAnnuel.recupererObjectif(this.idUtisateur).subscribe(data => {
+    this.objectifAnnuel.recupererObjectif().subscribe(data => {
       this.objectifAnnuelData = data;
       this.cdr.detectChanges();
     });
@@ -202,11 +201,11 @@ export class Home implements OnInit{
   }
 
   definirObjectif(): void {
-  this.objectifAnnuel.definirObjectif(this.idUtisateur, this.nouvelObjectif).subscribe(data => {
-    this.objectifAnnuelData = data;
-    this.cdr.detectChanges();
-  });
-}
+    this.objectifAnnuel.definirObjectif(this.nouvelObjectif).subscribe(data => {
+      this.objectifAnnuelData = data;
+      this.cdr.detectChanges();
+    });
+  }
 
   pourcentageProgression(): number {
     if (!this.objectifAnnuelData || this.objectifAnnuelData.valeurObjectif === 0) {

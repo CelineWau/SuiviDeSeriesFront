@@ -12,11 +12,11 @@ export class ObjectifAnnuel {
 
   constructor(private http: HttpClient) {}
 
-  recupererObjectif(idUtilisateur: number): Observable<ObjectifAnnuelData | null> {
-    return this.http.get<ObjectifAnnuelData | null>(`${this.apiUrl}?idUtilisateur=${idUtilisateur}`);
+  recupererObjectif(): Observable<ObjectifAnnuelData | null> {
+    return this.http.get<ObjectifAnnuelData | null>(this.apiUrl);
   }
 
-  definirObjectif(idUtilisateur: number, valeurObjectif: number): Observable<ObjectifAnnuelData> {
-    return this.http.post<ObjectifAnnuelData>(this.apiUrl, {idUtilisateur, valeurObjectif});
+  definirObjectif( valeurObjectif: number): Observable<ObjectifAnnuelData> {
+    return this.http.post<ObjectifAnnuelData>(this.apiUrl, {valeurObjectif});
   }
 }
