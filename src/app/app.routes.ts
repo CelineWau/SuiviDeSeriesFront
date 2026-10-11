@@ -9,14 +9,14 @@ import { CreerLivre } from './creer-livre/creer-livre';
 import { Stats } from './stats/stats';
 import { SerieDetail } from './serie-detail/serie-detail';
 import { LivreDetail } from './livre-detail/livre-detail';
-import { authGuard } from './auth-guard';
+import { authGuard, dejaConnecteGuard } from './auth-guard';
 
 export const routes: Routes = [
     { path: 'accueil', component: Home, canActivate: [authGuard]},
     { path: 'series', component: Series, canActivate: [authGuard]},
     { path: 'livre', component: Livre, canActivate: [authGuard]},
     { path: 'profil', component: Profil, canActivate: [authGuard]},
-    { path: '', component: Login},
+    { path: '', component: Login, canActivate: [dejaConnecteGuard] },
     { path: 'series/creer', component: CreerSerie, canActivate: [authGuard]},
     { path: 'livres/creer/:serieId', component: CreerLivre, canActivate: [authGuard]},
     { path: 'stats', component: Stats, canActivate: [authGuard]},

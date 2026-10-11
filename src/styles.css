@@ -136,6 +136,14 @@ h2, h3 {
     font-family: 'Raleway', sans-serif;
 }
 
+.label-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--couleur-texte);
+}
+
 /* MESSAGE ERREUR*/
 .message-erreur {
     color: var(--couleur-bordeaux);

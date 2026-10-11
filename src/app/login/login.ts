@@ -19,7 +19,8 @@ export class Login {
   constructor(private fb: FormBuilder, private router: Router, private authService: Auth) {
     this.connexionForm = this.fb.group({
       pseudo: ['', Validators.required],
-      mdp: ['', Validators.required]
+      mdp: ['', Validators.required],
+      resterConnecte: [false]
     });
     this.inscriptionForm = this.fb.group({
       nom: ['', Validators.required],
@@ -40,10 +41,10 @@ export class Login {
 
   seConnecter(): void {
     if(this.connexionForm.valid) {
-      const {pseudo, mdp} = this.connexionForm.value;
-      this.authService.connecterUtilisateur(pseudo, mdp).subscribe({
+      const {pseudo, mdp, resterConnecte} = this.connexionForm.value;
+      this.authService.connecterUtilisateur(pseudo, mdp, resterConnecte).subscribe({
         next: (reponse) => {
-          this.authService.stockerToken(reponse.token);
+          this.authService.stockerToken(reponse.token, resterConnecte);
           this.router.navigate(['/accueil']);
         },
         error: (err) => {
@@ -59,7 +60,7 @@ export class Login {
     if(this.inscriptionForm.valid) {
       this.authService.inscrireUtilisateur(this.inscriptionForm.value).subscribe({
         next: (reponse) => {
-          this.authService.stockerToken(reponse.token);
+          this.authService.stockerToken(reponse.token, false);
           this.router.navigate(['/accueil']);
         },
         error: (err) => {

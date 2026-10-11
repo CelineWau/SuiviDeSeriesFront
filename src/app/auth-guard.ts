@@ -13,3 +13,16 @@ export const authGuard: CanActivateFn = (route, state) => {
   router.navigate(['/']);
   return false;
 };
+
+
+export const dejaConnecteGuard: CanActivateFn = (route, state) => {
+  const authSerice = inject(Auth);
+  const router = inject(Router);
+
+  if(authSerice.estConnecte()) {
+    router.navigate(['/accueil']);
+    return false;
+  }
+
+  return true;
+};

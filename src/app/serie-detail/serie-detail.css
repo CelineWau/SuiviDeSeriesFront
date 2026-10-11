@@ -117,14 +117,6 @@
     font-weight: 600;
 }
 
-.label-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    color: var(--couleur-texte);
-}
-
 .label-checkbox input[type="checkbox"] {
     width: 1.1rem;
     height: 1.1rem;

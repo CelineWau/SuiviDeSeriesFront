@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { GenreData } from '../models/genre';
 import { Genre } from '../services/genre';
 import { traduireNatureSerie as traduireNature } from '../utils/nature-serie';
+import { decomposerDureeEnJours, DureeDecomposee } from '../utils/duree';
 
 @Component({
   selector: 'app-serie-detail',
@@ -35,6 +36,7 @@ export class SerieDetail implements OnInit{
   nouveauStatutSerie: 'EN_COURS' | 'ABANDONNEE' | 'TERMINEE' = 'EN_COURS';
   nouveauNatureSerie: 'ROMAN' | 'BANDE_DESSINE' | 'COMICS' | 'MANGA' | 'BEAU_LIVRE' | 'NON_DEFINI' = 'NON_DEFINI';
   nouveauNomGenre: string = '';
+  dureeDecomposee: DureeDecomposee = { annees: 0, mois: 0, jours: 0};
 
   constructor(private serieService: Serie, private cdr: ChangeDetectorRef, private route: ActivatedRoute, private livreService: Livre, private genreService: Genre){
     this.idSerie = Number(this.route.snapshot.paramMap.get('serieId'));
@@ -63,9 +65,21 @@ export class SerieDetail implements OnInit{
 
   chargerTempsLecture(): void {
     this.serieService.getTempsLecture(this.idSerie).subscribe(data => {
+      this.dureeDecomposee = decomposerDureeEnJours(data);
       this.tempsLecture = data;
       this.cdr.detectChanges();
     });
+  }
+
+  formaterDecomposition(): string {
+    const { annees, mois } = this.dureeDecomposee;
+    if (annees === 0 && mois === 0) {
+      return '';
+    }
+    const partieAnnees = annees > 0 ? `${annees} an${annees > 1 ? 's' : ''}` : '';
+    const partieMois = mois > 0 ? `${mois} mois` : '';
+    const separateur = annees > 0 && mois > 0 ? ' et ' : '';
+    return ` (${partieAnnees}${separateur}${partieMois})`;
   }
 
   changerFormatLivre(livre: LivreDetailData): void {
