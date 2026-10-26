@@ -1,1 +1,31 @@
-<p>profil works!</p>
+@if (profil) {
+  <div class="fiche-serie">
+    <h1>Mon profil</h1>
+
+    <div class="section-pal infos-globales">
+      <h2>Mes informations</h2>
+
+      <div class="ligne-info">
+        <span class="label-info">Pseudo : </span>
+        <span>{{ profil.pseudo }}</span>
+      </div>
+
+      <div class="ligne-info">
+        <span class="label-info">Prénom : </span>
+        <span>{{ profil.prenom }}</span>
+      </div>
+
+      <div class="ligne-info">
+        <span class="label-info">Nom : </span>
+        <span>{{ profil.nom }}</span>
+      </div>
+
+      <div class="ligne-info">
+        <span class="label-info">Email : </span>
+        <span>{{ profil.email }}</span>
+      </div>
+    </div>
+  </div>
+} @else {
+  <p>Chargement du profil...</p>
+}
