@@ -14,7 +14,8 @@ export class Login {
   connexionForm: FormGroup;
   inscriptionForm: FormGroup;
   modeInscription: boolean = false;
-  erreurServeur: string | null = null; 
+  erreurServeur: string | null = null;
+  afficherMdp: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private authService: Auth) {
     this.connexionForm = this.fb.group({
@@ -33,10 +34,12 @@ export class Login {
 
   basculerModeInscription(): void {
     this.modeInscription = true;
+    this.afficherMdp = false;
   }
 
   basculerModeConnexion(): void {
     this.modeInscription = false;
+    this.afficherMdp = false;
   }
 
   seConnecter(): void {
@@ -70,5 +73,9 @@ export class Login {
     } else {
       this.inscriptionForm.markAllAsTouched();
     }
+  }
+
+  basculerAffichageMdp(): void {
+    this.afficherMdp = !this.afficherMdp;
   }
 }

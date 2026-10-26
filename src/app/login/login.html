@@ -26,7 +26,12 @@
 
       <div class="champ">
         <label for="mdp-connexion">Mot de passe</label>
-        <input type="password" id="mdp-connexion" formControlName="mdp" placeholder="Ton mot de passe" />
+        <div class="champ-mdp">
+          <input [type]="afficherMdp ? 'text' : 'password'" id="mdp-connexion" formControlName="mdp" placeholder="Ton mot de passe"/>
+          <button type="button" class="btn-oeil" (click)="basculerAffichageMdp()">
+            {{ afficherMdp ? '🙈' : '👁️' }}
+          </button>
+        </div>
         @if (connexionForm.get('mdp')?.invalid && connexionForm.get('mdp')?.touched) {
           <span class="message-erreur">Le mot de passe est obligatoire.</span>
         }
@@ -77,7 +82,12 @@
 
       <div class="champ">
         <label for="mdp-inscription">Mot de passe</label>
-        <input type="password" id="mdp-inscription" formControlName="mdp" placeholder="Choisis un mot de passe" />
+        <div class="champ-mdp">
+          <input [type]="afficherMdp ? 'text' : 'password'" id="mdp-inscription" formControlName="mdp" placeholder="Ton mot de passe"/>
+          <button type="button" class="btn-oeil" (click)="basculerAffichageMdp()">
+            {{ afficherMdp ? '🙈' : '👁️' }}
+          </button>
+        </div>
         @if (inscriptionForm.get('mdp')?.invalid && inscriptionForm.get('mdp')?.touched) {
           <span class="message-erreur">Le mot de passe est obligatoire.</span>
         }
