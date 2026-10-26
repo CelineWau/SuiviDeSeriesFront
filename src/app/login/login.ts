@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Auth } from '../services/auth';
+import { maxLength } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login',
@@ -27,19 +28,21 @@ export class Login {
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       pseudo: ['', Validators.required],
-      email: ['', Validators.email],
-      mdp: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      mdp: ['', Validators.required],
     });
   }
 
   basculerModeInscription(): void {
     this.modeInscription = true;
     this.afficherMdp = false;
+    this.erreurServeur = null;
   }
 
   basculerModeConnexion(): void {
     this.modeInscription = false;
     this.afficherMdp = false;
+    this.erreurServeur = null;
   }
 
   seConnecter(): void {
