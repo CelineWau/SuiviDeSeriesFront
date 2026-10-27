@@ -22,8 +22,18 @@
 
       <div class="ligne-info">
         <span class="label-info">Email : </span>
-        <span>{{ profil.email }}</span>
+        @if (!modeEditionEmail) {
+          <span>{{ profil.email }}</span>
+          <span (click)="ouvrirEditionEmail()" class="btn-edit">✏️</span>
+        } @else {
+          <input type="email" [(ngModel)]="nouvelEmail"/>
+          <button type="button" class="btn-livre" (click)="sauvegarderEmail()">Enregistrer</button>
+          <button type="button" class="btn-supprimer" (click)="modeEditionEmail = false; erreurEmail = null">Annuler</button>
+        }
       </div>
+      @if (erreurEmail) {
+        <p class="erreur-serveur">{{ erreurEmail }}</p>
+      }
     </div>
   </div>
 } @else {

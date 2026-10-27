@@ -15,4 +15,8 @@ export class ProfilUtilisateur {
   getProfil(): Observable<ProfilData> {
     return this.http.get<ProfilData>(this.apiUrl);
   }
+
+  modifierEmail(email:string): Observable<ProfilData> {
+    return this.http.patch<ProfilData>(`${this.apiUrl}/email`, {email});
+  }
 }

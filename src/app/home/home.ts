@@ -14,6 +14,8 @@ import { PalVieillissanteData } from '../models/pal-vieillissante';
 import { SeriesASurveillerData } from '../models/serie-a-surveiller';
 import { ListeCourseLivreData } from '../models/liste-course-livre';
 import { SerieDetailData } from '../models/serie-detail';
+import { ProfilData } from '../models/profil';
+import { ProfilUtilisateur } from '../services/profil-utilisateur';
 
 @Component({
   selector: 'app-home',
@@ -50,8 +52,11 @@ export class Home implements OnInit{
   popupPapierOuverte: boolean = false;  
   popupEbookOuverte: boolean = false;
   lireEnAnglais: SerieDetailData[] = [];
+  profil: ProfilData | null = null;
 
-  constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef){}
+  constructor(private serieService: Serie, private livreService : Livre, private objectifAnnuel: ObjectifAnnuel, private cdr: ChangeDetectorRef, private profilService: 
+    ProfilUtilisateur
+  ){}
 
   ngOnInit(): void {
     this.chargerSerie();
@@ -69,6 +74,7 @@ export class Home implements OnInit{
     this.chargerListeCoursePapier();
     this.chargerListeCourseEbook();
     this.chargerLireEnAnglais();
+    this.chargerProfil();
   }
   
   chargerSerie():void {
@@ -200,6 +206,13 @@ export class Home implements OnInit{
     });
   }
 
+  chargerProfil(): void {
+    this.profilService.getProfil().subscribe(data => {
+      this.profil = data;
+      this.cdr.detectChanges();
+    })
+  }
+
   definirObjectif(): void {
     this.objectifAnnuel.definirObjectif(this.nouvelObjectif).subscribe(data => {
       this.objectifAnnuelData = data;
@@ -251,8 +264,8 @@ export class Home implements OnInit{
   }
 
   get nombreSeriesEnCoursCommencees(): number {
-  return this.series.filter(
-    (s) => s.statutSerie === 'EN_COURS' && s.livres.some((l: any) => l.statutLivre === 'LU')
-  ).length;
-}
+    return this.series.filter(
+      (s) => s.statutSerie === 'EN_COURS' && s.livres.some((l: any) => l.statutLivre === 'LU')
+    ).length;
+  }
 }
