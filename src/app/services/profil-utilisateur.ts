@@ -19,4 +19,8 @@ export class ProfilUtilisateur {
   modifierEmail(email:string): Observable<ProfilData> {
     return this.http.patch<ProfilData>(`${this.apiUrl}/email`, {email});
   }
+
+  modifierMdp(ancienMdp:string, nouveauMdp:string): Observable<void> {
+    return this.http.patch<void>(`${this.apiUrl}/mot-de-passe`, {ancienMdp, nouveauMdp});
+  }
 }

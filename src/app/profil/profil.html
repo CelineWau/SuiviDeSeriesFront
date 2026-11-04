@@ -34,6 +34,50 @@
       @if (erreurEmail) {
         <p class="erreur-serveur">{{ erreurEmail }}</p>
       }
+
+      <div class="ligne-info ligne-mdp">
+        @if (!modeEditionMdp) {
+          <button type="button" class="btn-livre" (click)="ouvrirEditionMdp()">Changer mon mot de passe</button>
+        } @else {
+          <div class="formulaire-mdp">
+            <div class="champ">
+              <label for="ancien-mdp">Ancien mot de passe</label>
+              <div class="champ-mdp">
+                <input [type]="afficherMdp ? 'text' : 'password'" id="ancien-mdp" [(ngModel)]="ancienMdp"/>
+                <button type="button" class="btn-oeil" (click)="basculerAffichageMdp()"> {{ afficherMdp ? '🙈' : '👁️' }}</button>
+              </div>
+            </div>
+
+            <div class="champ">
+              <label for="nouveau-mdp">Nouveau mot de passe</label>
+              <div class="champ-mdp">
+                <input [type]="afficherMdp ? 'text' : 'password'" id="nouveau-mdp" [(ngModel)]="nouveauMdp" />
+              </div>
+            </div>
+
+            <div class="champ">
+              <label for="confirmation-mdp">COnfirmer le nouveau mot de passe</label>
+              <div class="champ-mdp">
+                <input [type]="afficherMdp ? 'text' : 'password'" id="confirmation-mdp" [(ngModel)]="confirmationMdp" />
+              </div>
+            </div>
+
+            <div class="actions-formulaire">
+              <button type="button" class="btn-livre" (click)="sauvegarderMdp()">Enregistrer</button>
+              <button type="button" class="btn-supprimer" (click)="annulerEditionMdp()">Annuler</button>
+            </div>
+            
+          </div>
+        }
+      </div>
+
+      @if (erreurMdp) {
+        <p class="erreur-serveur">{{ erreurMdp }}</p>
+      }
+
+      @if (succesMdp) {
+        <p class="message-succes">Ton mot de passe a bien été modifié.</p>
+      }
     </div>
   </div>
 } @else {

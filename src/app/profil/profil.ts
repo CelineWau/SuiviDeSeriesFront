@@ -13,8 +13,15 @@ export class Profil implements OnInit{
 
   profil: ProfilData | null = null;
   modeEditionEmail: boolean = false;
+  modeEditionMdp: boolean = false;
   nouvelEmail: string = '';
+  ancienMdp: string = '';
+  nouveauMdp: string = '';
+  confirmationMdp: string = '';
   erreurEmail: string | null = null;
+  erreurMdp: String | null = null;
+  succesMdp : boolean = false;
+  afficherMdp: boolean = false; 
 
   constructor(private profilService: ProfilUtilisateur, private cdr: ChangeDetectorRef){}
 
@@ -46,6 +53,48 @@ export class Profil implements OnInit{
         this.erreurEmail = err.error.message;
         this.cdr.detectChanges();
       }
+    });
+  }
+
+  ouvrirEditionMdp(): void {
+    this.modeEditionMdp = true;
+    this.erreurMdp = null;
+    this.succesMdp = false;
+  }
+
+  annulerEditionMdp(): void {
+    this.modeEditionMdp = false;
+    this.ancienMdp = '';
+    this.nouveauMdp = '';
+    this.confirmationMdp = '';
+    this.erreurMdp = null;
+  }
+
+  sauvegarderMdp(): void {
+    if(this.nouveauMdp !== this.confirmationMdp) {
+      this.erreurMdp = "Le nouveau mot de passe et sa confirmation sont différents."
+      this.cdr.detectChanges();
+      return;
+    }
+
+    this.profilService.modifierMdp(this.ancienMdp, this.nouveauMdp).subscribe({
+      next: (data) => {
+        this.modeEditionMdp = false;
+        this.ancienMdp = '';
+        this.nouveauMdp = '';
+        this.confirmationMdp = '';
+        this.erreurMdp = null;
+        this.succesMdp = true;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        this.erreurMdp = err.error?.message ?? "Une erreur est survenue, réessaie plus tard.";
+        this.cdr.detectChanges();
+      },
     })
+  }
+
+  basculerAffichageMdp(): void {
+    this.afficherMdp = !this.afficherMdp;
   }
 }
