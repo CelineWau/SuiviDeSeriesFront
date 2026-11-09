@@ -1,60 +1,21 @@
 # SuiviDeSeriesFront
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.15.
+Frontend Angular 21 (composants standalone, TypeScript) de l'application **Les Archives Dragonesques**, un outil de suivi de séries de livres. Le backend (Spring Boot) est ici : [SuiviDeSeries](https://github.com/CelineWau/SuiviDeSeries).
 
-## Development server
+## Lancer le projet
 
-To start a local development server, run:
+Le backend doit tourner sur `http://localhost:8080`.
 
 ```bash
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+L'application est disponible sur `http://localhost:4200`.
 
-## Code scaffolding
+## Points techniques
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-
+- Authentification par JWT : intercepteur HTTP qui ajoute le token, gardes de routes (`authGuard` pour les pages protégées, garde inverse pour la page de connexion).
+- Option « rester connecté » : le token est stocké dans `localStorage` ou `sessionStorage` selon le choix.
+- Formulaires réactifs avec validation, messages d'erreur du serveur affichés à l'utilisateur.
+- Tableau de bord avec graphiques en SVG calculés à la main (camemberts).
