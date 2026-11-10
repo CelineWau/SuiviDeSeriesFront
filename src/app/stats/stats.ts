@@ -8,6 +8,7 @@ import { DecimalPipe } from '@angular/common';
 import { SeriesPlusLonguePlusCourteData } from '../models/series-plus-longue-plus-courte';
 import { RepartitionCategorieData } from '../models/repartition-categorie';
 import { traduireNatureSerie as traduireNature } from '../utils/nature-serie';
+import { LivreParAnneeData } from '../models/livre-par-annee';
 
 @Component({
   selector: 'app-stats',
@@ -32,6 +33,7 @@ export class Stats implements OnInit{
   dureePlusLongue: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
   repartitionCategorieGenre: RepartitionCategorieData[] = [];
   repartitionCategorieNature: RepartitionCategorieData[] = [];
+  repartitionLivreParAnnee: LivreParAnneeData[] = [];
 
   constructor(private serieService: Serie, private livreService: Livre, private cdr: ChangeDetectorRef){}
 
@@ -47,6 +49,7 @@ export class Stats implements OnInit{
     this.chargerSeriesTermineesPlusLonguePlusCourte();
     this.chargerRepartitionGenre();
     this.chargerRepartitionNature();
+    this.chargerLivreParAnnee();
     }
 
   chargerSeriesLesPlusLongues(): void {
@@ -127,9 +130,16 @@ export class Stats implements OnInit{
     });
   }
 
-    chargerRepartitionNature(): void {
+  chargerRepartitionNature(): void {
     this.serieService.getRepartitionNature().subscribe(data => {
       this.repartitionCategorieNature = data;
+      this.cdr.detectChanges();
+    });
+  }
+
+  chargerLivreParAnnee(): void {
+    this.livreService.getLivreParAnnee().subscribe(data => {
+      this.repartitionLivreParAnnee = data;
       this.cdr.detectChanges();
     });
   }
@@ -138,8 +148,13 @@ export class Stats implements OnInit{
   return traduireNature(nature);
 }
 
-calculerLargeurBarre(nombre: number, categories: RepartitionCategorieData[]): number {
-  const max = Math.max(...categories.map(c => c.nombreSerie), 1);
-  return (nombre / max) * 100;
-}
+  calculerLargeurBarre(nombre: number, categories: RepartitionCategorieData[]): number {
+    const max = Math.max(...categories.map(c => c.nombreSerie), 1);
+    return (nombre / max) * 100;
+  }
+
+  calculerLargeurBarreAnnee(nombre: number): number {
+    const max = Math.max(...this.repartitionLivreParAnnee.map(l => l.nombre), 1);
+    return (nombre / max) * 100;
+  }
 }
