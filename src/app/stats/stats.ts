@@ -8,7 +8,7 @@ import { DecimalPipe } from '@angular/common';
 import { SeriesPlusLonguePlusCourteData } from '../models/series-plus-longue-plus-courte';
 import { RepartitionCategorieData } from '../models/repartition-categorie';
 import { traduireNatureSerie as traduireNature } from '../utils/nature-serie';
-import { LivreParAnneeData } from '../models/livre-par-annee';
+import { NombreParAnneeData } from '../models/nombre-par-annee';
 
 @Component({
   selector: 'app-stats',
@@ -33,7 +33,8 @@ export class Stats implements OnInit{
   dureePlusLongue: DureeDecomposee = {annees: 0, mois: 0, jours: 0};
   repartitionCategorieGenre: RepartitionCategorieData[] = [];
   repartitionCategorieNature: RepartitionCategorieData[] = [];
-  repartitionLivreParAnnee: LivreParAnneeData[] = [];
+  repartitionLivreParAnnee: NombreParAnneeData[] = [];
+  repartitionSeriesCommenceesParAnnee: NombreParAnneeData[] = [];
 
   constructor(private serieService: Serie, private livreService: Livre, private cdr: ChangeDetectorRef){}
 
@@ -50,6 +51,7 @@ export class Stats implements OnInit{
     this.chargerRepartitionGenre();
     this.chargerRepartitionNature();
     this.chargerLivreParAnnee();
+    this.chargerSeriesCommenceesParAnnee();
     }
 
   chargerSeriesLesPlusLongues(): void {
@@ -144,6 +146,13 @@ export class Stats implements OnInit{
     });
   }
 
+  chargerSeriesCommenceesParAnnee(): void {
+    this.serieService.getSeriesCommenceesParAnnee().subscribe(data => {
+      this.repartitionSeriesCommenceesParAnnee = data;
+      this.cdr.detectChanges();
+    });
+  }
+
   traduireNatureSerie(nature: string): string {
   return traduireNature(nature);
 }
@@ -153,8 +162,12 @@ export class Stats implements OnInit{
     return (nombre / max) * 100;
   }
 
-  calculerLargeurBarreAnnee(nombre: number): number {
-    const max = Math.max(...this.repartitionLivreParAnnee.map(l => l.nombre), 1);
+  calculerLargeurBarreAnnee(nombre: number, liste: NombreParAnneeData[]): number {
+    const max = Math.max(...liste.map(l => l.nombre), 1);
     return (nombre / max) * 100;
+  }
+
+  get nombreSeriesCommenceesEtFinies(): number {
+    return Math.round(this.ratioSeriesCommenceesEtFiniesMemeAnnee * this.seriesCommenceesCetteAnnee);
   }
 }

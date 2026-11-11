@@ -6,7 +6,7 @@ import { AuteursSerieEnCours } from '../models/auteurs-series-en-cours';
 import { LivreDetailData } from '../models/livre-detail';
 import { ModifierLivreData } from '../models/modifier-livre';
 import { CreerLivreData } from '../models/creer-livre';
-import { LivreParAnneeData } from '../models/livre-par-annee';
+import { NombreParAnneeData } from '../models/nombre-par-annee';
 
 @Injectable({
   providedIn: 'root',
@@ -57,7 +57,7 @@ export class Livre {
     return this.http.get<number>(`${this.apiUrl}/dureeMoyenneDansPal`);
   }
 
-  getLivreParAnnee(): Observable<LivreParAnneeData[]> {
-    return this.http.get<LivreParAnneeData[]>(`${this.apiUrl}/compteurLivreParAnnee`);
+  getLivreParAnnee(): Observable<NombreParAnneeData[]> {
+    return this.http.get<NombreParAnneeData[]>(`${this.apiUrl}/compteurLivreParAnnee`);
   }
 }

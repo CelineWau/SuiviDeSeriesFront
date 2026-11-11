@@ -192,3 +192,21 @@
     font-size: 0.9rem;
     text-align: left;
 }
+
+.ligne-graphiques {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+}
+
+.bloc-graphique {
+    flex: 1 1 380px;
+    min-width: 0;
+}
+
+.bloc-graphique .conteneur-barres {
+    margin-bottom: 0;
+}

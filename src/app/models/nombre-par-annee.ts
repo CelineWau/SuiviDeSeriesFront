@@ -1,4 +1,4 @@
-export interface LivreParAnneeData {
+export interface NombreParAnneeData {
     annee: number;
     nombre: number;
 }
